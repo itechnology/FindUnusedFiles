@@ -1,5 +1,11 @@
 # FindUnusedFiles
+*Visual Studio 2012/2013 Plug-in*
 
+Find and eliminate unused images & files in web projects/applications
+
+Files can actually be of any type, but will most likely be images that you wish to remove from a website you are working on.
+
+Works as a Standalone Application, from the Windows Explorer context menu, from the Command Line, or as a Visual Studio extension. Thank's to the command line it can easily be integrated with your favorite development IDE too.
 
 ### Main Dialog
 ![Main Dialog](http://itechnology.github.io/FindUnusedFiles/media/findunusedfiles.png)
