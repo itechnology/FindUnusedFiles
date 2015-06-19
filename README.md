@@ -1,6 +1,22 @@
 # FindUnusedFiles
 
 
+### Main Dialog
+![Main Dialog](http://itechnology.github.io/FindUnusedFiles/media/findunusedfiles.png)
+
+
+### Thumbnail Preview
+![Thumbnail Preview](http://itechnology.github.io/FindUnusedFiles/media/findunusedfiles-thumb.png)
+
+### Parsing Dialog
+
+![Parsing Dialog](http://itechnology.github.io/FindUnusedFiles/media/findunusedfiles-parse.png)
+
+### Visual Studio (context menu)
+
+![Visual Studio (context menu)](http://itechnology.github.io/FindUnusedFiles/media/findunusedfiles-vs.png)
+
+
 Change log
 
 v1.3
