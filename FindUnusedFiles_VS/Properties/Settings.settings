@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ITechnologyNET.FindUnusedFiles.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Find" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\.(gif|png|jpg|jpeg|bmp|ico)$</Value>
+    </Setting>
+    <Setting Name="Search" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\.(htm|html|aspx|ascx|master|cshtml|js|css|less)$</Value>
+    </Setting>
+    <Setting Name="Directory" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="0cf7b733-7d9b-45b9-9aa8-328afd40580a" Version="1.3" Language="en-US" Publisher="Robert Hoffmann" />
+    <DisplayName>FindUnusedFiles</DisplayName>
+    <Description xml:space="preserve">Helps you find orphaned images or files in projects and directories.</Description>
+    <MoreInfo>http://www.i-technology.net/search/label/FindUnusedFiles</MoreInfo>
+    <License>license.txt</License>
+    <ReleaseNotes>changelog.txt</ReleaseNotes>
+    <Icon>assets\find.ico</Icon>
+    <PreviewImage>screen-main.png</PreviewImage>
+    <Tags>cleanup, organize, tools, project</Tags>
+  </Metadata>
+  <Installation InstalledByMsi="false">
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0,)" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Premium" Version="[11.0,)" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Ultimate" Version="[11.0,)" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="4.5" />
+    <Dependency Id="Microsoft.VisualStudio.MPF.11.0" DisplayName="Visual Studio MPF 11.0" d:Source="Installed" Version="11.0" />
+  </Dependencies>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+  </Assets>
+</PackageManifest>
