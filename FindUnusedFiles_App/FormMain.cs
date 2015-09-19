@@ -87,7 +87,7 @@ namespace ITechnologyNET.FindUnusedFiles
             patternFind.Text   = Properties.Settings.Default["Find"].ToString();
             patternSearch.Text = Properties.Settings.Default["Search"].ToString();
 
-            Dte            = dte;            
+            Dte            = dte;
             ProjectItems   = projectItems;
             DirectoryPath  = directoryPath;
             IsPackage      = true;
@@ -127,7 +127,7 @@ namespace ITechnologyNET.FindUnusedFiles
             var inside = string.Empty;
             var report = string.Empty;
             var shell  = string.Empty;
-            
+
             for (int i = 0; i < args.Length; i++)
             {
                 switch (args[i])
@@ -189,7 +189,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 {
                     patternSearch.Text = inside;
                 }
-            }            
+            }
 
             // TODO: preset form choices depending on args passed
             // In case we pass a file path and not a directory path to the command line
@@ -200,7 +200,7 @@ namespace ITechnologyNET.FindUnusedFiles
             else if (Directory.Exists(path))
             {
                 GetPath(path);
-            }           
+            }
         }
         #endregion
 
@@ -210,7 +210,7 @@ namespace ITechnologyNET.FindUnusedFiles
             return listResult.SelectedItems
                              .Cast<string>()
                              .ToList();
-        } 
+        }
 
         void Find(string pattern, vsFindTarget target)
         {
@@ -227,12 +227,12 @@ namespace ITechnologyNET.FindUnusedFiles
             Dte.Find.FindWhat          = pattern;
             Dte.Find.MatchCase         = false;
             Dte.Find.MatchWholeWord    = false;
-            Dte.Find.MatchInHiddenText = true;                        
+            Dte.Find.MatchInHiddenText = true;
             Dte.Find.SearchSubfolders  = true;
             Dte.Find.FilesOfType       = "*.*";
 
             Dte.ExecuteCommand("View.FindResults1");
-            Dte.Find.Execute();    
+            Dte.Find.Execute();
         }
 
         public PictureBox Pic { get; set; }
@@ -244,7 +244,7 @@ namespace ITechnologyNET.FindUnusedFiles
             listResult.SelectedIndexChanged += (s, o) =>
             {
                 if (ModifierKeys == Keys.Alt  && listResult.SelectedIndices.Count == 1)
-                {                                        
+                {
                     Pic.DisplayImage(DirectoryPath + listResult.SelectedItem);
                 }
                 else if (Pic != null)
@@ -297,7 +297,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 Image = new Bitmap(Properties.Resources.save)
             };
             mnuExport.Click += ExportFiles;
-            
+
             ctxMenu.Items.Add(mnuExport);
             #endregion
 
@@ -307,7 +307,7 @@ namespace ITechnologyNET.FindUnusedFiles
             {
                 Image = new Bitmap(Properties.Resources.delete)
             };
-            mnuDelete.Click += DeleteFiles;            
+            mnuDelete.Click += DeleteFiles;
             ctxMenu.Items.Add(mnuDelete);
             #endregion
 
@@ -345,7 +345,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 }
             };
             #endregion
-            
+
             #region Package
             if (IsPackage)
             {
@@ -374,7 +374,7 @@ namespace ITechnologyNET.FindUnusedFiles
                     Image = new Bitmap(Properties.Resources.project)
                 };
                 mnuSearchProject.Click += (s, o) =>
-                { 
+                {
                     var pattern  = string.Empty;
                     GetSelectedItems()
                         .ForEach(i =>
@@ -410,7 +410,7 @@ namespace ITechnologyNET.FindUnusedFiles
                     Find(string.Format("({0})", pattern.Substring(0, pattern.Length - 1)), vsFindTarget.vsFindTargetSolution);
                 };
 
-                // Add all items                
+                // Add all items
                 mnuFind.DropDownItems.Add(mnuSearchProject);
                 mnuFind.DropDownItems.Add(mnuSearchSolution);
 
@@ -418,7 +418,7 @@ namespace ITechnologyNET.FindUnusedFiles
             }
             #endregion
 
-            listResult.ContextMenuStrip = ctxMenu;            
+            listResult.ContextMenuStrip = ctxMenu;
         }
 
         void BrowseClick(object sender, EventArgs e)
@@ -430,7 +430,7 @@ namespace ITechnologyNET.FindUnusedFiles
             }
             else
             {
-                GetPath();    
+                GetPath();
             }
         }
 
@@ -455,14 +455,14 @@ namespace ITechnologyNET.FindUnusedFiles
             else
             {
                 ListUsedFiles();
-            }            
+            }
         }
 
         void ListUnusedFiles()
         {
             lblUnused.Enabled = true;
             lblUsed.Enabled   = false;
-     
+
             lblUsed.Text = string.Format(UsedLabel, UsedFiles == null ? "0000" : UsedFiles.Count.ToString("D4"));
 
             if (UnUsedFiles == null || UnUsedFiles.Count == 0)
@@ -472,7 +472,7 @@ namespace ITechnologyNET.FindUnusedFiles
             }
 
             lblUnused.Text = string.Format(UnusedLabel, UnUsedFiles.Count.ToString("D4"));
-            
+
             UnUsedFiles.Where(f=> !string.IsNullOrEmpty(f)).ToList().ForEach(i => listResult.Items.Add(i.Replace(DirectoryPath, string.Empty)));
         }
 
@@ -550,14 +550,14 @@ namespace ITechnologyNET.FindUnusedFiles
         {
             // TODO: Add alert to confirm deletion
             if (MessageBox.Show("Are you sure you want to delete this/these files ?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {                
+            {
                 GetSelectedItems()
                     .ForEach(i =>
                 {
                         if (File.Exists(DirectoryPath + i))
                     {
                             var fullPath = DirectoryPath + i;
-                        
+
                         // since we are deleting, file should not be in any list at all anymore
                         UsedFiles
                             .Remove(fullPath);
@@ -570,7 +570,7 @@ namespace ITechnologyNET.FindUnusedFiles
 
                         listResult.Items
                                 .Remove(i);
-                        
+
                         // in package mode, let VS do the deleting
                         if (IsPackage)
                         {
@@ -626,7 +626,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 if (Directory.Exists(path))
                 {
                     result = DialogResult.OK;
-                }                
+                }
             }
 
             if (result == DialogResult.OK)
@@ -640,7 +640,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 {
                     MessageBox.Show(e.Message);
                 }
-                
+
                 ProcessFiles();
             }
         }
@@ -653,9 +653,9 @@ namespace ITechnologyNET.FindUnusedFiles
                 MessageBox.Show("Directory path was not defined", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (IsPackage)
                 {
-                    Dispose();    
+                    Dispose();
                 }
-                
+
                 return;
             }
 
@@ -782,7 +782,7 @@ namespace ITechnologyNET.FindUnusedFiles
         #region Menu Items
         void WebsiteStripMenuItemClick(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.i-technology.net/search/label/FindUnusedFiles");
+            System.Diagnostics.Process.Start("http://www.codeproject.com/Articles/555489/Find-Unused-Files-v");
         }
 
         void AboutToolStripMenuItemClick(object sender, EventArgs e)
@@ -795,7 +795,7 @@ namespace ITechnologyNET.FindUnusedFiles
             var help = new Help("manual");
             help.Show();
         }
-        
+
         void ChangelogToolStripMenuItemClick(object sender, EventArgs e)
         {
             var help = new Help("changelog");
@@ -898,8 +898,8 @@ namespace ITechnologyNET.FindUnusedFiles
                 catch (UnauthorizedAccessException ex)
                 {
                     MessageBox.Show(ex.Message);
-                }                         
-            }                   
+                }
+            }
         }
     }
 }

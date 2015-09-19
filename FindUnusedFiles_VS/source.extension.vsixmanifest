@@ -4,7 +4,7 @@
     <Identity Id="0cf7b733-7d9b-45b9-9aa8-328afd40580a" Version="1.3" Language="en-US" Publisher="Robert Hoffmann" />
     <DisplayName>FindUnusedFiles</DisplayName>
     <Description xml:space="preserve">Helps you find orphaned images or files in projects and directories.</Description>
-    <MoreInfo>http://www.i-technology.net/search/label/FindUnusedFiles</MoreInfo>
+    <MoreInfo>http://www.codeproject.com/Articles/555489/Find-Unused-Files-v</MoreInfo>
     <License>license.txt</License>
     <ReleaseNotes>changelog.txt</ReleaseNotes>
     <Icon>assets\find.ico</Icon>
@@ -15,6 +15,8 @@
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0,)" />
     <InstallationTarget Id="Microsoft.VisualStudio.Premium" Version="[11.0,)" />
     <InstallationTarget Id="Microsoft.VisualStudio.Ultimate" Version="[11.0,)" />
+    <InstallationTarget Version="[11.0,)" Id="Microsoft.VisualStudio.Community" />
+    <InstallationTarget Version="[11.0,)" Id="Microsoft.VisualStudio.Enterprise" />
   </Installation>
   <Dependencies>
     <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" Version="[4.5,]" />

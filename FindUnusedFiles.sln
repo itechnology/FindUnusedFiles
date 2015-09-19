@@ -1,12 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindUnusedFiles_App", "FindUnusedFiles_App\FindUnusedFiles_App.csproj", "{53F310E3-E07A-4DFC-8128-70CE83DB8F68}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindUnusedFiles_VS", "FindUnusedFiles_VS\FindUnusedFiles_VS.csproj", "{875EEC49-C2CC-49F3-B0F1-700736735180}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{948C8FB0-116E-4B2F-A4D5-76D44A53C098}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
@@ -24,8 +20,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "media", "media", "{23D542C7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dist", "dist", "{2E8EC581-688A-4934-9583-4BE47902A393}"
 	ProjectSection(SolutionItems) = preProject
+		dist\FindUnusedFiles-1.3.vsix = dist\FindUnusedFiles-1.3.vsix
+		dist\FindUnusedFiles-1.3.zip = dist\FindUnusedFiles-1.3.zip
 		dist\readme.md = dist\readme.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindUnusedFiles_App", "FindUnusedFiles_App\FindUnusedFiles_App.csproj", "{53F310E3-E07A-4DFC-8128-70CE83DB8F68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindUnusedFiles_VS", "FindUnusedFiles_VS\FindUnusedFiles_VS.csproj", "{875EEC49-C2CC-49F3-B0F1-700736735180}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

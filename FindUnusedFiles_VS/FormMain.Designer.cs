@@ -45,10 +45,10 @@
             this.changelogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.websiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.registerShellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.registerShellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.lblUsed = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -237,6 +237,18 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
+            // registerShellToolStripMenuItem
+            // 
+            this.registerShellToolStripMenuItem.Name = "registerShellToolStripMenuItem";
+            this.registerShellToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.registerShellToolStripMenuItem.Text = "Shell Extension";
+            this.registerShellToolStripMenuItem.Click += new System.EventHandler(this.RegisterShellToolStripMenuItemClick);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Image = global::ITechnologyNET.FindUnusedFiles.Properties.Resources.about;
@@ -254,18 +266,6 @@
             this.licenseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.licenseToolStripMenuItem.Text = "License";
             this.licenseToolStripMenuItem.Click += new System.EventHandler(this.LicenseToolStripMenuItemClick);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
-            // 
-            // registerShellToolStripMenuItem
-            // 
-            this.registerShellToolStripMenuItem.Name = "registerShellToolStripMenuItem";
-            this.registerShellToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.registerShellToolStripMenuItem.Text = "Shell Extension";
-            this.registerShellToolStripMenuItem.Click += new System.EventHandler(this.RegisterShellToolStripMenuItemClick);
             // 
             // saveFileDialog
             // 

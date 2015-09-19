@@ -31,7 +31,7 @@ namespace ITechnologyNET.FindUnusedFiles
         List<string> AllFiles    { get; set; }
         List<string> UsedFiles   { get; set; }
         List<string> UnUsedFiles { get; set; }
-        
+
         const string PathLabel    = "Path: {0}";
         const string FilesLabel   = "Total Files: {0}";
         const string ToParseLabel = "To Parse: {0}";
@@ -80,15 +80,15 @@ namespace ITechnologyNET.FindUnusedFiles
         /// Used when called upon from inisde VS package
         /// </summary>
         public FormMain(DTE dte, IEnumerable<ProjectItem> projectItems, string directoryPath)
-        {            
+        {
             InitializeComponent();
             listResult.DoubleClick += ListResultDoubleClick;
 
             patternFind.Text   = Properties.Settings.Default["Find"].ToString();
             patternSearch.Text = Properties.Settings.Default["Search"].ToString();
-            
-            Dte            = dte;            
-            ProjectItems   = projectItems;            
+
+            Dte            = dte;
+            ProjectItems   = projectItems;
             DirectoryPath  = directoryPath;
             IsPackage      = true;
             btnBrowse.Text = "Search";
@@ -113,7 +113,7 @@ namespace ITechnologyNET.FindUnusedFiles
             listResult.DoubleClick += ListResultDoubleClick;
 
             patternFind.Text   = Properties.Settings.Default["Find"].ToString();
-            patternSearch.Text = Properties.Settings.Default["Search"].ToString();  
+            patternSearch.Text = Properties.Settings.Default["Search"].ToString();
 
             registerShellToolStripMenuItem.Checked = Registry.ClassesRoot.OpenSubKey("Directory\\shell\\FindUnusedFiles") != null;
 
@@ -200,7 +200,7 @@ namespace ITechnologyNET.FindUnusedFiles
             else if (Directory.Exists(path))
             {
                 GetPath(path);
-            }           
+            }
         }
         #endregion
 
@@ -210,7 +210,7 @@ namespace ITechnologyNET.FindUnusedFiles
             return listResult.SelectedItems
                              .Cast<string>()
                              .ToList();
-        } 
+        }
 
         void Find(string pattern, vsFindTarget target)
         {
@@ -227,12 +227,12 @@ namespace ITechnologyNET.FindUnusedFiles
             Dte.Find.FindWhat          = pattern;
             Dte.Find.MatchCase         = false;
             Dte.Find.MatchWholeWord    = false;
-            Dte.Find.MatchInHiddenText = true;                        
+            Dte.Find.MatchInHiddenText = true;
             Dte.Find.SearchSubfolders  = true;
             Dte.Find.FilesOfType       = "*.*";
 
             Dte.ExecuteCommand("View.FindResults1");
-            Dte.Find.Execute();    
+            Dte.Find.Execute();
         }
 
         public PictureBox Pic { get; set; }
@@ -244,7 +244,7 @@ namespace ITechnologyNET.FindUnusedFiles
             listResult.SelectedIndexChanged += (s, o) =>
             {
                 if (ModifierKeys == Keys.Alt  && listResult.SelectedIndices.Count == 1)
-                {                                        
+                {
                     Pic.DisplayImage(DirectoryPath + listResult.SelectedItem);
                 }
                 else if (Pic != null)
@@ -253,7 +253,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 }
             };
             #endregion
-          
+
             var ctxMenu   = new ContextMenuStrip();
             #region SelectAll
             // Select ALL entry
@@ -297,7 +297,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 Image = new Bitmap(Properties.Resources.save)
             };
             mnuExport.Click += ExportFiles;
-            
+
             ctxMenu.Items.Add(mnuExport);
             #endregion
 
@@ -334,7 +334,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 mnuExplore.Enabled = (listResult.SelectedItems.Count == 1);
 
                 if (listResult.SelectedItems.Count == 0)
-                {                    
+                {
                     mnuExport.Enabled = false;
                     mnuDelete.Enabled = false;
                 }
@@ -418,7 +418,7 @@ namespace ITechnologyNET.FindUnusedFiles
             }
             #endregion
 
-            listResult.ContextMenuStrip = ctxMenu;            
+            listResult.ContextMenuStrip = ctxMenu;
         }
 
         void BrowseClick(object sender, EventArgs e)
@@ -430,8 +430,8 @@ namespace ITechnologyNET.FindUnusedFiles
             }
             else
             {
-                GetPath();    
-            }            
+                GetPath();
+            }
         }
 
         void RadioUnusedCheckedChanged(object sender, EventArgs e)
@@ -455,11 +455,11 @@ namespace ITechnologyNET.FindUnusedFiles
             else
             {
                 ListUsedFiles();
-            }            
+            }
         }
 
         void ListUnusedFiles()
-        {            
+        {
             lblUnused.Enabled = true;
             lblUsed.Enabled   = false;
 
@@ -472,7 +472,7 @@ namespace ITechnologyNET.FindUnusedFiles
             }
 
             lblUnused.Text = string.Format(UnusedLabel, UnUsedFiles.Count.ToString("D4"));
-            
+
             UnUsedFiles.Where(f=> !string.IsNullOrEmpty(f)).ToList().ForEach(i => listResult.Items.Add(i.Replace(DirectoryPath, string.Empty)));
         }
 
@@ -540,7 +540,7 @@ namespace ITechnologyNET.FindUnusedFiles
                     }
                     else
                     {
-                        System.Diagnostics.Process.Start(DirectoryPath + path);  
+                        System.Diagnostics.Process.Start(DirectoryPath + path);
                     }
                 }
             }
@@ -587,7 +587,7 @@ namespace ITechnologyNET.FindUnusedFiles
                             {
                                 File.Delete(fullPath);
                             }
-                        }                        
+                        }
                     });
 
                 ListFiles();
@@ -626,7 +626,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 if (Directory.Exists(path))
                 {
                     result = DialogResult.OK;
-                }                
+                }
             }
 
             if (result == DialogResult.OK)
@@ -652,10 +652,10 @@ namespace ITechnologyNET.FindUnusedFiles
                 // show error message
                 MessageBox.Show("Directory path was not defined", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (IsPackage)
-                {                    
-                    Dispose();    
+                {
+                    Dispose();
                 }
-                
+
                 return;
             }
 
@@ -765,7 +765,7 @@ namespace ITechnologyNET.FindUnusedFiles
                         lblParsed.Text      = string.Format(ParsedLabel, progressBar.Value.ToString("D4"));
 
                         if (progressBar.Value == progressBar.Maximum)
-                        {                            
+                        {
                             // Remove unused files, from used files list
                             UnUsedFiles.ForEach(i => UsedFiles.Remove(i));
 
@@ -782,7 +782,7 @@ namespace ITechnologyNET.FindUnusedFiles
         #region Menu Items
         void WebsiteStripMenuItemClick(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.i-technology.net/search/label/FindUnusedFiles");
+            System.Diagnostics.Process.Start("http://www.codeproject.com/Articles/555489/Find-Unused-Files-v");
         }
 
         void AboutToolStripMenuItemClick(object sender, EventArgs e)
@@ -795,7 +795,7 @@ namespace ITechnologyNET.FindUnusedFiles
             var help = new Help("manual");
             help.Show();
         }
-        
+
         void ChangelogToolStripMenuItemClick(object sender, EventArgs e)
         {
             var help = new Help("changelog");
@@ -809,7 +809,7 @@ namespace ITechnologyNET.FindUnusedFiles
         }
         #endregion
 
-        bool IsElevatedProcess()
+        bool IsElevatedProcess(string args = "")
         {
             var isAdmin  = false;
             var identity = WindowsIdentity.GetCurrent();
@@ -820,7 +820,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 isAdmin = pricipal.IsInRole(WindowsBuiltInRole.Administrator);
                 if (!isAdmin)
                 {
-                    var result = MessageBox.Show("This action requires admin rights, relaunch with admin rights ?", "Admin Rights", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    var result = MessageBox.Show("This action requires admin rights, relaunch with appropriate rights ?", "Admin Rights", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
                     if (result == DialogResult.OK)
                     {
@@ -828,7 +828,7 @@ namespace ITechnologyNET.FindUnusedFiles
                         {
                             Verb      = "runas",
                             FileName  = Application.ExecutablePath,
-                            Arguments = Environment.CommandLine
+                            Arguments = string.Format("{0} {1}", Environment.CommandLine, args)
                         };
 
                         try
@@ -860,14 +860,14 @@ namespace ITechnologyNET.FindUnusedFiles
                 return;
             }
 
+            if (IsElevatedProcess("-s t"))
+            {
             var result = MessageBox.Show(string.Format("[{0}] shell extension?", registerShellToolStripMenuItem.Checked ? "UnRegister" : "Register"), "Shell extension", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Cancel)
             {
                 return;
             }
 
-            if (IsElevatedProcess())
-            {
                 try
                 {
                     if (registerShellToolStripMenuItem.Checked)
@@ -875,7 +875,7 @@ namespace ITechnologyNET.FindUnusedFiles
                         Registry.ClassesRoot.DeleteSubKeyTree("Directory\\shell\\FindUnusedFiles", false);
 
                         registerShellToolStripMenuItem.Checked = false;
-                        MessageBox.Show("Removed shell extension");
+                        MessageBox.Show("Shell extension is now [UnRegistered]");
                         return;
                     }
 
@@ -892,14 +892,14 @@ namespace ITechnologyNET.FindUnusedFiles
                         }
 
                         registerShellToolStripMenuItem.Checked = true;
-                        MessageBox.Show("Added shell extension");
+                        MessageBox.Show("Shell extension is now [Registered]");
                     }
                 }
                 catch (UnauthorizedAccessException ex)
                 {
                     MessageBox.Show(ex.Message);
-                }                         
-            }                   
+                }
+            }
         }
     }
 }
