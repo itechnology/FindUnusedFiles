@@ -35,10 +35,10 @@ __Change Log__
 __v1.3.1__
 
 * Added SVG, CSS, JS to default find list
-* Double-Click on list will open & set focus to item in solution explorer (VSIX only)
-* Shell integration (EXE only)
-    * Add/Remove from Help menu, or register/unregister from command line with -s t
-* More file stats
+* Added scss to default files list
+* Made search culture-invariant / case-insensitive
+* Added Visual Studio: Enterprise & Community to supported platform list
+* Solution (.sln) now built with Visual Studio 2015 Professional
 
 
 __v1.3__
