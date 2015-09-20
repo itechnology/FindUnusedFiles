@@ -38,8 +38,8 @@ __v1.3.1__
 * Added scss to default files list
 * Made search culture-invariant / case-insensitive
 * Added Visual Studio: Enterprise & Community to supported platform list
-* Solution (.sln) will now only build with Visual Studio 2015 Professional
-    * But plug-in works with Visual Studio 2012 and up
+* Solution (.sln) will now only build with Visual Studio 2015
+    * But plug-in will work with Visual Studio 2012 and up
 
 
 __v1.3__
