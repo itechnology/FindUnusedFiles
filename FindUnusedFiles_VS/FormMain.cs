@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Principal;
@@ -733,6 +734,9 @@ namespace ITechnologyNET.FindUnusedFiles
             progressBar.Maximum   = searchIn.Count;
             panelProgress.Visible = true;
 
+            // get invariant culture
+            var invariantCulture = CultureInfo.InvariantCulture;
+
             // start searching async
             var ui = TaskScheduler.FromCurrentSynchronizationContext();
             searchIn
@@ -744,13 +748,17 @@ namespace ITechnologyNET.FindUnusedFiles
                         var content = File.ReadAllText(f);
                         UsedFiles.ForEach(i =>
                         {
-                            var imageName = Path.GetFileName(i);
-                            if (imageName != null)
+                            var itemName = Path.GetFileName(i);
+                            if (itemName != null)
                             {
-                                if (content.Contains(imageName))
+                                if (invariantCulture.CompareInfo.IndexOf(content, itemName, CompareOptions.IgnoreCase) >= 0)
                                 {
                                     UnUsedFiles.Remove(i);
                                 }
+                                //if (content.Contains(itemName))
+                                //{
+                                //    UnUsedFiles.Remove(i);
+                                //}
                             }
                         });
                     }

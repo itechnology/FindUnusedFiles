@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="Find" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\.(gif|png|jpg|jpeg|bmp|ico)$</Value>
+      <Value Profile="(Default)">\.(gif|png|jpg|jpeg|bmp|ico|svg|js|css)$</Value>
     </Setting>
     <Setting Name="Search" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\.(htm|html|aspx|ascx|master|cshtml|js|css|less)$</Value>
+      <Value Profile="(Default)">\.(htm|html|aspx|ascx|master|cshtml|js|css|less|scss)$</Value>
     </Setting>
     <Setting Name="Directory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

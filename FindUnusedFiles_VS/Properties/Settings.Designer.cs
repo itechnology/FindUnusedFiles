@@ -25,7 +25,7 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\.(gif|png|jpg|jpeg|bmp|ico)$")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\.(gif|png|jpg|jpeg|bmp|ico|svg|js|css)$")]
         public string Find {
             get {
                 return ((string)(this["Find"]));
@@ -37,7 +37,7 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\.(htm|html|aspx|ascx|master|cshtml|js|css|less)$")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\.(htm|html|aspx|ascx|master|cshtml|js|css|less|scss)$")]
         public string Search {
             get {
                 return ((string)(this["Search"]));
