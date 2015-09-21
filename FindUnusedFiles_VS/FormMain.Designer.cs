@@ -110,7 +110,8 @@
             // patternFind
             // 
             this.patternFind.AutoCompleteCustomSource.AddRange(new string[] {
-            "\\.(gif|png|jpg|jpeg)$"});
+            "\\.(gif|png|jpg|jpeg|bmp|ico|svg)$",
+            "\\.(js|css)$"});
             this.patternFind.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.patternFind.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.patternFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
