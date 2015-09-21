@@ -20,6 +20,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "media", "media", "{23D542C7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dist", "dist", "{2E8EC581-688A-4934-9583-4BE47902A393}"
 	ProjectSection(SolutionItems) = preProject
+		dist\FindUnusedFiles-1.3.1.vsix = dist\FindUnusedFiles-1.3.1.vsix
+		dist\FindUnusedFiles-1.3.1.zip = dist\FindUnusedFiles-1.3.1.zip
+		dist\FindUnusedFiles-1.3.2.vsix = dist\FindUnusedFiles-1.3.2.vsix
+		dist\FindUnusedFiles-1.3.2.zip = dist\FindUnusedFiles-1.3.2.zip
 		dist\FindUnusedFiles-1.3.vsix = dist\FindUnusedFiles-1.3.vsix
 		dist\FindUnusedFiles-1.3.zip = dist\FindUnusedFiles-1.3.zip
 		dist\readme.md = dist\readme.md

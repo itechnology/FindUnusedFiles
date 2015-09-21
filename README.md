@@ -1,6 +1,6 @@
 # FindUnusedFiles
 
-###Latest Version: v1.3.1 :: [Download](https://github.com/itechnology/FindUnusedFiles/tree/master/dist)
+###Latest Version: v1.3.2 :: [Download](https://github.com/itechnology/FindUnusedFiles/tree/master/dist)
 
 Helps you find and eliminate unused files (images, css, js, etc) in web projects/applications
 
@@ -30,6 +30,11 @@ Thank's to the command line it can easily be integrated with your favorite devel
 
 
 __Change Log__
+
+__v1.3.2__
+
+  * Fixed problems with certain case insensitive searches
+  * Made picturebox bigger
 
 
 __v1.3.1__

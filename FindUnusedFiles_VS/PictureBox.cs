@@ -1,19 +1,24 @@
 ﻿using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace ITechnologyNET.FindUnusedFiles
 {
     public partial class PictureBox : Form
     {
-        public PictureBox()
+        public PictureBox(int width, int height)
         {
             InitializeComponent();
+
             LostFocus += (s, o) => Hide();
+
+            Size = new Size(width, height);
+            pictureBox1.Size = new Size(width, height);
         }
 
         public void DisplayImage(string path)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(path, @"\.(gif|jpg|jpeg|png|bmp|ico|wmf)$"))
+            if (Regex.IsMatch(path, @"\.(gif|jpg|jpeg|png|bmp|ico|wmf)$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
             {
                 pictureBox1.ImageLocation = path;
                 StartPosition             = FormStartPosition.Manual;
@@ -24,7 +29,7 @@ namespace ITechnologyNET.FindUnusedFiles
             else
             {
                 Hide();
-            }            
+            }
         }
     }
 }

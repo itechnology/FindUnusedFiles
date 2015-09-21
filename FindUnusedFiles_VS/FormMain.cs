@@ -241,7 +241,7 @@ namespace ITechnologyNET.FindUnusedFiles
         {
             // The context menu
             #region Picture Preview
-            Pic = new PictureBox();
+            Pic = new PictureBox(250, 250);
             listResult.SelectedIndexChanged += (s, o) =>
             {
                 if (ModifierKeys == Keys.Alt  && listResult.SelectedIndices.Count == 1)
@@ -704,7 +704,7 @@ namespace ITechnologyNET.FindUnusedFiles
             Properties.Settings.Default.Save();
 
             // files to search within
-            var searchIn = AllFiles.Where(c => System.Text.RegularExpressions.Regex.IsMatch(c, patternSearch.Text)).ToList();
+            var searchIn = AllFiles.Where(c => System.Text.RegularExpressions.Regex.IsMatch(c, patternSearch.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
 
             if (searchIn.Count == 0)
             {
@@ -716,8 +716,8 @@ namespace ITechnologyNET.FindUnusedFiles
             lblToParse.Text = string.Format(ToParseLabel, searchIn.Count.ToString("D4"));
 
             // files to search for
-            UsedFiles   = AllFiles.Where(c => System.Text.RegularExpressions.Regex.IsMatch(c, patternFind.Text)).ToList();
-            UnUsedFiles = AllFiles.Where(c => System.Text.RegularExpressions.Regex.IsMatch(c, patternFind.Text)).ToList();
+            UsedFiles   = AllFiles.Where(c => System.Text.RegularExpressions.Regex.IsMatch(c, patternFind.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
+            UnUsedFiles = AllFiles.Where(c => System.Text.RegularExpressions.Regex.IsMatch(c, patternFind.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
 
             if (UnUsedFiles.Count == 0)
             {
