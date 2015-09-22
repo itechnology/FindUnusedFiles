@@ -13,7 +13,7 @@ namespace ITechnologyNET.FindUnusedFiles
             LostFocus += (s, o) => Hide();
 
             Size = new Size(width, height);
-            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Size = Size;
         }
 
         public void DisplayImage(string path)
@@ -22,7 +22,7 @@ namespace ITechnologyNET.FindUnusedFiles
             {
                 pictureBox1.ImageLocation = path;
                 StartPosition             = FormStartPosition.Manual;
-                Location                  = new Point(MousePosition.X + 15, MousePosition.Y - 150);
+                //Location                  = new Point(MousePosition.X + 15, MousePosition.Y - 150);
 
                 Show();
             }

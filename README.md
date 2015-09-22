@@ -31,6 +31,12 @@ Thank's to the command line it can easily be integrated with your favorite devel
 
 __Change Log__
 
+__v1.3.3__ (*in progress*)
+
+  * Made picturebox a little bigger, and moved outside of bounds of main window for better ergonomics
+  * Added some extra checking for file path operations
+  * Added "Launch External" to context menu to launch a file with it's associated external program
+
 __v1.3.2__
 
   * Fixed problems with certain case insensitive searches

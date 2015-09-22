@@ -2,14 +2,14 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ITechnologyNET.FindUnusedFiles.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Find" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\.(gif|png|jpg|jpeg|bmp|ico|svg|js|css)$</Value>
-    </Setting>
-    <Setting Name="Search" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\.(htm|html|aspx|ascx|master|cshtml|js|css|less|scss)$</Value>
-    </Setting>
     <Setting Name="Directory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Find" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\.(gif|png|jpg|jpeg|bmp|ico|pdf|js|css|eot|svg|ttf|eot|otf|woff|woff2)$</Value>
+    </Setting>
+    <Setting Name="Search" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\.(htm|html|aspx|ascx|master|cshtml|js|css|less)$</Value>
     </Setting>
   </Settings>
 </SettingsFile>

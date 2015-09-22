@@ -81,37 +81,21 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1.3
+        ///   Looks up a localized string similar to 1.3.2
+        ///  * Fixed problems with certain case insensitive searches
+        ///  * Made picturebox bigger
+        ///
+        ///1.3.1
+        ///  * Added SVG, CSS, JS to default item list
+        ///  * Added scss to default files list
+        ///  * Made search culture-invariant / case-insensitive
+        ///  * Added Visual Studio: Enterprise &amp; Community to supported platform list
+        ///
+        ///1.3
         ///  * Alt-Click in list will show image thumbnail if it&apos;s an image
         ///  * Double-Click on list will open &amp; set focus to item in solution explorer (VSIX only)
         ///  * Shell integration (EXE only)
-        ///    - Add/Remove from Help menu, or register/unregister from command line with -s t
-        ///  * More file stats
-        ///
-        ///  1.2
-        ///  * Changed UI a bit
-        ///  * Context menus
-        ///    - Select All
-        ///    - Select Other
-        ///    - Export Selection
-        ///    - Delete Selection
-        ///    - Explore Here
-        ///    - Verify Existence (VSIX only: launches automated VS file search)
-        ///      - In Solution
-        ///      - In Project
-        ///  * Command line parameters (EXE only)
-        ///    -p path
-        ///    -r report type
-        ///    -f find regexp
-        ///    -i inside regexp
-        ///  * Help Menu
-        ///    - Manual
-        ///    - Changelog
-        ///    - Website
-        ///    - About
-        ///    - License
-        ///  * More file stats
-        ///  * More error handling [rest of string was truncated]&quot;;.
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string changelog_txt {
             get {
@@ -152,6 +136,16 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap launch {
+            get {
+                object obj = ResourceManager.GetObject("launch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap license {
             get {
                 object obj = ResourceManager.GetObject("license", resourceCulture);
@@ -183,19 +177,22 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find Unused Files (Standalone Application &amp; Visual Studio Plug-in)
+        ///   Looks up a localized string similar to --------------------------
+        ///Find Unused Files
+        ///--------------------------
+        ///Standalone Application (EXE) &amp; Visual Studio Plug-in (VSIX)
         ///
-        ///Helps find unused files in projects and directories.
-        ///Files can be of any type, but will most likely be images that you wish to remove from website projects.
         ///
-        ///How it works:
+        ///Helps find and eliminate unused files in projects.
+        ///Files can be of any type, but will most likely be images that you wish to remove from a website project.
         ///
+        ///
+        ///------------------
+        ///How it works
+        ///------------------
         ///1) Enter a valid Regexp in the (Search for files) textbox
         ///2) Choose if you wish to display the used or unused report
-        ///3) Enter a valid Regexp in the (Inside thse files) textbox
-        ///4) Click on (In this directory), and browser to where you want to search
-        ///
-        ///Once the  [rest of string was truncated]&quot;;.
+        ///3) Enter a valid Regexp in the (Insid [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string manual_txt {
             get {

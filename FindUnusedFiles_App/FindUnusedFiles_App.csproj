@@ -153,6 +153,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\launch.png" />
     <Content Include="screen-main.png" />
     <Content Include="screen-search.png" />
     <Content Include="screen-vs.png" />

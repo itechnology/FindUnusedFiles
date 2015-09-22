@@ -25,7 +25,19 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\.(gif|png|jpg|jpeg|bmp|ico|svg|js|css)$")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Directory {
+            get {
+                return ((string)(this["Directory"]));
+            }
+            set {
+                this["Directory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\.(gif|png|jpg|jpeg|bmp|ico|pdf|js|css|eot|svg|ttf|eot|otf|woff|woff2)$")]
         public string Find {
             get {
                 return ((string)(this["Find"]));
@@ -37,25 +49,13 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\.(htm|html|aspx|ascx|master|cshtml|js|css|less|scss)$")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\.(htm|html|aspx|ascx|master|cshtml|js|css|less)$")]
         public string Search {
             get {
                 return ((string)(this["Search"]));
             }
             set {
                 this["Search"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Directory {
-            get {
-                return ((string)(this["Directory"]));
-            }
-            set {
-                this["Directory"] = value;
             }
         }
     }

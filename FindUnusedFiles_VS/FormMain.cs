@@ -241,11 +241,12 @@ namespace ITechnologyNET.FindUnusedFiles
         {
             // The context menu
             #region Picture Preview
-            Pic = new PictureBox(250, 250);
+            Pic = new PictureBox(300, 300);
             listResult.SelectedIndexChanged += (s, o) =>
             {
                 if (ModifierKeys == Keys.Alt  && listResult.SelectedIndices.Count == 1)
                 {
+                    Pic.Location = new Point(Right, Top);
                     Pic.DisplayImage(DirectoryPath + listResult.SelectedItem);
                 }
                 else if (Pic != null)
@@ -256,6 +257,19 @@ namespace ITechnologyNET.FindUnusedFiles
             #endregion
 
             var ctxMenu   = new ContextMenuStrip();
+
+            #region Launch External
+            // Select ALL entry
+            var mnuLaunch = new ToolStripMenuItem("Launch External")
+            {
+                Image = new Bitmap(Properties.Resources.@launch)
+            };
+            mnuLaunch.Click += LaunchExternal;
+            ctxMenu.Items.Add(mnuLaunch);
+            #endregion
+
+            ctxMenu.Items.Add(new ToolStripSeparator());
+
             #region SelectAll
             // Select ALL entry
             var mnuSelect = new ToolStripMenuItem("Select All")
@@ -288,8 +302,7 @@ namespace ITechnologyNET.FindUnusedFiles
             ctxMenu.Items.Add(mnuInvert);
             #endregion
 
-            var separator1 = new ToolStripSeparator();
-            ctxMenu.Items.Add(separator1);
+            ctxMenu.Items.Add(new ToolStripSeparator());
 
             #region Export
             // Export entry
@@ -312,8 +325,7 @@ namespace ITechnologyNET.FindUnusedFiles
             ctxMenu.Items.Add(mnuDelete);
             #endregion
 
-            var separator2 = new ToolStripSeparator();
-            ctxMenu.Items.Add(separator2);
+            ctxMenu.Items.Add(new ToolStripSeparator());
 
             #region Explore
             // Explore entry
@@ -516,24 +528,32 @@ namespace ITechnologyNET.FindUnusedFiles
             }
         }
 
+
+        void LaunchExternal(object sender, EventArgs e)
+        {
+            if (listResult.SelectedItem != null)
+            {
+                var path = Path.GetFullPath(DirectoryPath + listResult.SelectedItem);
+                if (File.Exists(path))
+                {
+                    System.Diagnostics.Process.Start(path);
+                }
+            }
+        }
+
         void ExploreHere(object sender, EventArgs e)
         {
             if (listResult.SelectedItem != null)
             {
-                var path = Path.GetDirectoryName(listResult.SelectedItem.ToString());
-                if (path != null)
+                var path = Path.GetDirectoryName(DirectoryPath + listResult.SelectedItem);
+                if (path != null && Directory.Exists(path))
                 {
-                    System.Diagnostics.Process.Start(DirectoryPath + path);
+                    System.Diagnostics.Process.Start(path);
                 }
             }
         }
 
         void ListResultDoubleClick(object sender, EventArgs e)
-        {
-            if (listResult.SelectedItem != null)
-            {
-                var path = Path.GetDirectoryName(listResult.SelectedItem.ToString());
-                if (path != null)
                 {
                     if (IsPackage)
                     {
@@ -541,9 +561,7 @@ namespace ITechnologyNET.FindUnusedFiles
                     }
                     else
                     {
-                        System.Diagnostics.Process.Start(DirectoryPath + path);
-                    }
-                }
+                ExploreHere(sender, e);
             }
         }
 

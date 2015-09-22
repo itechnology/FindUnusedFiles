@@ -17,9 +17,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>assets\find.ico</ApplicationIcon>
-	<StartAction>Program</StartAction>
-	<StartProgram>$(DevEnvDir)\devenv.exe</StartProgram>
-	<StartArguments>/rootsuffix Exp</StartArguments>	
+    <StartAction>Program</StartAction>
+    <StartProgram>$(DevEnvDir)\devenv.exe</StartProgram>
+    <StartArguments>/rootsuffix Exp</StartArguments>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -221,6 +221,8 @@
     <Resource Include="screen-vs.png" />
     <Resource Include="Resources\Package.ico" />
     <Resource Include="Resources\Images.png" />
+    <Resource Include="assets\launch.png" />
+    <None Include="Resources\launch.bmp" />
     <Content Include="screen-main.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
