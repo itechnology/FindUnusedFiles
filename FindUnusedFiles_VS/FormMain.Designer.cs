@@ -55,6 +55,7 @@
             this.panelProgress = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.lblCurrentFile = new System.Windows.Forms.Label();
+            this.treeResult = new System.Windows.Forms.TreeView();
             this.lblUnused = new System.Windows.Forms.Label();
             this.lblPath = new System.Windows.Forms.Label();
             this.lblFiles = new System.Windows.Forms.Label();
@@ -151,7 +152,6 @@
             this.radioUsed.TabIndex = 6;
             this.radioUsed.Text = "used";
             this.radioUsed.UseVisualStyleBackColor = true;
-            this.radioUsed.CheckedChanged += new System.EventHandler(this.RadioUsedCheckedChanged);
             // 
             // radioUnused
             // 
@@ -165,7 +165,7 @@
             this.radioUnused.TabStop = true;
             this.radioUnused.Text = "unused";
             this.radioUnused.UseVisualStyleBackColor = true;
-            this.radioUnused.CheckedChanged += new System.EventHandler(this.RadioUnusedCheckedChanged);
+            this.radioUnused.CheckedChanged += new System.EventHandler(this.RadioCheckedChanged);
             // 
             // lblReport
             // 
@@ -325,6 +325,15 @@
             this.lblCurrentFile.TabIndex = 14;
             this.lblCurrentFile.Text = "... n/a";
             // 
+            // treeResult
+            // 
+            this.treeResult.Location = new System.Drawing.Point(397, 44);
+            this.treeResult.Name = "treeResult";
+            this.treeResult.ShowNodeToolTips = true;
+            this.treeResult.Size = new System.Drawing.Size(388, 319);
+            this.treeResult.TabIndex = 27;
+            this.treeResult.Visible = false;
+            // 
             // lblUnused
             // 
             this.lblUnused.AutoSize = true;
@@ -470,6 +479,7 @@
             this.Controls.Add(this.listResult);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.menuStrip);
+            this.Controls.Add(this.treeResult);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -529,6 +539,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem registerShellToolStripMenuItem;
+        private System.Windows.Forms.TreeView treeResult;
     }
 }
 

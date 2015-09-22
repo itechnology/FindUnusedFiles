@@ -2,6 +2,9 @@
   * Made picturebox a little bigger, and moved outside of bounds of main window for better ergonomics
   * Added some extra checking for file path operations
   * Added "Launch External" to context menu to launch a file with it's associated external program
+  * fixed some thread-safe issues
+  * swiched seach method, 2x faster
+  * started working on a treeview that shows in which files a item is used
 
 1.3.2
   * Fixed problems with certain case insensitive searches

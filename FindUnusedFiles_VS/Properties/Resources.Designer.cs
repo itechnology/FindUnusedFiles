@@ -81,7 +81,12 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1.3.2
+        ///   Looks up a localized string similar to 1.3.3
+        ///  * Made picturebox a little bigger, and moved outside of bounds of main window for better ergonomics
+        ///  * Added some extra checking for file path operations
+        ///  * Added &quot;Launch External&quot; to context menu to launch a file with it&apos;s associated external program
+        ///
+        ///1.3.2
         ///  * Fixed problems with certain case insensitive searches
         ///  * Made picturebox bigger
         ///
@@ -89,13 +94,7 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         ///  * Added SVG, CSS, JS to default item list
         ///  * Added scss to default files list
         ///  * Made search culture-invariant / case-insensitive
-        ///  * Added Visual Studio: Enterprise &amp; Community to supported platform list
-        ///
-        ///1.3
-        ///  * Alt-Click in list will show image thumbnail if it&apos;s an image
-        ///  * Double-Click on list will open &amp; set focus to item in solution explorer (VSIX only)
-        ///  * Shell integration (EXE only)
-        /// [rest of string was truncated]&quot;;.
+        ///  *  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string changelog_txt {
             get {

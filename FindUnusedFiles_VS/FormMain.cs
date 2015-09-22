@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -30,8 +31,10 @@ namespace ITechnologyNET.FindUnusedFiles
         string DirectoryPath { get; set; }
 
         List<string> AllFiles    { get; set; }
-        List<string> UsedFiles   { get; set; }
+        //List<string> UsedFiles   { get; set; }
         List<string> UnUsedFiles { get; set; }
+        ConcurrentDictionary<string, List<string>> UsedFiles { get; set; }
+
 
         const string PathLabel    = "Path: {0}";
         const string FilesLabel   = "Total Files: {0}";
@@ -92,7 +95,7 @@ namespace ITechnologyNET.FindUnusedFiles
             ProjectItems   = projectItems;
             DirectoryPath  = directoryPath;
             IsPackage      = true;
-            btnBrowse.Text = "Search";
+            btnBrowse.Text = @"Search";
 
             // BUG: if cast to string missing, thinks we are dealing with a List<dynamic>
             AllFiles = ProjectItems.Select(c => (string)c.Properties.Item("FullPath").Value.ToString()).ToList();
@@ -395,7 +398,7 @@ namespace ITechnologyNET.FindUnusedFiles
                             var name = Path.GetFileName(i);
                             if (!string.IsNullOrEmpty(name))
                             {
-                                pattern += string.Format("{0}|", System.Text.RegularExpressions.Regex.Escape(name));
+                            pattern += string.Format("{0}|", Regex.Escape(name));
                             }
                         });
 
@@ -416,7 +419,7 @@ namespace ITechnologyNET.FindUnusedFiles
                             var name = Path.GetFileName(i);
                             if (!string.IsNullOrEmpty(name))
                             {
-                                pattern += string.Format("{0}|", System.Text.RegularExpressions.Regex.Escape(name));
+                                pattern += string.Format("{0}|", Regex.Escape(name));
                             }
                         });
 
@@ -432,6 +435,7 @@ namespace ITechnologyNET.FindUnusedFiles
             #endregion
 
             listResult.ContextMenuStrip = ctxMenu;
+            //treeResult.ContextMenuStrip = ctxMenu;
         }
 
         void BrowseClick(object sender, EventArgs e)
@@ -447,32 +451,29 @@ namespace ITechnologyNET.FindUnusedFiles
             }
         }
 
-        void RadioUnusedCheckedChanged(object sender, EventArgs e)
-        {
-            ListFiles();
-        }
-
-        void RadioUsedCheckedChanged(object sender, EventArgs e)
+        void RadioCheckedChanged(object sender, EventArgs e)
         {
             ListFiles();
         }
 
         void ListFiles()
         {
-            listResult.Items.Clear();
-
             if (radioUnused.Checked)
             {
+                //BuildUnUsedTree();
                 ListUnusedFiles();
             }
             else
             {
+                //BuildUsedTree();
                 ListUsedFiles();
             }
         }
 
         void ListUnusedFiles()
         {
+            listResult.Items.Clear();
+
             lblUnused.Enabled = true;
             lblUsed.Enabled   = false;
 
@@ -486,11 +487,17 @@ namespace ITechnologyNET.FindUnusedFiles
 
             lblUnused.Text = string.Format(UnusedLabel, UnUsedFiles.Count.ToString("D4"));
 
-            UnUsedFiles.Where(f=> !string.IsNullOrEmpty(f)).ToList().ForEach(i => listResult.Items.Add(i.Replace(DirectoryPath, string.Empty)));
+            UnUsedFiles
+                .Where(c => !string.IsNullOrEmpty(c))
+                .OrderBy(c => c)
+                .ToList()
+                .ForEach(i => listResult.Items.Add(i.Replace(DirectoryPath, string.Empty)));
         }
 
         void ListUsedFiles()
         {
+            listResult.Items.Clear();
+
             lblUnused.Enabled = false;
             lblUsed.Enabled   = true;
 
@@ -504,7 +511,66 @@ namespace ITechnologyNET.FindUnusedFiles
 
             lblUsed.Text = string.Format(UsedLabel, UsedFiles.Count.ToString("D4"));
 
-            UsedFiles.Where(f => !string.IsNullOrEmpty(f)).ToList().ForEach(i => listResult.Items.Add(i.Replace(DirectoryPath, string.Empty)));
+            UsedFiles
+                .Select(c => c.Key)
+                .Where(c => !string.IsNullOrEmpty(c))
+                .OrderBy(c => c)
+                .ToList()
+                .ForEach(i => listResult.Items.Add(i.Replace(DirectoryPath, string.Empty)));
+        }
+
+        void BuildUsedTree()
+        {
+            if (UsedFiles == null || UsedFiles.Count == 0)
+            {
+                return;
+            }
+
+            treeResult.BeginUpdate();
+            treeResult.Nodes.Clear();
+            var directoryNode = treeResult.Nodes.Add(DirectoryPath);
+
+
+            var ordered = UsedFiles.OrderBy(parent => parent.Key).ThenBy(c => c.Value.OrderBy(d => d)).ToList();
+            foreach (var item in ordered)
+            {
+                var parentNode = new TreeNode(item.Key.Replace(DirectoryPath, string.Empty));
+                parentNode.ToolTipText = string.Format("Referenced in ({0}) files", item.Value.Count);
+                if (item.Value.Count > 0)
+                {
+                    foreach (var child in item.Value)
+                    {
+                        var childNode = new TreeNode(child.Replace(DirectoryPath, string.Empty));
+                        parentNode.Nodes.Add(childNode);
+
+                    }
+                }
+
+                directoryNode.Nodes.Add(parentNode);
+                directoryNode.Expand();
+            }
+            treeResult.EndUpdate();
+        }
+
+        void BuildUnUsedTree()
+        {
+            if (UnUsedFiles == null || UnUsedFiles.Count == 0)
+            {
+                return;
+            }
+
+            treeResult.BeginUpdate();
+            treeResult.Nodes.Clear();
+            var directoryNode = treeResult.Nodes.Add(DirectoryPath);
+
+            foreach (var item in UnUsedFiles)
+            {
+                var parentNode = new TreeNode(item.Replace(DirectoryPath, string.Empty));
+
+                directoryNode.Nodes.Add(parentNode);
+                directoryNode.ExpandAll();
+            }
+            treeResult.EndUpdate();
         }
 
         void ViewInProjectExplorer(object sender, EventArgs e)
@@ -527,7 +593,6 @@ namespace ITechnologyNET.FindUnusedFiles
                 }
             }
         }
-
 
         void LaunchExternal(object sender, EventArgs e)
         {
@@ -568,7 +633,7 @@ namespace ITechnologyNET.FindUnusedFiles
         void DeleteFiles(object sender, EventArgs eventArgs)
         {
             // TODO: Add alert to confirm deletion
-            if (MessageBox.Show("Are you sure you want to delete this/these files ?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show(@"Are you sure you want to delete this/these files ?", @"Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 GetSelectedItems()
                     .ForEach(i =>
@@ -578,8 +643,8 @@ namespace ITechnologyNET.FindUnusedFiles
                             var fullPath = DirectoryPath + i;
 
                             // since we are deleting, file should not be in any list at all anymore
-                            UsedFiles
-                                .Remove(fullPath);
+                            List<string> temp;
+                            UsedFiles.TryRemove(fullPath, out temp);
 
                             UnUsedFiles
                                 .Remove(fullPath);
@@ -626,7 +691,7 @@ namespace ITechnologyNET.FindUnusedFiles
                         .ForEach(i => s.WriteLine(DirectoryPath + i));
                 }
 
-                MessageBox.Show(string.Format("Result saved in: {0}", saveFileDialog.FileName), "Done", MessageBoxButtons.OK);
+                MessageBox.Show(string.Format("Result saved in: {0}", saveFileDialog.FileName), @"Done", MessageBoxButtons.OK);
             }
         }
         #endregion
@@ -669,7 +734,7 @@ namespace ITechnologyNET.FindUnusedFiles
             if (string.IsNullOrEmpty(DirectoryPath))
             {
                 // show error message
-                MessageBox.Show("Directory path was not defined", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Directory path was not defined", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (IsPackage)
                 {
                     Dispose();
@@ -683,7 +748,7 @@ namespace ITechnologyNET.FindUnusedFiles
             if (AllFiles == null || AllFiles.Count == 0)
             {
                 // show error message
-                MessageBox.Show("No project files where found", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"No project files where found", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (IsPackage)
                 {
                     Dispose();
@@ -694,9 +759,6 @@ namespace ITechnologyNET.FindUnusedFiles
 
             lblFiles.Text = string.Format(FilesLabel, AllFiles.Count.ToString("D5"));
             listResult.Items.Clear();
-
-            UsedFiles   = new List<string>();
-            UnUsedFiles = new List<string>();
 
             lblUsed.Text            = string.Format(UsedLabel  , 0);
             lblUnused.Text          = string.Format(UnusedLabel, 0);
@@ -722,8 +784,7 @@ namespace ITechnologyNET.FindUnusedFiles
             Properties.Settings.Default.Save();
 
             // files to search within
-            var searchIn = AllFiles.Where(c => System.Text.RegularExpressions.Regex.IsMatch(c, patternSearch.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
-
+            var searchIn = AllFiles.Where(c => Regex.IsMatch(c, patternSearch.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
             if (searchIn.Count == 0)
             {
                 // nothing to search in
@@ -734,9 +795,7 @@ namespace ITechnologyNET.FindUnusedFiles
             lblToParse.Text = string.Format(ToParseLabel, searchIn.Count.ToString("D4"));
 
             // files to search for
-            UsedFiles   = AllFiles.Where(c => System.Text.RegularExpressions.Regex.IsMatch(c, patternFind.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
-            UnUsedFiles = AllFiles.Where(c => System.Text.RegularExpressions.Regex.IsMatch(c, patternFind.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
-
+            UnUsedFiles = AllFiles.Where(c => Regex.IsMatch(c, patternFind.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
             if (UnUsedFiles.Count == 0)
             {
                 // nothing to search for
@@ -744,7 +803,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 return;
             }
 
-            lblToMatch.Text = string.Format(ToMatchLabel, UsedFiles.Count.ToString("D4"));
+            lblToMatch.Text = string.Format(ToMatchLabel, UnUsedFiles.Count.ToString("D4"));
 
             Enabled               = false;
             progressBar.Value     = 0;
@@ -752,35 +811,37 @@ namespace ITechnologyNET.FindUnusedFiles
             progressBar.Maximum   = searchIn.Count;
             panelProgress.Visible = true;
 
-            // get invariant culture
-            var invariantCulture = CultureInfo.InvariantCulture;
+            // placeholder for used files
+            UsedFiles = new ConcurrentDictionary<string, List<string>>();
 
             // start searching async
             var ui = TaskScheduler.FromCurrentSynchronizationContext();
-            searchIn
-                .ForEach(f => Task.Factory.StartNew(() =>
+            Parallel.ForEach(searchIn, f => Task.Factory.StartNew(() =>
                 {
                     var fileName = Path.GetFileName(f);
                     if (fileName != null && File.Exists(f))
                     {
                         var content = File.ReadAllText(f);
-                        UsedFiles.ForEach(i =>
+                    UnUsedFiles.ForEach(i =>
                         {
                             var itemName = Path.GetFileName(i);
                             if (itemName != null)
                             {
-                                if (invariantCulture.CompareInfo.IndexOf(content, itemName, CompareOptions.IgnoreCase) >= 0)
+                            if (Regex.IsMatch(content, Regex.Escape(itemName), RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Multiline))
                                 {
-                                    UnUsedFiles.Remove(i);
+                                if (UsedFiles.ContainsKey(i))
+                                {
+                                    UsedFiles[i].Add(f);
                                 }
-                                //if (content.Contains(itemName))
-                                //{
-                                //    UnUsedFiles.Remove(i);
-                                //}
+                                else
+                                {
+                                    UsedFiles.TryAdd(i, new List<string>() { f });
+                                }
+                                }
                             }
                         });
                     }
-                })
+            }, TaskCreationOptions.PreferFairness)
                 .ContinueWith(task =>
                 {
                     if (task.IsCompleted)
@@ -792,8 +853,13 @@ namespace ITechnologyNET.FindUnusedFiles
 
                         if (progressBar.Value == progressBar.Maximum)
                         {
-                            // Remove unused files, from used files list
-                            UnUsedFiles.ForEach(i => UsedFiles.Remove(i));
+                        UsedFiles
+                            .ToList()
+                            .ForEach(i =>
+                            {
+                                UnUsedFiles.Remove(i.Key);
+                            });
+
 
                             panelProgress.Visible = false;
                             Enabled               = true;
@@ -846,7 +912,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 isAdmin = pricipal.IsInRole(WindowsBuiltInRole.Administrator);
                 if (!isAdmin)
                 {
-                    var result = MessageBox.Show("This action requires admin rights, relaunch with appropriate rights ?", "Admin Rights", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    var result = MessageBox.Show(@"This action requires admin rights, relaunch with appropriate rights ?", @"Admin Rights", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
                     if (result == DialogResult.OK)
                     {
@@ -888,7 +954,7 @@ namespace ITechnologyNET.FindUnusedFiles
 
             if (IsElevatedProcess("-s t"))
             {
-            var result = MessageBox.Show(string.Format("[{0}] shell extension?", registerShellToolStripMenuItem.Checked ? "UnRegister" : "Register"), "Shell extension", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                var result = MessageBox.Show(string.Format("[{0}] shell extension?", registerShellToolStripMenuItem.Checked ? "UnRegister" : "Register"), @"Shell extension", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Cancel)
             {
                 return;

@@ -31,12 +31,9 @@ namespace ITechnologyNET.FindUnusedFiles
         string DirectoryPath { get; set; }
 
         List<string> AllFiles    { get; set; }
-        List<string> UsedFiles   { get; set; }
+        //List<string> UsedFiles   { get; set; }
         List<string> UnUsedFiles { get; set; }
-
-        // TODO: Test list
-        ConcurrentBag<string> UnUsedFilesConcurrent { get; set; }
-        ConcurrentDictionary<string, ConcurrentBag<string>> UsedDictionaryConcurrent { get; set; }
+        ConcurrentDictionary<string, List<string>> UsedFiles { get; set; }
 
 
         const string PathLabel    = "Path: {0}";
@@ -438,6 +435,7 @@ namespace ITechnologyNET.FindUnusedFiles
             #endregion
 
             listResult.ContextMenuStrip = ctxMenu;
+            //treeResult.ContextMenuStrip = ctxMenu;
         }
 
         void BrowseClick(object sender, EventArgs e)
@@ -462,11 +460,12 @@ namespace ITechnologyNET.FindUnusedFiles
         {
             if (radioUnused.Checked)
             {
+                //BuildUnUsedTree();
                 ListUnusedFiles();
             }
             else
             {
-                BuildUsedTree();
+                //BuildUsedTree();
                 ListUsedFiles();
             }
         }
@@ -488,7 +487,11 @@ namespace ITechnologyNET.FindUnusedFiles
 
             lblUnused.Text = string.Format(UnusedLabel, UnUsedFiles.Count.ToString("D4"));
 
-            UnUsedFiles.Where(f=> !string.IsNullOrEmpty(f)).ToList().ForEach(i => listResult.Items.Add(i.Replace(DirectoryPath, string.Empty)));
+            UnUsedFiles
+                .Where(c => !string.IsNullOrEmpty(c))
+                .OrderBy(c => c)
+                .ToList()
+                .ForEach(i => listResult.Items.Add(i.Replace(DirectoryPath, string.Empty)));
         }
 
         void ListUsedFiles()
@@ -508,37 +511,66 @@ namespace ITechnologyNET.FindUnusedFiles
 
             lblUsed.Text = string.Format(UsedLabel, UsedFiles.Count.ToString("D4"));
 
-            UsedFiles.Where(f => !string.IsNullOrEmpty(f)).ToList().ForEach(i => listResult.Items.Add(i.Replace(DirectoryPath, string.Empty)));
+            UsedFiles
+                .Select(c => c.Key)
+                .Where(c => !string.IsNullOrEmpty(c))
+                .OrderBy(c => c)
+                .ToList()
+                .ForEach(i => listResult.Items.Add(i.Replace(DirectoryPath, string.Empty)));
         }
-
 
         void BuildUsedTree()
         {
-            if (UsedDictionaryConcurrent == null || UsedDictionaryConcurrent.Count == 0)
+            if (UsedFiles == null || UsedFiles.Count == 0)
             {
                 return;
             }
 
-            treeView1.Nodes.Clear();
-            treeView1.Nodes.Add(DirectoryPath);
+            treeResult.BeginUpdate();
+            treeResult.Nodes.Clear();
+            var directoryNode = treeResult.Nodes.Add(DirectoryPath);
 
-            foreach (var item in UsedDictionaryConcurrent)
+
+            var ordered = UsedFiles.OrderBy(parent => parent.Key).ThenBy(c => c.Value.OrderBy(d => d)).ToList();
+            foreach (var item in ordered)
             {
-                var parentNode = new TreeNode(item.Key);
-                parentNode.ExpandAll();
+                var parentNode = new TreeNode(item.Key.Replace(DirectoryPath, string.Empty));
+                parentNode.ToolTipText = string.Format("Referenced in ({0}) files", item.Value.Count);
                 if (item.Value.Count > 0)
                 {
                     foreach (var child in item.Value)
                     {
-                        var childNode = new TreeNode(child);
-                        //childNode.ExpandAll();
+                        var childNode = new TreeNode(child.Replace(DirectoryPath, string.Empty));
                         parentNode.Nodes.Add(childNode);
 
                     }
                 }
 
-                treeView1.Nodes.Add(parentNode);
+                directoryNode.Nodes.Add(parentNode);
+                directoryNode.Expand();
             }
+            treeResult.EndUpdate();
+        }
+
+        void BuildUnUsedTree()
+        {
+            if (UnUsedFiles == null || UnUsedFiles.Count == 0)
+            {
+                return;
+            }
+
+            treeResult.BeginUpdate();
+            treeResult.Nodes.Clear();
+            var directoryNode = treeResult.Nodes.Add(DirectoryPath);
+
+            foreach (var item in UnUsedFiles)
+            {
+                var parentNode = new TreeNode(item.Replace(DirectoryPath, string.Empty));
+
+                directoryNode.Nodes.Add(parentNode);
+                directoryNode.ExpandAll();
+            }
+            treeResult.EndUpdate();
         }
 
         void ViewInProjectExplorer(object sender, EventArgs e)
@@ -561,7 +593,6 @@ namespace ITechnologyNET.FindUnusedFiles
                 }
             }
         }
-
 
         void LaunchExternal(object sender, EventArgs e)
         {
@@ -606,41 +637,41 @@ namespace ITechnologyNET.FindUnusedFiles
             {
                 GetSelectedItems()
                     .ForEach(i =>
-                {
-                        if (File.Exists(DirectoryPath + i))
                     {
+                        if (File.Exists(DirectoryPath + i))
+                        {
                             var fullPath = DirectoryPath + i;
 
-                        // since we are deleting, file should not be in any list at all anymore
-                        UsedFiles
-                            .Remove(fullPath);
+                            // since we are deleting, file should not be in any list at all anymore
+                            List<string> temp;
+                            UsedFiles.TryRemove(fullPath, out temp);
 
-                        UnUsedFiles
-                            .Remove(fullPath);
+                            UnUsedFiles
+                                .Remove(fullPath);
 
-                        AllFiles
-                            .Remove(fullPath);
+                            AllFiles
+                                .Remove(fullPath);
 
-                        listResult.Items
-                                .Remove(i);
+                            listResult.Items
+                                    .Remove(i);
 
-                        // in package mode, let VS do the deleting
-                        if (IsPackage)
-                        {
-                            var item = ProjectItems.FirstOrDefault(c => c.Properties.Item("FullPath").Value.ToString() == fullPath);
-                            if (item != null)
+                            // in package mode, let VS do the deleting
+                            if (IsPackage)
                             {
-                                item.Delete();
+                                var item = ProjectItems.FirstOrDefault(c => c.Properties.Item("FullPath").Value.ToString() == fullPath);
+                                if (item != null)
+                                {
+                                    item.Delete();
 
-                                ProjectItems.ToList()
-                                    .Remove(item);
+                                    ProjectItems.ToList()
+                                        .Remove(item);
+                                }
+                            }
+                            else
+                            {
+                                File.Delete(fullPath);
                             }
                         }
-                        else
-                        {
-                            File.Delete(fullPath);
-                        }
-                    }
                     });
 
                 ListFiles();
@@ -754,7 +785,6 @@ namespace ITechnologyNET.FindUnusedFiles
 
             // files to search within
             var searchIn = AllFiles.Where(c => Regex.IsMatch(c, patternSearch.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
-
             if (searchIn.Count == 0)
             {
                 // nothing to search in
@@ -765,13 +795,7 @@ namespace ITechnologyNET.FindUnusedFiles
             lblToParse.Text = string.Format(ToParseLabel, searchIn.Count.ToString("D4"));
 
             // files to search for
-            var fileList = AllFiles.Where(c => Regex.IsMatch(c, patternFind.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
-            // copy to lists without reference
-            UsedFiles   = fileList.ConvertAll(x => x);
-            UnUsedFiles = fileList.ConvertAll(x => x);
-
-            UsedDictionaryConcurrent = new ConcurrentDictionary<string, ConcurrentBag<string>>();
-
+            UnUsedFiles = AllFiles.Where(c => Regex.IsMatch(c, patternFind.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
             if (UnUsedFiles.Count == 0)
             {
                 // nothing to search for
@@ -779,77 +803,71 @@ namespace ITechnologyNET.FindUnusedFiles
                 return;
             }
 
-            lblToMatch.Text = string.Format(ToMatchLabel, UsedFiles.Count.ToString("D4"));
+            lblToMatch.Text = string.Format(ToMatchLabel, UnUsedFiles.Count.ToString("D4"));
 
-            Enabled           = false;
+            Enabled               = false;
             progressBar.Value     = 0;
             progressBar.Minimum   = 0;
             progressBar.Maximum   = searchIn.Count;
             panelProgress.Visible = true;
 
-            // get invariant culture
-            var invariantCulture = CultureInfo.InvariantCulture;
+            // placeholder for used files
+            UsedFiles = new ConcurrentDictionary<string, List<string>>();
 
             // start searching async
             var ui = TaskScheduler.FromCurrentSynchronizationContext();
-            searchIn
-                .ForEach(f => Task.Factory.StartNew(() =>
+            Parallel.ForEach(searchIn, f => Task.Factory.StartNew(() =>
+            {
+                var fileName = Path.GetFileName(f);
+                if (fileName != null && File.Exists(f))
                 {
-                    var fileName = Path.GetFileName(f);
-                    if (fileName != null && File.Exists(f))
+                    var content = File.ReadAllText(f);
+                    UnUsedFiles.ForEach(i =>
                     {
-                        var content = File.ReadAllText(f);
-                        UsedFiles.ForEach(i =>
+                        var itemName = Path.GetFileName(i);
+                        if (itemName != null)
                         {
-                            var itemName = Path.GetFileName(i);
-                            if (itemName != null)
+                            if (Regex.IsMatch(content, Regex.Escape(itemName), RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Multiline))
                             {
-                                if (invariantCulture.CompareInfo.IndexOf(content, itemName, CompareOptions.IgnoreCase) >= 0)
+                                if (UsedFiles.ContainsKey(i))
                                 {
-                                    lock (UnUsedFiles)
-                                    {
-                                        UnUsedFiles.Remove(i);
-                                    }
-                                    //UnUsedFiles.Remove(i);
-
-                                    if (UsedDictionaryConcurrent.ContainsKey(itemName))
-                                    {
-                                        UsedDictionaryConcurrent[itemName].Add(fileName);
-                                    }
-                                    else
-                                    {
-                                        UsedDictionaryConcurrent.TryAdd(itemName, new ConcurrentBag<string>() {fileName} );
-                                    }
+                                    UsedFiles[i].Add(f);
                                 }
-                                //if (content.Contains(itemName))
-                                //{
-                                //    UnUsedFiles.Remove(i);
-                                //}
+                                else
+                                {
+                                    UsedFiles.TryAdd(i, new List<string>() { f });
+                                }
                             }
-                        });
-                    }
-                })
-                .ContinueWith(task =>
-                {
-                    if (task.IsCompleted)
-                    {
-                        // update ui
-                        progressBar.Value++;
-                        lblCurrentFile.Text = f.Replace(DirectoryPath, string.Empty);
-                        lblParsed.Text      = string.Format(ParsedLabel, progressBar.Value.ToString("D4"));
-
-                        if (progressBar.Value == progressBar.Maximum)
-                        {
-                            // Remove unused files, from used files list
-                            UnUsedFiles.ForEach(i => UsedFiles.Remove(i));
-
-                            panelProgress.Visible = false;
-                            Enabled               = true;
-
-                            ListFiles();
                         }
+                    });
+                }
+            }, TaskCreationOptions.PreferFairness)
+            .ContinueWith(task =>
+            {
+                if (task.IsCompleted)
+                {
+                    // update ui
+                    progressBar.Value++;
+                    lblCurrentFile.Text = f.Replace(DirectoryPath, string.Empty);
+                    lblParsed.Text      = string.Format(ParsedLabel, progressBar.Value.ToString("D4"));
+
+                    if (progressBar.Value == progressBar.Maximum)
+                    {
+                        UsedFiles
+                            .ToList()
+                            .ForEach(i =>
+                            {
+                                UnUsedFiles.Remove(i.Key);
+                            });
+
+
+                        panelProgress.Visible = false;
+                        Enabled               = true;
+
+                        ListFiles();
                     }
-                }, ui));
+                }
+            }, ui));
         }
         #endregion
 

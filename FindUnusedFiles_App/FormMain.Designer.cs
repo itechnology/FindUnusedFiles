@@ -53,9 +53,9 @@
             this.lblUsed = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.panelProgress = new System.Windows.Forms.Panel();
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.label1 = new System.Windows.Forms.Label();
             this.lblCurrentFile = new System.Windows.Forms.Label();
+            this.treeResult = new System.Windows.Forms.TreeView();
             this.lblUnused = new System.Windows.Forms.Label();
             this.lblPath = new System.Windows.Forms.Label();
             this.lblFiles = new System.Windows.Forms.Label();
@@ -91,7 +91,7 @@
             this.listResult.Margin = new System.Windows.Forms.Padding(2);
             this.listResult.Name = "listResult";
             this.listResult.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listResult.Size = new System.Drawing.Size(771, 319);
+            this.listResult.Size = new System.Drawing.Size(774, 319);
             this.listResult.TabIndex = 1;
             // 
             // patternSearch
@@ -305,14 +305,6 @@
             this.panelProgress.TabIndex = 14;
             this.panelProgress.Visible = false;
             // 
-            // treeView1
-            // 
-            this.treeView1.Location = new System.Drawing.Point(397, 44);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(388, 319);
-            this.treeView1.TabIndex = 27;
-            this.treeView1.Visible = false;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -332,6 +324,15 @@
             this.lblCurrentFile.Size = new System.Drawing.Size(36, 15);
             this.lblCurrentFile.TabIndex = 14;
             this.lblCurrentFile.Text = "... n/a";
+            // 
+            // treeResult
+            // 
+            this.treeResult.Location = new System.Drawing.Point(397, 44);
+            this.treeResult.Name = "treeResult";
+            this.treeResult.ShowNodeToolTips = true;
+            this.treeResult.Size = new System.Drawing.Size(388, 319);
+            this.treeResult.TabIndex = 27;
+            this.treeResult.Visible = false;
             // 
             // lblUnused
             // 
@@ -478,7 +479,7 @@
             this.Controls.Add(this.listResult);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.menuStrip);
-            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.treeResult);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -538,7 +539,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem registerShellToolStripMenuItem;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView treeResult;
     }
 }
 
