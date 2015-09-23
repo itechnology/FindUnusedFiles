@@ -860,15 +860,20 @@ namespace ITechnologyNET.FindUnusedFiles
                         var itemName = Path.GetFileName(i);
                         if (itemName != null)
                         {
-                            if (Regex.IsMatch(content, Regex.Escape(itemName), RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Multiline))
+                            // don't search for yourself in yourself (but use entire path)
+                            if (!i.Equals(f, StringComparison.InvariantCultureIgnoreCase))
                             {
-                                if (UsedFiles.ContainsKey(i))
+                                if (Regex.IsMatch(content, Regex.Escape(itemName),
+                                    RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Multiline))
                                 {
-                                    UsedFiles[i].Add(f);
-                                }
-                                else
-                                {
-                                    UsedFiles.TryAdd(i, new List<string>() { f });
+                                    if (UsedFiles.ContainsKey(i))
+                                    {
+                                        UsedFiles[i].Add(f);
+                                    }
+                                    else
+                                    {
+                                        UsedFiles.TryAdd(i, new List<string>() {f});
+                                    }
                                 }
                             }
                         }

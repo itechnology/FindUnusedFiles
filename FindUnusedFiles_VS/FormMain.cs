@@ -860,7 +860,11 @@ namespace ITechnologyNET.FindUnusedFiles
                             var itemName = Path.GetFileName(i);
                             if (itemName != null)
                             {
-                            if (Regex.IsMatch(content, Regex.Escape(itemName), RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Multiline))
+                            // don't search for yourself in yourself (but use entire path)
+                            if (!i.Equals(f, StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                if (Regex.IsMatch(content, Regex.Escape(itemName),
+                                    RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Multiline))
                                 {
                                 if (UsedFiles.ContainsKey(i))
                                 {
@@ -872,6 +876,7 @@ namespace ITechnologyNET.FindUnusedFiles
                                 }
                                 }
                             }
+                        }
                         });
                     }
             }, TaskCreationOptions.PreferFairness)
