@@ -73,6 +73,7 @@
             this.tabPageTreeView = new System.Windows.Forms.TabPage();
             this.tabPageOptions = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.panelProgress.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -83,6 +84,7 @@
             // 
             // btnBrowse
             // 
+            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBrowse.Location = new System.Drawing.Point(652, 433);
             this.btnBrowse.Margin = new System.Windows.Forms.Padding(2);
             this.btnBrowse.Name = "btnBrowse";
@@ -108,6 +110,8 @@
             // 
             // patternSearch
             // 
+            this.patternSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.patternSearch.AutoCompleteCustomSource.AddRange(new string[] {
             "\\.(htm|html|aspx|ascx|master|cshtml|js|css|less)$",
             "\\.(htm|html|php|js|css|less)$"});
@@ -122,6 +126,8 @@
             // 
             // patternFind
             // 
+            this.patternFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.patternFind.AutoCompleteCustomSource.AddRange(new string[] {
             "\\.(gif|png|jpg|jpeg|bmp|ico|svg)$",
             "\\.(js|css)$"});
@@ -136,6 +142,7 @@
             // 
             // lblInside
             // 
+            this.lblInside.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblInside.AutoSize = true;
             this.lblInside.Location = new System.Drawing.Point(10, 419);
             this.lblInside.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -146,6 +153,7 @@
             // 
             // lblSearch
             // 
+            this.lblSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSearch.AutoSize = true;
             this.lblSearch.Location = new System.Drawing.Point(11, 372);
             this.lblSearch.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -156,6 +164,7 @@
             // 
             // radioUsed
             // 
+            this.radioUsed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.radioUsed.AutoSize = true;
             this.radioUsed.Location = new System.Drawing.Point(652, 390);
             this.radioUsed.Margin = new System.Windows.Forms.Padding(2);
@@ -167,6 +176,7 @@
             // 
             // radioUnused
             // 
+            this.radioUnused.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.radioUnused.AutoSize = true;
             this.radioUnused.Checked = true;
             this.radioUnused.Location = new System.Drawing.Point(708, 390);
@@ -181,6 +191,7 @@
             // 
             // lblReport
             // 
+            this.lblReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblReport.AutoSize = true;
             this.lblReport.Location = new System.Drawing.Point(649, 372);
             this.lblReport.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -307,6 +318,8 @@
             // 
             // panelProgress
             // 
+            this.panelProgress.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelProgress.Controls.Add(this.buttonCancel);
             this.panelProgress.Controls.Add(this.label1);
             this.panelProgress.Controls.Add(this.lblCurrentFile);
             this.panelProgress.Controls.Add(this.progressBar);
@@ -466,6 +479,7 @@
             // 
             // checkBoxImages
             // 
+            this.checkBoxImages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxImages.AutoSize = true;
             this.checkBoxImages.Checked = true;
             this.checkBoxImages.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -478,6 +492,9 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPageNormal);
             this.tabControl1.Controls.Add(this.tabPageTreeView);
             this.tabControl1.Controls.Add(this.tabPageOptions);
@@ -522,15 +539,26 @@
             // 
             // label7
             // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label7.Location = new System.Drawing.Point(238, 185);
+            this.label7.Location = new System.Drawing.Point(238, 116);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(278, 46);
             this.label7.TabIndex = 0;
             this.label7.Text = "For future stuff";
             // 
+            // buttonCancel
+            //
+            this.buttonCancel.Location = new System.Drawing.Point(657, 17);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 30;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancelClick);
+            //
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -562,12 +590,10 @@
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.checkBoxImages);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(820, 508);
             this.Name = "FormMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -632,6 +658,7 @@
         private System.Windows.Forms.TabPage tabPageTreeView;
         private System.Windows.Forms.TabPage tabPageOptions;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button buttonCancel;
     }
 }
 

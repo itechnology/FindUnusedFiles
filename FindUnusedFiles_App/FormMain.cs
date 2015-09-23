@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Principal;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EnvDTE;
@@ -762,6 +763,25 @@ namespace ITechnologyNET.FindUnusedFiles
             }
         }
 
+        CancellationTokenSource _cancellationTokenSource;
+        void ButtonCancelClick(object sender, EventArgs e)
+        {
+            if (_cancellationTokenSource != null)
+            {
+                _cancellationTokenSource.Cancel();
+
+                if (IsPackage)
+                {
+                    Dispose();
+                }
+                else
+                {
+                    UsedFiles.Clear();
+                    UnUsedFiles.Clear();
+                }
+            }
+        }
+
         void ProcessFiles()
         {
             if (string.IsNullOrEmpty(DirectoryPath))
@@ -849,8 +869,12 @@ namespace ITechnologyNET.FindUnusedFiles
 
             // start searching async
             var ui = TaskScheduler.FromCurrentSynchronizationContext();
+            _cancellationTokenSource = new CancellationTokenSource();
+
             Parallel.ForEach(searchIn, f => Task.Factory.StartNew(() =>
             {
+                _cancellationTokenSource.Token.ThrowIfCancellationRequested();
+
                 var fileName = Path.GetFileName(f);
                 if (fileName != null && File.Exists(f))
                 {
@@ -879,7 +903,7 @@ namespace ITechnologyNET.FindUnusedFiles
                         }
                     });
                 }
-            }, TaskCreationOptions.PreferFairness)
+            }, _cancellationTokenSource.Token)
             .ContinueWith(task =>
             {
                 if (task.IsCompleted)
