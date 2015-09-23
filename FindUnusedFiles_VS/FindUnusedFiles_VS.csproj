@@ -148,6 +148,7 @@
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Guids.cs" />
+    <Compile Include="GuiExtensionMethods.cs" />
     <Compile Include="Help.cs">
       <SubType>Form</SubType>
     </Compile>
