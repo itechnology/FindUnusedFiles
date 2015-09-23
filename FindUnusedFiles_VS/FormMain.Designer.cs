@@ -53,6 +53,7 @@
             this.lblUsed = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.panelProgress = new System.Windows.Forms.Panel();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblCurrentFile = new System.Windows.Forms.Label();
             this.treeResult = new System.Windows.Forms.TreeView();
@@ -73,7 +74,6 @@
             this.tabPageTreeView = new System.Windows.Forms.TabPage();
             this.tabPageOptions = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.panelProgress.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -85,7 +85,7 @@
             // btnBrowse
             // 
             this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse.Location = new System.Drawing.Point(652, 433);
+            this.btnBrowse.Location = new System.Drawing.Point(712, 475);
             this.btnBrowse.Margin = new System.Windows.Forms.Padding(2);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(133, 27);
@@ -105,7 +105,7 @@
             this.listResult.Margin = new System.Windows.Forms.Padding(0);
             this.listResult.Name = "listResult";
             this.listResult.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listResult.Size = new System.Drawing.Size(757, 290);
+            this.listResult.Size = new System.Drawing.Size(817, 332);
             this.listResult.TabIndex = 1;
             // 
             // patternSearch
@@ -118,10 +118,10 @@
             this.patternSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.patternSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.patternSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patternSearch.Location = new System.Drawing.Point(13, 436);
+            this.patternSearch.Location = new System.Drawing.Point(13, 478);
             this.patternSearch.Margin = new System.Windows.Forms.Padding(2);
             this.patternSearch.Name = "patternSearch";
-            this.patternSearch.Size = new System.Drawing.Size(617, 21);
+            this.patternSearch.Size = new System.Drawing.Size(677, 21);
             this.patternSearch.TabIndex = 2;
             // 
             // patternFind
@@ -134,17 +134,17 @@
             this.patternFind.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.patternFind.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.patternFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patternFind.Location = new System.Drawing.Point(14, 389);
+            this.patternFind.Location = new System.Drawing.Point(14, 431);
             this.patternFind.Margin = new System.Windows.Forms.Padding(2);
             this.patternFind.Name = "patternFind";
-            this.patternFind.Size = new System.Drawing.Size(616, 21);
+            this.patternFind.Size = new System.Drawing.Size(676, 21);
             this.patternFind.TabIndex = 3;
             // 
             // lblInside
             // 
             this.lblInside.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblInside.AutoSize = true;
-            this.lblInside.Location = new System.Drawing.Point(10, 419);
+            this.lblInside.Location = new System.Drawing.Point(10, 461);
             this.lblInside.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblInside.Name = "lblInside";
             this.lblInside.Size = new System.Drawing.Size(98, 15);
@@ -155,7 +155,7 @@
             // 
             this.lblSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(11, 372);
+            this.lblSearch.Location = new System.Drawing.Point(11, 414);
             this.lblSearch.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(88, 15);
@@ -166,7 +166,7 @@
             // 
             this.radioUsed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.radioUsed.AutoSize = true;
-            this.radioUsed.Location = new System.Drawing.Point(652, 390);
+            this.radioUsed.Location = new System.Drawing.Point(712, 432);
             this.radioUsed.Margin = new System.Windows.Forms.Padding(2);
             this.radioUsed.Name = "radioUsed";
             this.radioUsed.Size = new System.Drawing.Size(52, 19);
@@ -179,7 +179,7 @@
             this.radioUnused.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.radioUnused.AutoSize = true;
             this.radioUnused.Checked = true;
-            this.radioUnused.Location = new System.Drawing.Point(708, 390);
+            this.radioUnused.Location = new System.Drawing.Point(768, 432);
             this.radioUnused.Margin = new System.Windows.Forms.Padding(2);
             this.radioUnused.Name = "radioUnused";
             this.radioUnused.Size = new System.Drawing.Size(66, 19);
@@ -193,7 +193,7 @@
             // 
             this.lblReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblReport.AutoSize = true;
-            this.lblReport.Location = new System.Drawing.Point(649, 372);
+            this.lblReport.Location = new System.Drawing.Point(709, 414);
             this.lblReport.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblReport.Name = "lblReport";
             this.lblReport.Size = new System.Drawing.Size(52, 15);
@@ -208,7 +208,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 1, 0, 1);
-            this.menuStrip.Size = new System.Drawing.Size(804, 24);
+            this.menuStrip.Size = new System.Drawing.Size(864, 24);
             this.menuStrip.TabIndex = 10;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -323,12 +323,22 @@
             this.panelProgress.Controls.Add(this.label1);
             this.panelProgress.Controls.Add(this.lblCurrentFile);
             this.panelProgress.Controls.Add(this.progressBar);
-            this.panelProgress.Location = new System.Drawing.Point(26, 120);
+            this.panelProgress.Location = new System.Drawing.Point(56, 141);
             this.panelProgress.Margin = new System.Windows.Forms.Padding(2);
             this.panelProgress.Name = "panelProgress";
             this.panelProgress.Size = new System.Drawing.Size(748, 114);
             this.panelProgress.TabIndex = 14;
             this.panelProgress.Visible = false;
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Location = new System.Drawing.Point(657, 17);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 30;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancelClick);
             // 
             // label1
             // 
@@ -483,7 +493,7 @@
             this.checkBoxImages.AutoSize = true;
             this.checkBoxImages.Checked = true;
             this.checkBoxImages.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxImages.Location = new System.Drawing.Point(678, 26);
+            this.checkBoxImages.Location = new System.Drawing.Point(738, 26);
             this.checkBoxImages.Name = "checkBoxImages";
             this.checkBoxImages.Size = new System.Drawing.Size(107, 19);
             this.checkBoxImages.TabIndex = 28;
@@ -501,7 +511,7 @@
             this.tabControl1.Location = new System.Drawing.Point(14, 45);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(771, 324);
+            this.tabControl1.Size = new System.Drawing.Size(831, 366);
             this.tabControl1.TabIndex = 29;
             // 
             // tabPageNormal
@@ -510,7 +520,7 @@
             this.tabPageNormal.Location = new System.Drawing.Point(4, 24);
             this.tabPageNormal.Name = "tabPageNormal";
             this.tabPageNormal.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageNormal.Size = new System.Drawing.Size(763, 296);
+            this.tabPageNormal.Size = new System.Drawing.Size(823, 338);
             this.tabPageNormal.TabIndex = 0;
             this.tabPageNormal.Text = "Normal";
             this.tabPageNormal.UseVisualStyleBackColor = true;
@@ -549,22 +559,12 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "For future stuff";
             // 
-            // buttonCancel
-            //
-            this.buttonCancel.Location = new System.Drawing.Point(657, 17);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 30;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancelClick);
-            //
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(804, 469);
+            this.ClientSize = new System.Drawing.Size(864, 511);
             this.Controls.Add(this.panelProgress);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label6);
@@ -593,7 +593,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(820, 508);
+            this.MaximumSize = new System.Drawing.Size(1250, 750);
+            this.MinimumSize = new System.Drawing.Size(880, 550);
             this.Name = "FormMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

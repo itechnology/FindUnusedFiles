@@ -1,5 +1,4 @@
 ﻿1.3.4 (in progress)
-  * Adding option to cancel a search in progress in case of long running instance
   * Started working on a treeview that shows in which files an item is used
 	* Problem is treeviews do not allow for multi-select (delete, export, etc)
 
@@ -13,6 +12,7 @@
   * Ordered files in list
   * Prevent from searching for a reference of oneself (foo.css inside foo.css)
   * Made form resizable
+  * Added button to cancel a search in progress in case of long running instance
 
 1.3.2
   * Fixed problems with certain case insensitive searches

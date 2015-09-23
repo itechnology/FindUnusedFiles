@@ -764,20 +764,32 @@ namespace ITechnologyNET.FindUnusedFiles
         }
 
         CancellationTokenSource _cancellationTokenSource;
+        /// <summary>
+        /// Cancels the ProcessFiles() loop
+        /// </summary>
         void ButtonCancelClick(object sender, EventArgs e)
         {
             if (_cancellationTokenSource != null)
             {
                 _cancellationTokenSource.Cancel();
 
+                // In VS, just quit since we can't select a new directory anyways
                 if (IsPackage)
                 {
                     Dispose();
                 }
                 else
                 {
+                    // the problem is that even if the task is canceled, task.IsCompleted in ProcessFiles() will be called multiple times
+                    // so just do all the clreaing and resetting here
+
                     UsedFiles.Clear();
                     UnUsedFiles.Clear();
+
+                    lblParsed.Text        = string.Format(ParsedLabel, 0.ToString("D4"));
+                    panelProgress.Visible = false;
+
+                    this.EnabledControlAndChildren(true);
                 }
             }
         }
@@ -858,7 +870,10 @@ namespace ITechnologyNET.FindUnusedFiles
 
             lblToMatch.Text = string.Format(ToMatchLabel, UnUsedFiles.Count.ToString("D4"));
 
-            Enabled               = false;
+            // Disbale all controls on form except cancel button
+            this.EnabledControlAndChildren(false);
+            buttonCancel.EnableControlAndParents(true);
+
             progressBar.Value     = 0;
             progressBar.Minimum   = 0;
             progressBar.Maximum   = searchIn.Count;
@@ -873,8 +888,6 @@ namespace ITechnologyNET.FindUnusedFiles
 
             Parallel.ForEach(searchIn, f => Task.Factory.StartNew(() =>
                 {
-                _cancellationTokenSource.Token.ThrowIfCancellationRequested();
-
                     var fileName = Path.GetFileName(f);
                     if (fileName != null && File.Exists(f))
                     {
@@ -908,6 +921,12 @@ namespace ITechnologyNET.FindUnusedFiles
                 {
                     if (task.IsCompleted)
                     {
+                    // operation was canceled
+                    if (_cancellationTokenSource.IsCancellationRequested)
+                    {
+                        return;
+                    }
+
                         // update ui
                         progressBar.Value++;
                         lblCurrentFile.Text = f.Replace(DirectoryPath, string.Empty);
@@ -924,7 +943,7 @@ namespace ITechnologyNET.FindUnusedFiles
 
 
                             panelProgress.Visible = false;
-                            Enabled               = true;
+                        this.EnabledControlAndChildren(true);
 
                             ListFiles();
                         }
