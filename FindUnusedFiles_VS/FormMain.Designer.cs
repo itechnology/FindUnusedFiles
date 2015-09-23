@@ -67,8 +67,18 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.checkBoxImages = new System.Windows.Forms.CheckBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPageNormal = new System.Windows.Forms.TabPage();
+            this.tabPageTreeView = new System.Windows.Forms.TabPage();
+            this.tabPageOptions = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.panelProgress.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPageNormal.SuspendLayout();
+            this.tabPageTreeView.SuspendLayout();
+            this.tabPageOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBrowse
@@ -84,14 +94,16 @@
             // 
             // listResult
             // 
+            this.listResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listResult.FormattingEnabled = true;
             this.listResult.HorizontalScrollbar = true;
             this.listResult.ItemHeight = 15;
-            this.listResult.Location = new System.Drawing.Point(14, 44);
-            this.listResult.Margin = new System.Windows.Forms.Padding(2);
+            this.listResult.Location = new System.Drawing.Point(3, 3);
+            this.listResult.Margin = new System.Windows.Forms.Padding(0);
             this.listResult.Name = "listResult";
             this.listResult.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listResult.Size = new System.Drawing.Size(774, 319);
+            this.listResult.Size = new System.Drawing.Size(757, 290);
             this.listResult.TabIndex = 1;
             // 
             // patternSearch
@@ -327,12 +339,14 @@
             // 
             // treeResult
             // 
-            this.treeResult.Location = new System.Drawing.Point(397, 44);
+            this.treeResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.treeResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeResult.Location = new System.Drawing.Point(3, 3);
+            this.treeResult.Margin = new System.Windows.Forms.Padding(0);
             this.treeResult.Name = "treeResult";
             this.treeResult.ShowNodeToolTips = true;
-            this.treeResult.Size = new System.Drawing.Size(388, 319);
+            this.treeResult.Size = new System.Drawing.Size(757, 290);
             this.treeResult.TabIndex = 27;
-            this.treeResult.Visible = false;
             // 
             // lblUnused
             // 
@@ -450,12 +464,81 @@
             this.label6.TabIndex = 26;
             this.label6.Text = "|";
             // 
+            // checkBoxImages
+            // 
+            this.checkBoxImages.AutoSize = true;
+            this.checkBoxImages.Checked = true;
+            this.checkBoxImages.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxImages.Location = new System.Drawing.Point(678, 26);
+            this.checkBoxImages.Name = "checkBoxImages";
+            this.checkBoxImages.Size = new System.Drawing.Size(107, 19);
+            this.checkBoxImages.TabIndex = 28;
+            this.checkBoxImages.Text = "Image Preview";
+            this.checkBoxImages.UseVisualStyleBackColor = true;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPageNormal);
+            this.tabControl1.Controls.Add(this.tabPageTreeView);
+            this.tabControl1.Controls.Add(this.tabPageOptions);
+            this.tabControl1.Location = new System.Drawing.Point(14, 45);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(771, 324);
+            this.tabControl1.TabIndex = 29;
+            // 
+            // tabPageNormal
+            // 
+            this.tabPageNormal.Controls.Add(this.listResult);
+            this.tabPageNormal.Location = new System.Drawing.Point(4, 24);
+            this.tabPageNormal.Name = "tabPageNormal";
+            this.tabPageNormal.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageNormal.Size = new System.Drawing.Size(763, 296);
+            this.tabPageNormal.TabIndex = 0;
+            this.tabPageNormal.Text = "Normal";
+            this.tabPageNormal.UseVisualStyleBackColor = true;
+            // 
+            // tabPageTreeView
+            // 
+            this.tabPageTreeView.Controls.Add(this.treeResult);
+            this.tabPageTreeView.Location = new System.Drawing.Point(4, 24);
+            this.tabPageTreeView.Name = "tabPageTreeView";
+            this.tabPageTreeView.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTreeView.Size = new System.Drawing.Size(763, 296);
+            this.tabPageTreeView.TabIndex = 1;
+            this.tabPageTreeView.Text = "TreeView";
+            this.tabPageTreeView.UseVisualStyleBackColor = true;
+            // 
+            // tabPageOptions
+            // 
+            this.tabPageOptions.Controls.Add(this.label7);
+            this.tabPageOptions.Location = new System.Drawing.Point(4, 24);
+            this.tabPageOptions.Name = "tabPageOptions";
+            this.tabPageOptions.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageOptions.Size = new System.Drawing.Size(763, 296);
+            this.tabPageOptions.TabIndex = 2;
+            this.tabPageOptions.Text = "Options";
+            this.tabPageOptions.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label7.Location = new System.Drawing.Point(238, 185);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(278, 46);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "For future stuff";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(804, 469);
+            this.Controls.Add(this.panelProgress);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -467,7 +550,6 @@
             this.Controls.Add(this.lblFiles);
             this.Controls.Add(this.lblPath);
             this.Controls.Add(this.lblUnused);
-            this.Controls.Add(this.panelProgress);
             this.Controls.Add(this.lblUsed);
             this.Controls.Add(this.lblReport);
             this.Controls.Add(this.radioUnused);
@@ -476,10 +558,9 @@
             this.Controls.Add(this.lblInside);
             this.Controls.Add(this.patternFind);
             this.Controls.Add(this.patternSearch);
-            this.Controls.Add(this.listResult);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.menuStrip);
-            this.Controls.Add(this.treeResult);
+            this.Controls.Add(this.checkBoxImages);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -495,6 +576,11 @@
             this.menuStrip.PerformLayout();
             this.panelProgress.ResumeLayout(false);
             this.panelProgress.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPageNormal.ResumeLayout(false);
+            this.tabPageTreeView.ResumeLayout(false);
+            this.tabPageOptions.ResumeLayout(false);
+            this.tabPageOptions.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -540,6 +626,12 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem registerShellToolStripMenuItem;
         private System.Windows.Forms.TreeView treeResult;
+        private System.Windows.Forms.CheckBox checkBoxImages;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPageNormal;
+        private System.Windows.Forms.TabPage tabPageTreeView;
+        private System.Windows.Forms.TabPage tabPageOptions;
+        private System.Windows.Forms.Label label7;
     }
 }
 

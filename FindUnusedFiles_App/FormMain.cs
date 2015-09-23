@@ -216,6 +216,16 @@ namespace ITechnologyNET.FindUnusedFiles
                              .ToList();
         }
 
+        /// <summary>
+        /// Need to be able to switch between normal & treeview
+        /// </summary>
+        List<string> GetSelectedTreeItems()
+        {
+            return treeResult.SelectedNode.Text
+                             .Cast<string>()
+                             .ToList();
+        }
+
         void Find(string pattern, vsFindTarget target)
         {
             if (Dte == null)
@@ -247,7 +257,7 @@ namespace ITechnologyNET.FindUnusedFiles
             Pic = new PictureBox(300, 300);
             listResult.SelectedIndexChanged += (s, o) =>
             {
-                if (ModifierKeys == Keys.Alt  && listResult.SelectedIndices.Count == 1)
+                if ((checkBoxImages.Checked || ModifierKeys == Keys.Alt) && listResult.SelectedIndices.Count == 1)
                 {
                     Pic.Location = new Point(Right, Top);
                     Pic.DisplayImage(DirectoryPath + listResult.SelectedItem);
@@ -348,6 +358,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 mnuSelect.Enabled  = (listResult.Items.Count > 0);
                 mnuInvert.Enabled  = (listResult.Items.Count > 0);
                 mnuExplore.Enabled = (listResult.SelectedItems.Count == 1);
+                mnuLaunch.Enabled  = (listResult.SelectedItems.Count == 1);
 
                 if (listResult.SelectedItems.Count == 0)
                 {
@@ -460,12 +471,12 @@ namespace ITechnologyNET.FindUnusedFiles
         {
             if (radioUnused.Checked)
             {
-                //BuildUnUsedTree();
+                BuildUnUsedTree();
                 ListUnusedFiles();
             }
             else
             {
-                //BuildUsedTree();
+                BuildUsedTree();
                 ListUsedFiles();
             }
         }
@@ -521,21 +532,29 @@ namespace ITechnologyNET.FindUnusedFiles
 
         void BuildUsedTree()
         {
+            treeResult.Nodes.Clear();
+
+            lblUnused.Enabled = false;
+            lblUsed.Enabled   = true;
+
+            lblUnused.Text = string.Format(UnusedLabel, UnUsedFiles == null ? "0000" : UnUsedFiles.Count.ToString("D4"));
+
             if (UsedFiles == null || UsedFiles.Count == 0)
             {
+                lblUsed.Text = string.Format(UsedLabel, 0);
                 return;
             }
 
+            lblUsed.Text = string.Format(UsedLabel, UsedFiles.Count.ToString("D4"));
+
             treeResult.BeginUpdate();
-            treeResult.Nodes.Clear();
+
             var directoryNode = treeResult.Nodes.Add(DirectoryPath);
-
-
             var ordered = UsedFiles.OrderBy(parent => parent.Key).ThenBy(c => c.Value.OrderBy(d => d)).ToList();
             foreach (var item in ordered)
             {
                 var parentNode = new TreeNode(item.Key.Replace(DirectoryPath, string.Empty));
-                parentNode.ToolTipText = string.Format("Referenced in ({0}) files", item.Value.Count);
+                parentNode.ToolTipText = string.Format("Referenced in ({0}) file(s)", item.Value.Count);
                 if (item.Value.Count > 0)
                 {
                     foreach (var child in item.Value)
@@ -549,27 +568,42 @@ namespace ITechnologyNET.FindUnusedFiles
                 directoryNode.Nodes.Add(parentNode);
                 directoryNode.Expand();
             }
+
             treeResult.EndUpdate();
         }
 
         void BuildUnUsedTree()
         {
+            treeResult.Nodes.Clear();
+
+            lblUnused.Enabled = true;
+            lblUsed.Enabled   = false;
+
+            lblUsed.Text = string.Format(UsedLabel, UsedFiles == null ? "0000" : UsedFiles.Count.ToString("D4"));
+
             if (UnUsedFiles == null || UnUsedFiles.Count == 0)
             {
+                lblUnused.Text = string.Format(UnusedLabel, 0);
                 return;
             }
 
+            lblUnused.Text = string.Format(UnusedLabel, UnUsedFiles.Count.ToString("D4"));
+
             treeResult.BeginUpdate();
-            treeResult.Nodes.Clear();
+
             var directoryNode = treeResult.Nodes.Add(DirectoryPath);
+            UnUsedFiles
+                .Where(c => !string.IsNullOrEmpty(c))
+                .OrderBy(c => c)
+                .ToList()
+                .ForEach(i =>
+                {
+                    var parentNode = new TreeNode(i.Replace(DirectoryPath, string.Empty));
 
-            foreach (var item in UnUsedFiles)
-            {
-                var parentNode = new TreeNode(item.Replace(DirectoryPath, string.Empty));
+                    directoryNode.Nodes.Add(parentNode);
+                    directoryNode.Expand();
+                });
 
-                directoryNode.Nodes.Add(parentNode);
-                directoryNode.ExpandAll();
-            }
             treeResult.EndUpdate();
         }
 
@@ -596,7 +630,7 @@ namespace ITechnologyNET.FindUnusedFiles
 
         void LaunchExternal(object sender, EventArgs e)
         {
-            if (listResult.SelectedItem != null)
+            if (listResult.SelectedItem != null && listResult.SelectedItems.Count == 1)
             {
                 var path = Path.GetFullPath(DirectoryPath + listResult.SelectedItem);
                 if (File.Exists(path))
@@ -608,7 +642,7 @@ namespace ITechnologyNET.FindUnusedFiles
 
         void ExploreHere(object sender, EventArgs e)
         {
-            if (listResult.SelectedItem != null)
+            if (listResult.SelectedItem != null && listResult.SelectedItems.Count == 1)
             {
                 var path = Path.GetDirectoryName(DirectoryPath + listResult.SelectedItem);
                 if (path != null && Directory.Exists(path))
@@ -687,8 +721,7 @@ namespace ITechnologyNET.FindUnusedFiles
             {
                 using (var s = new StreamWriter(saveFileDialog.FileName))
                 {
-                    GetSelectedItems()
-                        .ForEach(i => s.WriteLine(DirectoryPath + i));
+                    GetSelectedItems().ForEach(i => s.WriteLine(DirectoryPath + i));
                 }
 
                 MessageBox.Show(string.Format("Result saved in: {0}", saveFileDialog.FileName), @"Done", MessageBoxButtons.OK);
