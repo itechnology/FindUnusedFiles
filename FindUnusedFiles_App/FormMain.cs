@@ -121,9 +121,9 @@ namespace ITechnologyNET.FindUnusedFiles
             //patternFind.Text   = Properties.Settings.Default["Find"].ToString();
             patternSearch.Text = Properties.Settings.Default["Search"].ToString();
 
+            // http://stackoverflow.com/a/4267845
             var source = new AutoCompleteStringCollection();
             source.AddRange(((string[])Properties.Settings.Default["Setting"]));
-            //patternFind.AutoCompleteSource = AutoCompleteSource.CustomSource;
             patternFind.AutoCompleteCustomSource = source;
 
             registerShellToolStripMenuItem.Checked = Registry.ClassesRoot.OpenSubKey("Directory\\shell\\FindUnusedFiles") != null;
