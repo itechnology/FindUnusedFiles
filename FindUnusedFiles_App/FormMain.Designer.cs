@@ -74,6 +74,8 @@
             this.tabPageTreeView = new System.Windows.Forms.TabPage();
             this.tabPageOptions = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.panelProgress.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -119,9 +121,9 @@
             this.patternSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.patternSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patternSearch.Location = new System.Drawing.Point(13, 478);
-            this.patternSearch.Margin = new System.Windows.Forms.Padding(2);
+            this.patternSearch.Margin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.patternSearch.Name = "patternSearch";
-            this.patternSearch.Size = new System.Drawing.Size(677, 21);
+            this.patternSearch.Size = new System.Drawing.Size(643, 21);
             this.patternSearch.TabIndex = 2;
             // 
             // patternFind
@@ -135,9 +137,9 @@
             this.patternFind.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.patternFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patternFind.Location = new System.Drawing.Point(14, 431);
-            this.patternFind.Margin = new System.Windows.Forms.Padding(2);
+            this.patternFind.Margin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.patternFind.Name = "patternFind";
-            this.patternFind.Size = new System.Drawing.Size(676, 21);
+            this.patternFind.Size = new System.Drawing.Size(642, 21);
             this.patternFind.TabIndex = 3;
             // 
             // lblInside
@@ -368,7 +370,7 @@
             this.treeResult.Margin = new System.Windows.Forms.Padding(0);
             this.treeResult.Name = "treeResult";
             this.treeResult.ShowNodeToolTips = true;
-            this.treeResult.Size = new System.Drawing.Size(757, 290);
+            this.treeResult.Size = new System.Drawing.Size(817, 332);
             this.treeResult.TabIndex = 27;
             // 
             // lblUnused
@@ -531,7 +533,7 @@
             this.tabPageTreeView.Location = new System.Drawing.Point(4, 24);
             this.tabPageTreeView.Name = "tabPageTreeView";
             this.tabPageTreeView.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTreeView.Size = new System.Drawing.Size(763, 296);
+            this.tabPageTreeView.Size = new System.Drawing.Size(823, 338);
             this.tabPageTreeView.TabIndex = 1;
             this.tabPageTreeView.Text = "TreeView";
             this.tabPageTreeView.UseVisualStyleBackColor = true;
@@ -542,7 +544,7 @@
             this.tabPageOptions.Location = new System.Drawing.Point(4, 24);
             this.tabPageOptions.Name = "tabPageOptions";
             this.tabPageOptions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageOptions.Size = new System.Drawing.Size(763, 296);
+            this.tabPageOptions.Size = new System.Drawing.Size(823, 338);
             this.tabPageOptions.TabIndex = 2;
             this.tabPageOptions.Text = "Options";
             this.tabPageOptions.UseVisualStyleBackColor = true;
@@ -559,12 +561,36 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "For future stuff";
             // 
+            // button1
+            // 
+            this.button1.Image = global::ITechnologyNET.FindUnusedFiles.Properties.Resources.down;
+            this.button1.Location = new System.Drawing.Point(656, 430);
+            this.button1.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(23, 23);
+            this.button1.TabIndex = 30;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Image = global::ITechnologyNET.FindUnusedFiles.Properties.Resources.down;
+            this.button2.Location = new System.Drawing.Point(656, 477);
+            this.button2.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(23, 23);
+            this.button2.TabIndex = 31;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(864, 511);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panelProgress);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label6);
@@ -660,6 +686,8 @@
         private System.Windows.Forms.TabPage tabPageOptions;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -117,8 +118,13 @@ namespace ITechnologyNET.FindUnusedFiles
             InitializeComponent();
             listResult.DoubleClick += ListResultDoubleClick;
 
-            patternFind.Text   = Properties.Settings.Default["Find"].ToString();
+            //patternFind.Text   = Properties.Settings.Default["Find"].ToString();
             patternSearch.Text = Properties.Settings.Default["Search"].ToString();
+
+            var source = new AutoCompleteStringCollection();
+            source.AddRange(((string[])Properties.Settings.Default["Setting"]));
+            //patternFind.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            patternFind.AutoCompleteCustomSource = source;
 
             registerShellToolStripMenuItem.Checked = Registry.ClassesRoot.OpenSubKey("Directory\\shell\\FindUnusedFiles") != null;
 
@@ -1073,6 +1079,24 @@ namespace ITechnologyNET.FindUnusedFiles
                     MessageBox.Show(ex.Message);
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            patternFind.Clear();
+            patternFind.Focus();
+
+            //http://stackoverflow.com/a/11460724
+            SendKeys.Send(@"\");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            patternSearch.Clear();
+            patternSearch.Focus();
+
+            //http://stackoverflow.com/a/11460724
+            SendKeys.Send(@"\");
         }
     }
 }

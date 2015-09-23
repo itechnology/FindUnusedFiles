@@ -58,5 +58,21 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
                 this["Search"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>\.(gif|png|jpg|jpeg|bmp|ico|pdf|js|css|eot|svg|ttf|eot|otf|woff|woff2)$</string>
+  <string>\.(gif|png|jpg|jpeg|bmp|ico)$</string>
+</ArrayOfString>")]
+        public string[] Setting {
+            get {
+                return ((string[])(this["Setting"]));
+            }
+            set {
+                this["Setting"] = value;
+            }
+        }
     }
 }
