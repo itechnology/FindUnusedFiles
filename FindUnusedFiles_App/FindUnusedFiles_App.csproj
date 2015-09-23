@@ -154,6 +154,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\assets.txt" />
     <Content Include="assets\down.png" />
     <Content Include="assets\launch.png" />
     <Content Include="screen-main.png" />
