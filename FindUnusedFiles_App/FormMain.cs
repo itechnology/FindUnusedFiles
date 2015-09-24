@@ -880,7 +880,22 @@ namespace ITechnologyNET.FindUnusedFiles
             }
 
             // files to search within
-            var searchIn = AllFiles.Where(c => Regex.IsMatch(c, patternSearch.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
+            //var searchIn = AllFiles.Where(c => Regex.IsMatch(c, patternSearch.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
+            #region Exclude files
+            var excluded = new List<string>()
+            {
+                //@"\node_modules\"
+            };
+
+            // files to search within
+            var searchIn = AllFiles
+                            .Where(a => Regex.IsMatch(a, patternSearch.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
+                            // Remove any files listed in the excluded list
+                            // we remove here to not have to relaunch the program each time to take into account any changes made in the exclusion list
+                            .Where(a => !excluded.Any(e => Regex.IsMatch(a, Regex.Escape(e), RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)))
+                            .ToList();
+            #endregion
+
             if (searchIn.Count == 0)
             {
                 // nothing to search in
@@ -891,7 +906,17 @@ namespace ITechnologyNET.FindUnusedFiles
             lblToParse.Text = string.Format(ToParseLabel, searchIn.Count.ToString("D4"));
 
             // files to search for
-            UnUsedFiles = AllFiles.Where(c => Regex.IsMatch(c, patternFind.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
+            //UnUsedFiles = AllFiles.Where(c => Regex.IsMatch(c, patternFind.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
+            #region Exclude files
+            // files to search for
+            UnUsedFiles = AllFiles
+                            .Where(c => Regex.IsMatch(c, patternFind.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
+                            // Remove any files listed in the excluded list
+                            // we remove here to not have to relaunch the program each time to take into account any changes made in the exclusion list
+                            .Where(a => !excluded.Any(e => Regex.IsMatch(a, Regex.Escape(e), RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)))
+                            .ToList();
+            #endregion
+
             if (UnUsedFiles.Count == 0)
             {
                 // nothing to search for
