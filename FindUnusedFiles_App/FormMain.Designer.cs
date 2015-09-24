@@ -574,7 +574,7 @@
             // 
             // button1
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Image = global::ITechnologyNET.FindUnusedFiles.Properties.Resources.down;
             this.button1.Location = new System.Drawing.Point(656, 430);
             this.button1.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
@@ -586,7 +586,7 @@
             // 
             // button2
             // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Image = global::ITechnologyNET.FindUnusedFiles.Properties.Resources.down;
             this.button2.Location = new System.Drawing.Point(656, 477);
             this.button2.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
