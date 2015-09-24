@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -89,8 +90,9 @@ namespace ITechnologyNET.FindUnusedFiles
             InitializeComponent();
             listResult.DoubleClick += ListResultDoubleClick;
 
-            patternFind.Text   = Properties.Settings.Default["Find"].ToString();
-            patternSearch.Text = Properties.Settings.Default["Search"].ToString();
+            // http://stackoverflow.com/a/4267845
+            SetAutoCompleteSource(patternFind  , "Find");
+            SetAutoCompleteSource(patternSearch, "Search");
 
             Dte            = dte;
             ProjectItems   = projectItems;
@@ -117,8 +119,9 @@ namespace ITechnologyNET.FindUnusedFiles
             InitializeComponent();
             listResult.DoubleClick += ListResultDoubleClick;
 
-            patternFind.Text   = Properties.Settings.Default["Find"].ToString();
-            patternSearch.Text = Properties.Settings.Default["Search"].ToString();
+            // http://stackoverflow.com/a/4267845
+            SetAutoCompleteSource(patternFind  , "Find");
+            SetAutoCompleteSource(patternSearch, "Search");
 
             registerShellToolStripMenuItem.Checked = Registry.ClassesRoot.OpenSubKey("Directory\\shell\\FindUnusedFiles") != null;
 
@@ -250,22 +253,21 @@ namespace ITechnologyNET.FindUnusedFiles
             Dte.Find.Execute();
         }
 
-        public PictureBox Pic { get; set; }
         void AddContextMenu()
         {
             // The context menu
             #region Picture Preview
-            Pic = new PictureBox(300, 300);
+            var pic = new PictureBox(300, 300);
             listResult.SelectedIndexChanged += (s, o) =>
             {
                 if ((checkBoxImages.Checked || ModifierKeys == Keys.Alt) && listResult.SelectedIndices.Count == 1)
                 {
-                    Pic.Location = new Point(Right, Top);
-                    Pic.DisplayImage(DirectoryPath + listResult.SelectedItem);
+                    pic.Location = new Point(Right, Top);
+                    pic.DisplayImage(DirectoryPath + listResult.SelectedItem);
                 }
-                else if (Pic != null)
+                else if (pic != null)
                 {
-                    Pic.Hide();
+                    pic.Hide();
                 }
             };
             #endregion
@@ -448,6 +450,36 @@ namespace ITechnologyNET.FindUnusedFiles
 
             listResult.ContextMenuStrip = ctxMenu;
             //treeResult.ContextMenuStrip = ctxMenu;
+
+            #region TextBoxes
+            var ctxTexboxMenu = new ContextMenuStrip();
+
+            var mnuTextBoxDelete = new ToolStripMenuItem("Delete")
+            {
+                Image = new Bitmap(Properties.Resources.delete)
+            };
+            mnuTextBoxDelete.Click += (sender, args) =>
+            {
+                var mnuItem  = (ToolStripMenuItem)sender;
+                var mnuStrip = (ContextMenuStrip)mnuItem.Owner;
+                var txtBox   = (TextBox) mnuStrip.SourceControl;
+
+                switch (txtBox.Name)
+                {
+                    case "patternSearch":
+                        RemoveFromAutoCompleteSource(txtBox, "Search");
+                        break;
+
+                    case "patternFind":
+                        RemoveFromAutoCompleteSource(txtBox, "Find");
+                        break;
+                }
+            };
+            ctxTexboxMenu.Items.Add(mnuTextBoxDelete);
+
+            patternFind.ContextMenuStrip   = ctxTexboxMenu;
+            patternSearch.ContextMenuStrip = ctxTexboxMenu;
+            #endregion
         }
 
         void BrowseClick(object sender, EventArgs e)
@@ -796,10 +828,10 @@ namespace ITechnologyNET.FindUnusedFiles
 
         void ProcessFiles()
         {
-            if (string.IsNullOrEmpty(DirectoryPath))
+            if (string.IsNullOrEmpty(DirectoryPath) || !Directory.Exists(DirectoryPath))
             {
                 // show error message
-                MessageBox.Show(@"Directory path was not defined", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Directory: Path is undefined or does not exist", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (IsPackage)
                 {
                     Dispose();
@@ -842,12 +874,6 @@ namespace ITechnologyNET.FindUnusedFiles
                 return;
             }
 
-            // no errors, so save settings
-            Properties.Settings.Default["Find"]      = patternFind.Text;
-            Properties.Settings.Default["Search"]    = patternSearch.Text;
-            Properties.Settings.Default["Directory"] = DirectoryPath;
-            Properties.Settings.Default.Save();
-
             // files to search within
             var searchIn = AllFiles.Where(c => Regex.IsMatch(c, patternSearch.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
             if (searchIn.Count == 0)
@@ -867,6 +893,17 @@ namespace ITechnologyNET.FindUnusedFiles
                 MessageBox.Show(string.Format("No matching files found for:\r\n{0}", patternFind.Text), Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
+            #region Save current settings
+            // no errors, so save settings
+
+            // should do this on a right click or something, as to not bloat the list
+            UpateAutoCompleteSource(patternFind  , "Find");
+            UpateAutoCompleteSource(patternSearch, "Search");
+
+            Properties.Settings.Default["Directory"] = DirectoryPath;
+            Properties.Settings.Default.Save();
+            #endregion
 
             lblToMatch.Text = string.Format(ToMatchLabel, UnUsedFiles.Count.ToString("D4"));
 
@@ -1074,5 +1111,83 @@ namespace ITechnologyNET.FindUnusedFiles
                 }
             }
         }
+
+        #region AutoComplete (textboxes)
+        /// <summary>
+        /// Load autocomplete data into a textbox from user settings
+        /// http://stackoverflow.com/a/4267845
+        /// </summary>
+        void SetAutoCompleteSource(TextBox textbox, string setting)
+        {
+
+            var settings               = Properties.Settings.Default;
+            var patternCollection      = ((StringCollection)settings[setting]).Cast<string>().ToArray();
+            var autoCompleteCollection = new AutoCompleteStringCollection();
+
+            autoCompleteCollection.AddRange(patternCollection);
+
+            textbox.AutoCompleteCustomSource = autoCompleteCollection;
+            textbox.Text                     = patternCollection.FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Add current textbox.Text to user settings, it's loaded at next application launch
+        /// </summary>
+        void UpateAutoCompleteSource(TextBox textbox, string setting)
+        {
+            if (IsRegexPatternValid(textbox.Text))
+            {
+                if (!textbox.AutoCompleteCustomSource.Contains(textbox.Text))
+                {
+                    var settings          = Properties.Settings.Default;
+                    var patternCollection = ((StringCollection) settings[setting]);
+
+                    // add to top of list
+                    patternCollection.Insert(0, textbox.Text);
+                    settings.Save();
+
+                    // refresh autocomplete list
+                    SetAutoCompleteSource(textbox, setting);
+                }
+            }
+        }
+
+        void RemoveFromAutoCompleteSource(TextBox textbox, string setting)
+        {
+            if (IsRegexPatternValid(textbox.Text))
+            {
+                if (textbox.AutoCompleteCustomSource.Contains(textbox.Text))
+                {
+                    var settings          = Properties.Settings.Default;
+                    var patternCollection = (StringCollection)settings[setting];
+
+                    // add to top of list
+                    patternCollection.Remove(textbox.Text);
+                    textbox.AutoCompleteCustomSource.Remove(textbox.Text);
+                    settings.Save();
+
+                    textbox.Text = patternCollection.Cast<string>().FirstOrDefault();
+                }
+            }
+        }
+
+        void button1_Click(object sender, EventArgs e)
+        {
+            patternFind.Clear();
+            patternFind.Focus();
+
+            //http://stackoverflow.com/a/11460724
+            SendKeys.Send(@"\");
+        }
+
+        void button2_Click(object sender, EventArgs e)
+        {
+            patternSearch.Clear();
+            patternSearch.Focus();
+
+            //http://stackoverflow.com/a/11460724
+            SendKeys.Send(@"\");
+        }
+        #endregion
     }
 }

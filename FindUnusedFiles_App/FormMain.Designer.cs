@@ -114,9 +114,6 @@
             // 
             this.patternSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.patternSearch.AutoCompleteCustomSource.AddRange(new string[] {
-            "\\.(htm|html|aspx|ascx|master|cshtml|js|css|less)$",
-            "\\.(htm|html|php|js|css|less)$"});
             this.patternSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.patternSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.patternSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -130,9 +127,6 @@
             // 
             this.patternFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.patternFind.AutoCompleteCustomSource.AddRange(new string[] {
-            "\\.(gif|png|jpg|jpeg|bmp|ico|svg)$",
-            "\\.(js|css)$"});
             this.patternFind.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.patternFind.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.patternFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -563,6 +557,7 @@
             // 
             // button1
             // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button1.Image = global::ITechnologyNET.FindUnusedFiles.Properties.Resources.down;
             this.button1.Location = new System.Drawing.Point(656, 430);
             this.button1.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
@@ -574,6 +569,7 @@
             // 
             // button2
             // 
+            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button2.Image = global::ITechnologyNET.FindUnusedFiles.Properties.Resources.down;
             this.button2.Location = new System.Drawing.Point(656, 477);
             this.button2.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);

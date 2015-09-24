@@ -81,20 +81,16 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1.3.3
+        ///   Looks up a localized string similar to 1.3.4 (in progress)
+        ///  * Implementing a pseudo-dropdown for autocompleting search/find patterns
+        ///	* Items can be stored in settings.settings
+        ///  * Started working on a treeview that shows in which files an item is used
+        ///	* Problem is treeviews do not allow for multi-select (delete, export, etc)
+        ///
+        ///1.3.3
         ///  * Made picturebox a little bigger, and moved outside of bounds of main window for better ergonomics
-        ///  * Added some extra checking for file path operations
-        ///  * Added &quot;Launch External&quot; to context menu to launch a file with it&apos;s associated external program
-        ///
-        ///1.3.2
-        ///  * Fixed problems with certain case insensitive searches
-        ///  * Made picturebox bigger
-        ///
-        ///1.3.1
-        ///  * Added SVG, CSS, JS to default item list
-        ///  * Added scss to default files list
-        ///  * Made search culture-invariant / case-insensitive
-        ///  *  [rest of string was truncated]&quot;;.
+        ///  * Added image-preview checkbox to not have to alt-click on an image to trigger display
+        ///  * Added some [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string changelog_txt {
             get {
@@ -108,6 +104,16 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         internal static System.Drawing.Bitmap delete {
             get {
                 object obj = ResourceManager.GetObject("delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap down {
+            get {
+                object obj = ResourceManager.GetObject("down", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

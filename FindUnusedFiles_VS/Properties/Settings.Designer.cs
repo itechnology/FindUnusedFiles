@@ -37,10 +37,16 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\.(gif|png|jpg|jpeg|bmp|ico|pdf|js|css|eot|svg|ttf|eot|otf|woff|woff2)$")]
-        public string Find {
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>\.(gif|png|jpg|jpeg|bmp|ico|pdf|js|css|eot|svg|ttf|eot|otf|woff|woff2)$</string>
+  <string>\.(gif|png|jpg|jpeg|bmp|ico)$</string>
+  <string>\.(ttf|eot|otf|woff|woff2)$</string>
+  <string>\.(js|css)$</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection Find {
             get {
-                return ((string)(this["Find"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["Find"]));
             }
             set {
                 this["Find"] = value;
@@ -49,10 +55,15 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\.(htm|html|aspx|ascx|master|cshtml|js|css|less)$")]
-        public string Search {
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>\.(htm|html|aspx|ascx|master|cshtml|js|css|less)$</string>
+  <string>\.(htm|html|php|js|css|less)$</string>
+  <string>\.(js|css|less)$</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection Search {
             get {
-                return ((string)(this["Search"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["Search"]));
             }
             set {
                 this["Search"] = value;

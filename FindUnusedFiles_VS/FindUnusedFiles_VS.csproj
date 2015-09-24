@@ -224,6 +224,8 @@
     <Resource Include="Resources\Images.png" />
     <Resource Include="assets\launch.png" />
     <None Include="Resources\launch.bmp" />
+    <Resource Include="assets\assets.txt" />
+    <Resource Include="assets\down.png" />
     <Content Include="screen-main.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>

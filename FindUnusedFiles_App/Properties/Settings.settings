@@ -5,17 +5,21 @@
     <Setting Name="Directory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Find" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\.(gif|png|jpg|jpeg|bmp|ico|pdf|js|css|eot|svg|ttf|eot|otf|woff|woff2)$</Value>
-    </Setting>
-    <Setting Name="Search" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\.(htm|html|aspx|ascx|master|cshtml|js|css|less)$</Value>
-    </Setting>
-    <Setting Name="Setting" Type="System.String[]" Scope="User">
+    <Setting Name="Find" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;string&gt;\.(gif|png|jpg|jpeg|bmp|ico|pdf|js|css|eot|svg|ttf|eot|otf|woff|woff2)$&lt;/string&gt;
   &lt;string&gt;\.(gif|png|jpg|jpeg|bmp|ico)$&lt;/string&gt;
+  &lt;string&gt;\.(ttf|eot|otf|woff|woff2)$&lt;/string&gt;
+  &lt;string&gt;\.(js|css)$&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="Search" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;\.(htm|html|aspx|ascx|master|cshtml|js|css|less)$&lt;/string&gt;
+  &lt;string&gt;\.(htm|html|php|js|css|less)$&lt;/string&gt;
+  &lt;string&gt;\.(js|css|less)$&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
   </Settings>

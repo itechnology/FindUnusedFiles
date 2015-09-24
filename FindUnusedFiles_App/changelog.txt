@@ -1,6 +1,5 @@
 ﻿1.3.4 (in progress)
-  * Implementing a pseudo-dropdown for autocompleting search/find patterns
-	* Items can be stored in settings.settings
+  * Items can be stored in settings.settings
   * Started working on a treeview that shows in which files an item is used
 	* Problem is treeviews do not allow for multi-select (delete, export, etc)
 
@@ -15,6 +14,9 @@
   * Prevent from searching for a reference of oneself (foo.css inside foo.css)
   * Made form resizable
   * Added button to cancel a search in progress in case of long running instance
+  * Added pseudo-dropdown to pattern textboxes
+	* Items are auto-added after a sucessful search
+	* Items can be deleted via a right-click on the textbox
 
 1.3.2
   * Fixed problems with certain case insensitive searches
