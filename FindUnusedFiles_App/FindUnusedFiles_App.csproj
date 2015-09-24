@@ -157,6 +157,7 @@
     <Content Include="assets\assets.txt" />
     <Content Include="assets\down.png" />
     <Content Include="assets\launch.png" />
+    <Content Include="assets\refresh.png" />
     <Content Include="screen-main.png" />
     <Content Include="screen-search.png" />
     <Content Include="screen-vs.png" />

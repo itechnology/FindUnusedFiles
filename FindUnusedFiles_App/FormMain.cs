@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Principal;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -103,9 +104,13 @@ namespace ITechnologyNET.FindUnusedFiles
             // BUG: if cast to string missing, thinks we are dealing with a List<dynamic>
             AllFiles = ProjectItems.Select(c => (string)c.Properties.Item("FullPath").Value.ToString()).ToList();
 
-
+            // dont show register shell extension
             registerShellToolStripMenuItem.Visible = false;
-            toolStripSeparator2.Visible            = false;
+            toolStripSeparatorShell.Visible        = false;
+
+            // dont show update check
+            toolStripSeparatorUpdate.Visible     = false;
+            checkUpdateToolStripMenuItem.Visible = false;
 
             AddContextMenu();
             ProcessFiles();
@@ -1016,6 +1021,48 @@ namespace ITechnologyNET.FindUnusedFiles
         {
             var help = new Help("license");
             help.Show();
+        }
+
+        void checkUpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var req = (HttpWebRequest)WebRequest.Create("https://raw.githubusercontent.com/itechnology/FindUnusedFiles/master/version.txt");
+
+            req.BeginGetResponse(ar =>
+            {
+                try
+                {
+                    var resp = (HttpWebResponse) req.EndGetResponse(ar);
+                    using (var stream = resp.GetResponseStream())
+                    {
+                        if (stream != null)
+                        {
+                            using (var sr = new StreamReader(stream))
+                            {
+                                var result = sr.ReadToEnd();
+                                var currentVersion = new Version(Application.ProductVersion);
+                                var latestVersion = new Version(result);
+                                if (latestVersion.CompareTo(currentVersion) > 0)
+                                {
+                                    var respMsg = MessageBox.Show(@"Would you like to go download it ?", @"Update Availiable", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                                    if (respMsg == DialogResult.Yes)
+                                    {
+                                        System.Diagnostics.Process.Start(
+                                            "https://github.com/itechnology/FindUnusedFiles/tree/master/dist");
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show(@"You have the latest version.", @"Up to date", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, @"Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }, null);
         }
         #endregion
 

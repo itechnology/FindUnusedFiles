@@ -46,9 +46,11 @@
             this.websiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.registerShellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparatorShell = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparatorUpdate = new System.Windows.Forms.ToolStripSeparator();
+            this.checkUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.lblUsed = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -217,9 +219,11 @@
             this.websiteToolStripMenuItem,
             this.toolStripSeparator1,
             this.registerShellToolStripMenuItem,
-            this.toolStripSeparator2,
+            this.toolStripSeparatorShell,
             this.aboutToolStripMenuItem,
-            this.licenseToolStripMenuItem});
+            this.licenseToolStripMenuItem,
+            this.toolStripSeparatorUpdate,
+            this.checkUpdateToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.helpToolStripMenuItem.Text = "Help";
@@ -264,10 +268,10 @@
             this.registerShellToolStripMenuItem.Text = "Shell Extension";
             this.registerShellToolStripMenuItem.Click += new System.EventHandler(this.RegisterShellToolStripMenuItemClick);
             // 
-            // toolStripSeparator2
+            // toolStripSeparatorShell
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparatorShell.Name = "toolStripSeparatorShell";
+            this.toolStripSeparatorShell.Size = new System.Drawing.Size(149, 6);
             // 
             // aboutToolStripMenuItem
             // 
@@ -286,6 +290,19 @@
             this.licenseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.licenseToolStripMenuItem.Text = "License";
             this.licenseToolStripMenuItem.Click += new System.EventHandler(this.LicenseToolStripMenuItemClick);
+            // 
+            // toolStripSeparatorUpdate
+            // 
+            this.toolStripSeparatorUpdate.Name = "toolStripSeparatorUpdate";
+            this.toolStripSeparatorUpdate.Size = new System.Drawing.Size(149, 6);
+            // 
+            // checkUpdateToolStripMenuItem
+            // 
+            this.checkUpdateToolStripMenuItem.Image = global::ITechnologyNET.FindUnusedFiles.Properties.Resources.refresh;
+            this.checkUpdateToolStripMenuItem.Name = "checkUpdateToolStripMenuItem";
+            this.checkUpdateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.checkUpdateToolStripMenuItem.Text = "Check Update";
+            this.checkUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkUpdateToolStripMenuItem_Click);
             // 
             // saveFileDialog
             // 
@@ -672,7 +689,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparatorShell;
         private System.Windows.Forms.ToolStripMenuItem registerShellToolStripMenuItem;
         private System.Windows.Forms.TreeView treeResult;
         private System.Windows.Forms.CheckBox checkBoxImages;
@@ -684,6 +701,8 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparatorUpdate;
+        private System.Windows.Forms.ToolStripMenuItem checkUpdateToolStripMenuItem;
     }
 }
 

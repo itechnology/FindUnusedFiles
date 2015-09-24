@@ -82,15 +82,16 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to 1.3.4 (in progress)
-        ///  * Implementing a pseudo-dropdown for autocompleting search/find patterns
-        ///	* Items can be stored in settings.settings
+        ///  * Add update check feature (app only)
         ///  * Started working on a treeview that shows in which files an item is used
         ///	* Problem is treeviews do not allow for multi-select (delete, export, etc)
         ///
         ///1.3.3
         ///  * Made picturebox a little bigger, and moved outside of bounds of main window for better ergonomics
         ///  * Added image-preview checkbox to not have to alt-click on an image to trigger display
-        ///  * Added some [rest of string was truncated]&quot;;.
+        ///  * Added some extra checking for file path operations
+        ///  * Fixed some thread-safety issues
+        ///  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string changelog_txt {
             get {
@@ -211,6 +212,16 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         internal static System.Drawing.Bitmap project {
             get {
                 object obj = ResourceManager.GetObject("project", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap refresh {
+            get {
+                object obj = ResourceManager.GetObject("refresh", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
