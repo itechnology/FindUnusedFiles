@@ -93,7 +93,7 @@
             // btnBrowse
             // 
             this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse.Location = new System.Drawing.Point(712, 475);
+            this.btnBrowse.Location = new System.Drawing.Point(708, 475);
             this.btnBrowse.Margin = new System.Windows.Forms.Padding(2);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(133, 27);
@@ -540,7 +540,7 @@
             this.tabPageNormal.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageNormal.Size = new System.Drawing.Size(823, 338);
             this.tabPageNormal.TabIndex = 0;
-            this.tabPageNormal.Text = "Normal";
+            this.tabPageNormal.Text = "Flat View";
             this.tabPageNormal.UseVisualStyleBackColor = true;
             // 
             // tabPageTreeView
@@ -572,8 +572,6 @@
             // checkBoxExclude
             // 
             this.checkBoxExclude.AutoSize = true;
-            this.checkBoxExclude.Checked = true;
-            this.checkBoxExclude.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxExclude.Location = new System.Drawing.Point(403, 21);
             this.checkBoxExclude.Name = "checkBoxExclude";
             this.checkBoxExclude.Size = new System.Drawing.Size(113, 19);
