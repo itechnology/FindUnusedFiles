@@ -89,11 +89,6 @@ namespace ITechnologyNET.FindUnusedFiles
         public FormMain(DTE dte, IEnumerable<ProjectItem> projectItems, string directoryPath)
         {
             InitializeComponent();
-            listResult.DoubleClick += ListResultDoubleClick;
-
-            // http://stackoverflow.com/a/4267845
-            SetAutoCompleteSource(patternFind  , "Find");
-            SetAutoCompleteSource(patternSearch, "Search");
 
             Dte            = dte;
             ProjectItems   = projectItems;
@@ -112,7 +107,7 @@ namespace ITechnologyNET.FindUnusedFiles
             toolStripSeparatorUpdate.Visible     = false;
             checkUpdateToolStripMenuItem.Visible = false;
 
-            AddContextMenu();
+            InitializeFormElements();
             ProcessFiles();
         }
 
@@ -122,15 +117,10 @@ namespace ITechnologyNET.FindUnusedFiles
         public FormMain()
         {
             InitializeComponent();
-            listResult.DoubleClick += ListResultDoubleClick;
-
-            // http://stackoverflow.com/a/4267845
-            SetAutoCompleteSource(patternFind  , "Find");
-            SetAutoCompleteSource(patternSearch, "Search");
 
             registerShellToolStripMenuItem.Checked = Registry.ClassesRoot.OpenSubKey("Directory\\shell\\FindUnusedFiles") != null;
 
-            AddContextMenu();
+            InitializeFormElements();
 
             // Launch from command line for integration with external tools
             string[] args = Environment.GetCommandLineArgs();
@@ -258,8 +248,27 @@ namespace ITechnologyNET.FindUnusedFiles
             Dte.Find.Execute();
         }
 
-        void AddContextMenu()
+        void InitializeFormElements()
         {
+            listResult.DoubleClick += ListResultDoubleClick;
+
+            #region Bind AutoComplete TextBoxes
+            // http://stackoverflow.com/a/4267845
+            SetAutoCompleteSource(patternFind  , "Find");
+            SetAutoCompleteSource(patternSearch, "Search");
+            #endregion
+
+            #region Restore Settings
+            // Excluded Files ListBox
+            listBoxExclude.Items.AddRange(Properties.Settings.Default.Exclude.Cast<object>().ToArray());
+
+            // Excusion Active CheckBox
+            checkBoxExclude.Checked = Properties.Settings.Default.ExcludeChecked;
+
+            // Image Preview CheckBox
+            checkBoxImages.Checked = Properties.Settings.Default.ImagePreviewChecked;
+            #endregion
+
             // The context menu
             #region Picture Preview
             var pic = new PictureBox(300, 300);
@@ -402,7 +411,6 @@ namespace ITechnologyNET.FindUnusedFiles
                     }
                 };
 
-
                 // Search submenu: Project
                 var mnuSearchProject = new ToolStripMenuItem("Exists In Project")
                 {
@@ -456,7 +464,7 @@ namespace ITechnologyNET.FindUnusedFiles
             listResult.ContextMenuStrip = ctxMenu;
             //treeResult.ContextMenuStrip = ctxMenu;
 
-            #region TextBoxes
+            #region Find/Search TextBoxes
             var ctxTexboxMenu = new ContextMenuStrip();
 
             var mnuTextBoxDelete = new ToolStripMenuItem("Delete")
@@ -484,6 +492,26 @@ namespace ITechnologyNET.FindUnusedFiles
 
             patternFind.ContextMenuStrip   = ctxTexboxMenu;
             patternSearch.ContextMenuStrip = ctxTexboxMenu;
+            #endregion
+
+            #region Options Panel
+            var ctxExcludeMenu   = new ContextMenuStrip();
+            var mnuExcludeDelete = new ToolStripMenuItem("Delete")
+            {
+                Image = new Bitmap(Properties.Resources.delete)
+            };
+            mnuExcludeDelete.Click += (sender, args) =>
+            {
+                var item = listBoxExclude.SelectedItem;
+
+                Properties.Settings.Default.Exclude.Remove(item.ToString());
+                Properties.Settings.Default.Save();
+
+                listBoxExclude.Items.Remove(item);
+            };
+
+            ctxExcludeMenu.Items.Add(mnuExcludeDelete);
+            listBoxExclude.ContextMenuStrip = ctxExcludeMenu;
             #endregion
         }
 
@@ -880,20 +908,15 @@ namespace ITechnologyNET.FindUnusedFiles
             }
 
             // files to search within
-            //var searchIn = AllFiles.Where(c => Regex.IsMatch(c, patternSearch.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
-            #region Exclude files
-            var excluded = new List<string>()
-            {
-                //@"\node_modules\"
-            };
+            var searchIn = AllFiles.Where(c => Regex.IsMatch(c, patternSearch.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
 
-            // files to search within
-            var searchIn = AllFiles
-                            .Where(a => Regex.IsMatch(a, patternSearch.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
-                            // Remove any files listed in the excluded list
-                            // we remove here to not have to relaunch the program each time to take into account any changes made in the exclusion list
-                            .Where(a => !excluded.Any(e => Regex.IsMatch(a, Regex.Escape(e), RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)))
-                            .ToList();
+            #region Exclude files
+            if (checkBoxExclude.Checked)
+            {
+                var excluded = listBoxExclude.Items.Cast<string>();
+                // we remove here to not have to relaunch the program each time to take into account any changes made in the exclusion list
+                searchIn = searchIn.Where(a => !excluded.Any(e => Regex.IsMatch(a, Regex.Escape(e), RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))).ToList();
+            }
             #endregion
 
             if (searchIn.Count == 0)
@@ -906,15 +929,15 @@ namespace ITechnologyNET.FindUnusedFiles
             lblToParse.Text = string.Format(ToParseLabel, searchIn.Count.ToString("D4"));
 
             // files to search for
-            //UnUsedFiles = AllFiles.Where(c => Regex.IsMatch(c, patternFind.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
+            UnUsedFiles = AllFiles.Where(c => Regex.IsMatch(c, patternFind.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).ToList();
+
             #region Exclude files
-            // files to search for
-            UnUsedFiles = AllFiles
-                            .Where(c => Regex.IsMatch(c, patternFind.Text, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
-                            // Remove any files listed in the excluded list
-                            // we remove here to not have to relaunch the program each time to take into account any changes made in the exclusion list
-                            .Where(a => !excluded.Any(e => Regex.IsMatch(a, Regex.Escape(e), RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)))
-                            .ToList();
+            if (checkBoxExclude.Checked)
+            {
+                var excluded = listBoxExclude.Items.Cast<string>();
+                // we remove here to not have to relaunch the program each time to take into account any changes made in the exclusion list
+                UnUsedFiles = UnUsedFiles.Where(a => !excluded.Any(e => Regex.IsMatch(a, Regex.Escape(e), RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))).ToList();
+            }
             #endregion
 
             if (UnUsedFiles.Count == 0)
@@ -931,7 +954,7 @@ namespace ITechnologyNET.FindUnusedFiles
             UpateAutoCompleteSource(patternFind  , "Find");
             UpateAutoCompleteSource(patternSearch, "Search");
 
-            Properties.Settings.Default["Directory"] = DirectoryPath;
+            Properties.Settings.Default.Directory = DirectoryPath;
             Properties.Settings.Default.Save();
             #endregion
 
@@ -1191,7 +1214,6 @@ namespace ITechnologyNET.FindUnusedFiles
         /// </summary>
         void SetAutoCompleteSource(TextBox textbox, string setting)
         {
-
             var settings               = Properties.Settings.Default;
             var patternCollection      = ((StringCollection)settings[setting]).Cast<string>().ToArray();
             var autoCompleteCollection = new AutoCompleteStringCollection();
@@ -1243,7 +1265,7 @@ namespace ITechnologyNET.FindUnusedFiles
             }
         }
 
-        void button1_Click(object sender, EventArgs e)
+        void ButtonFindAutoCompleteClick(object sender, EventArgs e)
         {
             patternFind.Clear();
             patternFind.Focus();
@@ -1252,7 +1274,7 @@ namespace ITechnologyNET.FindUnusedFiles
             SendKeys.Send(@"\");
         }
 
-        void button2_Click(object sender, EventArgs e)
+        void ButtonSearchAutoComplete(object sender, EventArgs e)
         {
             patternSearch.Clear();
             patternSearch.Focus();
@@ -1261,5 +1283,28 @@ namespace ITechnologyNET.FindUnusedFiles
             SendKeys.Send(@"\");
         }
         #endregion
+
+        #region Exclude
+        void buttonExcludeAdd_Click(object sender, EventArgs e)
+        {
+            var item = textBoxExclude.Text;
+            listBoxExclude.Items.Add(item);
+
+            Properties.Settings.Default.Exclude.Add(item);
+            Properties.Settings.Default.Save();
+        }
+
+        void checkBoxExclude_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ExcludeChecked = checkBoxExclude.Checked;
+            Properties.Settings.Default.Save();
+        }
+        #endregion
+
+        private void checkBoxImages_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ImagePreviewChecked = checkBoxImages.Checked;
+            Properties.Settings.Default.Save();
+        }
     }
 }

@@ -75,9 +75,13 @@
             this.tabPageNormal = new System.Windows.Forms.TabPage();
             this.tabPageTreeView = new System.Windows.Forms.TabPage();
             this.tabPageOptions = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.checkBoxExclude = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.buttonExcludeAdd = new System.Windows.Forms.Button();
+            this.textBoxExclude = new System.Windows.Forms.TextBox();
+            this.listBoxExclude = new System.Windows.Forms.ListBox();
+            this.buttonFindAutoComplete = new System.Windows.Forms.Button();
+            this.buttonSearchAutoComplete = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.panelProgress.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -512,6 +516,7 @@
             this.checkBoxImages.TabIndex = 28;
             this.checkBoxImages.Text = "Image Preview";
             this.checkBoxImages.UseVisualStyleBackColor = true;
+            this.checkBoxImages.CheckedChanged += new System.EventHandler(this.checkBoxImages_CheckedChanged);
             // 
             // tabControl1
             // 
@@ -551,7 +556,11 @@
             // 
             // tabPageOptions
             // 
-            this.tabPageOptions.Controls.Add(this.label7);
+            this.tabPageOptions.Controls.Add(this.checkBoxExclude);
+            this.tabPageOptions.Controls.Add(this.label8);
+            this.tabPageOptions.Controls.Add(this.buttonExcludeAdd);
+            this.tabPageOptions.Controls.Add(this.textBoxExclude);
+            this.tabPageOptions.Controls.Add(this.listBoxExclude);
             this.tabPageOptions.Location = new System.Drawing.Point(4, 24);
             this.tabPageOptions.Name = "tabPageOptions";
             this.tabPageOptions.Padding = new System.Windows.Forms.Padding(3);
@@ -560,41 +569,77 @@
             this.tabPageOptions.Text = "Options";
             this.tabPageOptions.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // checkBoxExclude
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label7.Location = new System.Drawing.Point(238, 116);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(278, 46);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "For future stuff";
+            this.checkBoxExclude.AutoSize = true;
+            this.checkBoxExclude.Checked = true;
+            this.checkBoxExclude.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxExclude.Location = new System.Drawing.Point(403, 21);
+            this.checkBoxExclude.Name = "checkBoxExclude";
+            this.checkBoxExclude.Size = new System.Drawing.Size(113, 19);
+            this.checkBoxExclude.TabIndex = 5;
+            this.checkBoxExclude.Text = "Exclusion Active";
+            this.checkBoxExclude.UseVisualStyleBackColor = true;
+            this.checkBoxExclude.CheckedChanged += new System.EventHandler(this.checkBoxExclude_CheckedChanged);
             // 
-            // button1
+            // label8
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Image = global::ITechnologyNET.FindUnusedFiles.Properties.Resources.down;
-            this.button1.Location = new System.Drawing.Point(656, 430);
-            this.button1.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(23, 23);
-            this.button1.TabIndex = 30;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(13, 21);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(91, 15);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Excluded Items";
             // 
-            // button2
+            // buttonExcludeAdd
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Image = global::ITechnologyNET.FindUnusedFiles.Properties.Resources.down;
-            this.button2.Location = new System.Drawing.Point(656, 477);
-            this.button2.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(23, 23);
-            this.button2.TabIndex = 31;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonExcludeAdd.Location = new System.Drawing.Point(273, 212);
+            this.buttonExcludeAdd.Name = "buttonExcludeAdd";
+            this.buttonExcludeAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonExcludeAdd.TabIndex = 3;
+            this.buttonExcludeAdd.Text = "Add";
+            this.buttonExcludeAdd.UseVisualStyleBackColor = true;
+            this.buttonExcludeAdd.Click += new System.EventHandler(this.buttonExcludeAdd_Click);
+            // 
+            // textBoxExclude
+            // 
+            this.textBoxExclude.Location = new System.Drawing.Point(16, 214);
+            this.textBoxExclude.Name = "textBoxExclude";
+            this.textBoxExclude.Size = new System.Drawing.Size(251, 21);
+            this.textBoxExclude.TabIndex = 2;
+            // 
+            // listBoxExclude
+            // 
+            this.listBoxExclude.FormattingEnabled = true;
+            this.listBoxExclude.ItemHeight = 15;
+            this.listBoxExclude.Location = new System.Drawing.Point(16, 39);
+            this.listBoxExclude.Name = "listBoxExclude";
+            this.listBoxExclude.Size = new System.Drawing.Size(332, 169);
+            this.listBoxExclude.TabIndex = 1;
+            // 
+            // buttonFindAutoComplete
+            // 
+            this.buttonFindAutoComplete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonFindAutoComplete.Image = global::ITechnologyNET.FindUnusedFiles.Properties.Resources.down;
+            this.buttonFindAutoComplete.Location = new System.Drawing.Point(656, 430);
+            this.buttonFindAutoComplete.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.buttonFindAutoComplete.Name = "buttonFindAutoComplete";
+            this.buttonFindAutoComplete.Size = new System.Drawing.Size(23, 23);
+            this.buttonFindAutoComplete.TabIndex = 30;
+            this.buttonFindAutoComplete.UseVisualStyleBackColor = true;
+            this.buttonFindAutoComplete.Click += new System.EventHandler(this.ButtonFindAutoCompleteClick);
+            // 
+            // buttonSearchAutoComplete
+            // 
+            this.buttonSearchAutoComplete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSearchAutoComplete.Image = global::ITechnologyNET.FindUnusedFiles.Properties.Resources.down;
+            this.buttonSearchAutoComplete.Location = new System.Drawing.Point(656, 477);
+            this.buttonSearchAutoComplete.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.buttonSearchAutoComplete.Name = "buttonSearchAutoComplete";
+            this.buttonSearchAutoComplete.Size = new System.Drawing.Size(23, 23);
+            this.buttonSearchAutoComplete.TabIndex = 31;
+            this.buttonSearchAutoComplete.UseVisualStyleBackColor = true;
+            this.buttonSearchAutoComplete.Click += new System.EventHandler(this.ButtonSearchAutoComplete);
             // 
             // FormMain
             // 
@@ -602,10 +647,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(864, 511);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.panelProgress);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.buttonSearchAutoComplete);
+            this.Controls.Add(this.buttonFindAutoComplete);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -697,12 +742,16 @@
         private System.Windows.Forms.TabPage tabPageNormal;
         private System.Windows.Forms.TabPage tabPageTreeView;
         private System.Windows.Forms.TabPage tabPageOptions;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonFindAutoComplete;
+        private System.Windows.Forms.Button buttonSearchAutoComplete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparatorUpdate;
         private System.Windows.Forms.ToolStripMenuItem checkUpdateToolStripMenuItem;
+        private System.Windows.Forms.Button buttonExcludeAdd;
+        private System.Windows.Forms.TextBox textBoxExclude;
+        private System.Windows.Forms.ListBox listBoxExclude;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox checkBoxExclude;
     }
 }
 
