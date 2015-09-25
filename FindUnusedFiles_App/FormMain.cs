@@ -122,6 +122,7 @@ namespace ITechnologyNET.FindUnusedFiles
 
             InitializeFormElements();
 
+            #region Command Line
             // Launch from command line for integration with external tools
             string[] args = Environment.GetCommandLineArgs();
 
@@ -204,6 +205,7 @@ namespace ITechnologyNET.FindUnusedFiles
             {
                 GetPath(path);
             }
+            #endregion
         }
         #endregion
 
