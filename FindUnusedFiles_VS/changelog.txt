@@ -1,12 +1,4 @@
-﻿1.3.4 (in progress)
-  * Started working on a treeview that shows in which files an item is used
-	* Problem is treeviews do not allow for multi-select (delete, export, etc)
-	* Will probably just add some basic context menus to the treeview and leave the original resultList in place
-	* Once migrated to WPF it will be much easier to implement a kickass all in one list
-	  * https://github.com/itechnology/FindUnusedFiles/issues/4
-  * Once this is done: 1.3.3 & 1.3.4 will be released merged as 1.4
-
-1.3.3 (done)
+﻿1.4 (just needs some testing to be finalized)
   * Made picturebox a little bigger, and moved outside of bounds of main window for better ergonomics
   * Added image-preview checkbox to not have to alt-click on an image to trigger display
   * Added some extra checking for file path operations
@@ -24,8 +16,10 @@
   * Added exclusion list to option panel
     * Can be file names or folders (backslash).
 	* Anything matched will be ignored
+  * Added a treeview pane to see in which files ressources are used in
+    * Has some context menus, but some things like multi-select do not work in treeviews, thus the Flat View pane that remains
 
-1.3.2 (last release)
+1.3.2
   * Fixed problems with certain case insensitive searches
   * Made picturebox bigger
 

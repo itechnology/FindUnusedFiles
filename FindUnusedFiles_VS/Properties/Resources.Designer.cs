@@ -82,20 +82,28 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to 1.3.4 (in progress)
-        ///  * Add update check feature (app only)
         ///  * Started working on a treeview that shows in which files an item is used
         ///	* Problem is treeviews do not allow for multi-select (delete, export, etc)
+        ///	* Will probably just add some basic context menus to the treeview and leave the original resultList in place
+        ///	* Once migrated to WPF it will be much easier to implement a kickass all in one list
+        ///	  * https://github.com/itechnology/FindUnusedFiles/issues/4
+        ///  * Once this is done: 1.3.3 &amp; 1.3.4 will be released merged as 1.4
         ///
-        ///1.3.3
-        ///  * Made picturebox a little bigger, and moved outside of bounds of main window for better ergonomics
-        ///  * Added image-preview checkbox to not have to alt-click on an image to trigger display
-        ///  * Added some extra checking for file path operations
-        ///  * Fixed some thread-safety issues
-        ///  [rest of string was truncated]&quot;;.
+        ///1.3.3  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string changelog_txt {
             get {
                 return ResourceManager.GetString("changelog_txt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap collapse {
+            get {
+                object obj = ResourceManager.GetObject("collapse", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -115,6 +123,16 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         internal static System.Drawing.Bitmap down {
             get {
                 object obj = ResourceManager.GetObject("down", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap expand {
+            get {
+                object obj = ResourceManager.GetObject("expand", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

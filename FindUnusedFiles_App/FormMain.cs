@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -32,11 +31,11 @@ namespace ITechnologyNET.FindUnusedFiles
 
         #region Declarations
         string DirectoryPath { get; set; }
-
         List<string> AllFiles    { get; set; }
         //List<string> UsedFiles   { get; set; }
         List<string> UnUsedFiles { get; set; }
         ConcurrentDictionary<string, List<string>> UsedFiles { get; set; }
+        PictureBox PictureBox { get; set; }
 
 
         const string PathLabel    = "Path: {0}";
@@ -210,21 +209,52 @@ namespace ITechnologyNET.FindUnusedFiles
         #endregion
 
         #region Form Actions
+        // gets selected items from currently active result list
         List<string> GetSelectedItems()
         {
-            return listResult.SelectedItems
-                             .Cast<string>()
-                             .ToList();
+            if (tabControlMain.SelectedTab == tabPageNormal)
+            {
+                return listResult.SelectedItems
+                                 .Cast<string>()
+                                 .ToList();
+            }
+
+            if (tabControlMain.SelectedTab == tabPageTreeView)
+            {
+                return new List<string>() { treeResult.SelectedNode.Text };
+            }
+
+            return new List<string>();
         }
 
-        /// <summary>
-        /// Need to be able to switch between normal & treeview
-        /// </summary>
-        List<string> GetSelectedTreeItems()
+        string GetSelecteItemText()
         {
-            return treeResult.SelectedNode.Text
-                             .Cast<string>()
-                             .ToList();
+            if (tabControlMain.SelectedTab == tabPageNormal)
+            {
+                return listResult.SelectedItem.ToString();
+            }
+
+            if (tabControlMain.SelectedTab == tabPageTreeView)
+            {
+                return treeResult.SelectedNode.Text;
+            }
+
+            return null;
+        }
+
+        int GetSelectedItemCount()
+        {
+            if (tabControlMain.SelectedTab == tabPageNormal)
+            {
+                return listResult.SelectedItems.Count;
+            }
+
+            if (tabControlMain.SelectedTab == tabPageTreeView)
+            {
+                return treeResult.Nodes.Count > 0 ? 1 : 0;
+            }
+
+            return 0;
         }
 
         void Find(string pattern, vsFindTarget target)
@@ -253,19 +283,20 @@ namespace ITechnologyNET.FindUnusedFiles
         void InitializeFormElements()
         {
             listResult.DoubleClick += ListResultDoubleClick;
-
-            #region Bind AutoComplete TextBoxes
-            // http://stackoverflow.com/a/4267845
-            SetAutoCompleteSource(patternFind  , "Find");
-            SetAutoCompleteSource(patternSearch, "Search");
-            #endregion
+            treeResult.DoubleClick += ListResultDoubleClick;
 
             #region Restore Settings
+            // Bind AutoComplete TextBoxes
+            // http://stackoverflow.com/a/4267845
+            SetAutoCompleteSource(patternFind, "Find");
+            SetAutoCompleteSource(patternSearch, "Search");
+
             // Excluded Files ListBox
             listBoxExclude.Items.AddRange(Properties.Settings.Default.Exclude.Cast<object>().ToArray());
 
             // Excusion Active CheckBox
             checkBoxExclude.Checked = Properties.Settings.Default.ExcludeChecked;
+            listBoxExclude.Enabled  = checkBoxExclude.Checked;
 
             // Image Preview CheckBox
             checkBoxImages.Checked = Properties.Settings.Default.ImagePreviewChecked;
@@ -273,22 +304,30 @@ namespace ITechnologyNET.FindUnusedFiles
 
             // The context menu
             #region Picture Preview
-            var pic = new PictureBox(300, 300);
+            PictureBox = new PictureBox(300, 300);
+
+            // listResult
             listResult.SelectedIndexChanged += (s, o) =>
             {
-                if ((checkBoxImages.Checked || ModifierKeys == Keys.Alt) && listResult.SelectedIndices.Count == 1)
+                if ((checkBoxImages.Checked || ModifierKeys == Keys.Alt) && GetSelectedItemCount() == 1)
                 {
-                    pic.Location = new Point(Right, Top);
-                    pic.DisplayImage(DirectoryPath + listResult.SelectedItem);
+                    PictureBox.Location = new Point(Right, Top);
+                    PictureBox.DisplayImage(DirectoryPath + GetSelecteItemText());
                 }
-                else if (pic != null)
+            };
+
+            // treeResult
+            treeResult.AfterSelect += (s, o) =>
+            {
+                if ((checkBoxImages.Checked || ModifierKeys == Keys.Alt))
                 {
-                    pic.Hide();
+                    PictureBox.Location = new Point(Right, Top);
+                    PictureBox.DisplayImage(DirectoryPath + GetSelecteItemText());
                 }
             };
             #endregion
 
-            var ctxMenu   = new ContextMenuStrip();
+            var ctxMenu = new ContextMenuStrip();
 
             #region Launch External
             // Select ALL entry
@@ -334,6 +373,29 @@ namespace ITechnologyNET.FindUnusedFiles
             ctxMenu.Items.Add(mnuInvert);
             #endregion
 
+            #region treeViewResult Specific
+            // Expand node
+            var mnuExpandAll = new ToolStripMenuItem("Expand")
+            {
+                Image = new Bitmap(Properties.Resources.expand)
+            };
+            mnuExpandAll.Click += (s, o) =>
+            {
+                treeResult.SelectedNode.ExpandAll();
+            };
+            ctxMenu.Items.Add(mnuExpandAll);
+
+            var mnuCollapseAll = new ToolStripMenuItem("Collapse")
+            {
+                Image = new Bitmap(Properties.Resources.collapse)
+            };
+            mnuCollapseAll.Click += (s, o) =>
+            {
+                treeResult.SelectedNode.Collapse(false);
+            };
+            ctxMenu.Items.Add(mnuCollapseAll);
+            #endregion
+
             ctxMenu.Items.Add(new ToolStripSeparator());
 
             #region Export
@@ -374,12 +436,20 @@ namespace ITechnologyNET.FindUnusedFiles
             // Tests to hide context menu items
             ctxMenu.Opening += (s, o) =>
             {
-                mnuSelect.Enabled  = (listResult.Items.Count > 0);
-                mnuInvert.Enabled  = (listResult.Items.Count > 0);
-                mnuExplore.Enabled = (listResult.SelectedItems.Count == 1);
-                mnuLaunch.Enabled  = (listResult.SelectedItems.Count == 1);
+                var selectedItemsCount = GetSelectedItemCount();
 
-                if (listResult.SelectedItems.Count == 0)
+                mnuLaunch.Enabled      = (selectedItemsCount == 1);
+                mnuSelect.Enabled      = (selectedItemsCount > 0);
+                mnuSelect.Visible      = (tabControlMain.SelectedTab == tabPageNormal);
+                mnuInvert.Enabled      = (selectedItemsCount > 0);
+                mnuInvert.Visible      = (tabControlMain.SelectedTab == tabPageNormal);
+                mnuExplore.Enabled     = (selectedItemsCount == 1);
+                mnuCollapseAll.Enabled = (selectedItemsCount > 0);
+                mnuCollapseAll.Visible = (tabControlMain.SelectedTab == tabPageTreeView);
+                mnuExpandAll.Enabled   = (selectedItemsCount > 0);
+                mnuExpandAll.Visible   = (tabControlMain.SelectedTab == tabPageTreeView);
+
+                if (selectedItemsCount == 0)
                 {
                     mnuExport.Enabled = false;
                     mnuDelete.Enabled = false;
@@ -403,7 +473,7 @@ namespace ITechnologyNET.FindUnusedFiles
 
                 ctxMenu.Opening += (s, o) =>
                 {
-                    if (listResult.SelectedItems.Count == 0)
+                    if (GetSelectedItemCount() == 0)
                     {
                         mnuFind.Enabled = false;
                     }
@@ -464,7 +534,7 @@ namespace ITechnologyNET.FindUnusedFiles
             #endregion
 
             listResult.ContextMenuStrip = ctxMenu;
-            //treeResult.ContextMenuStrip = ctxMenu;
+            treeResult.ContextMenuStrip = ctxMenu;
 
             #region Find/Search TextBoxes
             var ctxTexboxMenu = new ContextMenuStrip();
@@ -505,11 +575,13 @@ namespace ITechnologyNET.FindUnusedFiles
             mnuExcludeDelete.Click += (sender, args) =>
             {
                 var item = listBoxExclude.SelectedItem;
+                if (item != null)
+                {
+                    Properties.Settings.Default.Exclude.Remove(item.ToString());
+                    Properties.Settings.Default.Save();
 
-                Properties.Settings.Default.Exclude.Remove(item.ToString());
-                Properties.Settings.Default.Save();
-
-                listBoxExclude.Items.Remove(item);
+                    listBoxExclude.Items.Remove(item);
+                }
             };
 
             ctxExcludeMenu.Items.Add(mnuExcludeDelete);
@@ -539,17 +611,17 @@ namespace ITechnologyNET.FindUnusedFiles
         {
             if (radioUnused.Checked)
             {
-                BuildUnUsedTree();
-                ListUnusedFiles();
+                BuildUnusedFilesFlat();
+                BuildUnusedFilesTree();
             }
             else
             {
-                BuildUsedTree();
-                ListUsedFiles();
+                BuildUsedFilesFlat();
+                BuildUsedFilesTree();
             }
         }
 
-        void ListUnusedFiles()
+        void BuildUnusedFilesFlat()
         {
             listResult.Items.Clear();
 
@@ -573,7 +645,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 .ForEach(i => listResult.Items.Add(i.Replace(DirectoryPath, string.Empty)));
         }
 
-        void ListUsedFiles()
+        void BuildUsedFilesFlat()
         {
             listResult.Items.Clear();
 
@@ -598,7 +670,7 @@ namespace ITechnologyNET.FindUnusedFiles
                 .ForEach(i => listResult.Items.Add(i.Replace(DirectoryPath, string.Empty)));
         }
 
-        void BuildUsedTree()
+        void BuildUsedFilesTree()
         {
             treeResult.Nodes.Clear();
 
@@ -640,7 +712,7 @@ namespace ITechnologyNET.FindUnusedFiles
             treeResult.EndUpdate();
         }
 
-        void BuildUnUsedTree()
+        void BuildUnusedFilesTree()
         {
             treeResult.Nodes.Clear();
 
@@ -679,9 +751,9 @@ namespace ITechnologyNET.FindUnusedFiles
         {
             if (IsPackage)
             {
-                if (listResult.SelectedItem != null)
+                if (GetSelecteItemText() != null)
                 {
-                    var fullPath = DirectoryPath + listResult.SelectedItem;
+                    var fullPath = DirectoryPath + GetSelecteItemText();
                     var item     = ProjectItems.FirstOrDefault(c => c.Properties.Item("FullPath").Value.ToString() == fullPath);
                     if (item != null)
                     {
@@ -698,9 +770,9 @@ namespace ITechnologyNET.FindUnusedFiles
 
         void LaunchExternal(object sender, EventArgs e)
         {
-            if (listResult.SelectedItem != null && listResult.SelectedItems.Count == 1)
+            if (GetSelecteItemText() != null && GetSelectedItemCount() == 1)
             {
-                var path = Path.GetFullPath(DirectoryPath + listResult.SelectedItem);
+                var path = Path.GetFullPath(DirectoryPath + GetSelecteItemText());
                 if (File.Exists(path))
                 {
                     System.Diagnostics.Process.Start(path);
@@ -710,9 +782,9 @@ namespace ITechnologyNET.FindUnusedFiles
 
         void ExploreHere(object sender, EventArgs e)
         {
-            if (listResult.SelectedItem != null && listResult.SelectedItems.Count == 1)
+            if (GetSelecteItemText() != null && GetSelectedItemCount() == 1)
             {
-                var path = Path.GetDirectoryName(DirectoryPath + listResult.SelectedItem);
+                var path = Path.GetDirectoryName(DirectoryPath + GetSelecteItemText());
                 if (path != null && Directory.Exists(path))
                 {
                     System.Diagnostics.Process.Start(path);
@@ -744,18 +816,28 @@ namespace ITechnologyNET.FindUnusedFiles
                         {
                             var fullPath = DirectoryPath + i;
 
-                            // since we are deleting, file should not be in any list at all anymore
-                            List<string> temp;
-                            UsedFiles.TryRemove(fullPath, out temp);
+                            // treeview is a little more complicated, we need to search both keys/values, and remove at correct level
+                            var key = UsedFiles.Where(c => c.Key == fullPath).Select(c => c.Key).FirstOrDefault();
+                            if (key == null)
+                            {
+                                // check children, and return parent key
+                                var parent = UsedFiles.FirstOrDefault(c => c.Value.Contains(fullPath));
+                                if (parent.Key != null)
+                                {
+                                    UsedFiles[parent.Key].Remove(fullPath);
+                                }
+                            }
+                            else
+                            {
+                                List<string> temp;
+                                UsedFiles.TryRemove(key, out temp);
+                            }
 
                             UnUsedFiles
                                 .Remove(fullPath);
 
                             AllFiles
                                 .Remove(fullPath);
-
-                            listResult.Items
-                                    .Remove(i);
 
                             // in package mode, let VS do the deleting
                             if (IsPackage)
@@ -890,7 +972,10 @@ namespace ITechnologyNET.FindUnusedFiles
             }
 
             lblFiles.Text = string.Format(FilesLabel, AllFiles.Count.ToString("D5"));
+
+            // reset result lists
             listResult.Items.Clear();
+            treeResult.Nodes.Clear();
 
             lblUsed.Text            = string.Format(UsedLabel  , 0);
             lblUnused.Text          = string.Format(UnusedLabel, 0);
@@ -1154,7 +1239,6 @@ namespace ITechnologyNET.FindUnusedFiles
             return isAdmin;
         }
 
-
         private void RegisterShellToolStripMenuItemClick(object sender, EventArgs e)
         {
             RegisterShell();
@@ -1300,6 +1384,8 @@ namespace ITechnologyNET.FindUnusedFiles
         {
             Properties.Settings.Default.ExcludeChecked = checkBoxExclude.Checked;
             Properties.Settings.Default.Save();
+
+            listBoxExclude.Enabled = checkBoxExclude.Checked;
         }
         #endregion
 
@@ -1307,6 +1393,11 @@ namespace ITechnologyNET.FindUnusedFiles
         {
             Properties.Settings.Default.ImagePreviewChecked = checkBoxImages.Checked;
             Properties.Settings.Default.Save();
+
+            if (!checkBoxImages.Checked && PictureBox != null)
+            {
+                PictureBox.Hide();
+            }
         }
     }
 }

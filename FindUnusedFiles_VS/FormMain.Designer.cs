@@ -71,12 +71,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.checkBoxImages = new System.Windows.Forms.CheckBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageNormal = new System.Windows.Forms.TabPage();
             this.tabPageTreeView = new System.Windows.Forms.TabPage();
             this.tabPageOptions = new System.Windows.Forms.TabPage();
             this.checkBoxExclude = new System.Windows.Forms.CheckBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.buttonExcludeAdd = new System.Windows.Forms.Button();
             this.textBoxExclude = new System.Windows.Forms.TextBox();
             this.listBoxExclude = new System.Windows.Forms.ListBox();
@@ -84,7 +83,7 @@
             this.buttonSearchAutoComplete = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.panelProgress.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.tabControlMain.SuspendLayout();
             this.tabPageNormal.SuspendLayout();
             this.tabPageTreeView.SuspendLayout();
             this.tabPageOptions.SuspendLayout();
@@ -518,19 +517,19 @@
             this.checkBoxImages.UseVisualStyleBackColor = true;
             this.checkBoxImages.CheckedChanged += new System.EventHandler(this.checkBoxImages_CheckedChanged);
             // 
-            // tabControl1
+            // tabControlMain
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabControlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPageNormal);
-            this.tabControl1.Controls.Add(this.tabPageTreeView);
-            this.tabControl1.Controls.Add(this.tabPageOptions);
-            this.tabControl1.Location = new System.Drawing.Point(14, 45);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(831, 366);
-            this.tabControl1.TabIndex = 29;
+            this.tabControlMain.Controls.Add(this.tabPageNormal);
+            this.tabControlMain.Controls.Add(this.tabPageTreeView);
+            this.tabControlMain.Controls.Add(this.tabPageOptions);
+            this.tabControlMain.Location = new System.Drawing.Point(14, 45);
+            this.tabControlMain.Name = "tabControlMain";
+            this.tabControlMain.SelectedIndex = 0;
+            this.tabControlMain.Size = new System.Drawing.Size(831, 366);
+            this.tabControlMain.TabIndex = 29;
             // 
             // tabPageNormal
             // 
@@ -556,11 +555,10 @@
             // 
             // tabPageOptions
             // 
-            this.tabPageOptions.Controls.Add(this.checkBoxExclude);
-            this.tabPageOptions.Controls.Add(this.label8);
             this.tabPageOptions.Controls.Add(this.buttonExcludeAdd);
             this.tabPageOptions.Controls.Add(this.textBoxExclude);
             this.tabPageOptions.Controls.Add(this.listBoxExclude);
+            this.tabPageOptions.Controls.Add(this.checkBoxExclude);
             this.tabPageOptions.Location = new System.Drawing.Point(4, 24);
             this.tabPageOptions.Name = "tabPageOptions";
             this.tabPageOptions.Padding = new System.Windows.Forms.Padding(3);
@@ -572,26 +570,19 @@
             // checkBoxExclude
             // 
             this.checkBoxExclude.AutoSize = true;
-            this.checkBoxExclude.Location = new System.Drawing.Point(403, 21);
+            this.checkBoxExclude.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxExclude.Location = new System.Drawing.Point(12, 20);
             this.checkBoxExclude.Name = "checkBoxExclude";
-            this.checkBoxExclude.Size = new System.Drawing.Size(113, 19);
+            this.checkBoxExclude.Size = new System.Drawing.Size(129, 19);
             this.checkBoxExclude.TabIndex = 5;
-            this.checkBoxExclude.Text = "Exclusion Active";
+            this.checkBoxExclude.Text = "Exclusions Active ?";
             this.checkBoxExclude.UseVisualStyleBackColor = true;
             this.checkBoxExclude.CheckedChanged += new System.EventHandler(this.checkBoxExclude_CheckedChanged);
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 21);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(91, 15);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Excluded Items";
-            // 
             // buttonExcludeAdd
             // 
-            this.buttonExcludeAdd.Location = new System.Drawing.Point(273, 212);
+            this.buttonExcludeAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonExcludeAdd.Location = new System.Drawing.Point(322, 309);
             this.buttonExcludeAdd.Name = "buttonExcludeAdd";
             this.buttonExcludeAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonExcludeAdd.TabIndex = 3;
@@ -601,18 +592,23 @@
             // 
             // textBoxExclude
             // 
-            this.textBoxExclude.Location = new System.Drawing.Point(16, 214);
+            this.textBoxExclude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxExclude.Location = new System.Drawing.Point(16, 311);
             this.textBoxExclude.Name = "textBoxExclude";
-            this.textBoxExclude.Size = new System.Drawing.Size(251, 21);
+            this.textBoxExclude.Size = new System.Drawing.Size(300, 21);
             this.textBoxExclude.TabIndex = 2;
             // 
             // listBoxExclude
             // 
+            this.listBoxExclude.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxExclude.FormattingEnabled = true;
             this.listBoxExclude.ItemHeight = 15;
             this.listBoxExclude.Location = new System.Drawing.Point(16, 39);
             this.listBoxExclude.Name = "listBoxExclude";
-            this.listBoxExclude.Size = new System.Drawing.Size(332, 169);
+            this.listBoxExclude.Size = new System.Drawing.Size(381, 259);
             this.listBoxExclude.TabIndex = 1;
             // 
             // buttonFindAutoComplete
@@ -646,7 +642,7 @@
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(864, 511);
             this.Controls.Add(this.panelProgress);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.buttonSearchAutoComplete);
             this.Controls.Add(this.buttonFindAutoComplete);
             this.Controls.Add(this.label6);
@@ -685,7 +681,7 @@
             this.menuStrip.PerformLayout();
             this.panelProgress.ResumeLayout(false);
             this.panelProgress.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
+            this.tabControlMain.ResumeLayout(false);
             this.tabPageNormal.ResumeLayout(false);
             this.tabPageTreeView.ResumeLayout(false);
             this.tabPageOptions.ResumeLayout(false);
@@ -736,7 +732,7 @@
         private System.Windows.Forms.ToolStripMenuItem registerShellToolStripMenuItem;
         private System.Windows.Forms.TreeView treeResult;
         private System.Windows.Forms.CheckBox checkBoxImages;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageNormal;
         private System.Windows.Forms.TabPage tabPageTreeView;
         private System.Windows.Forms.TabPage tabPageOptions;
@@ -748,7 +744,6 @@
         private System.Windows.Forms.Button buttonExcludeAdd;
         private System.Windows.Forms.TextBox textBoxExclude;
         private System.Windows.Forms.ListBox listBoxExclude;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox checkBoxExclude;
     }
 }

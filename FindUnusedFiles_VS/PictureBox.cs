@@ -10,7 +10,8 @@ namespace ITechnologyNET.FindUnusedFiles
         {
             InitializeComponent();
 
-            LostFocus += (s, o) => Hide();
+            // deactivated because treeview breaks focus all the time...
+            //LostFocus += (s, o) => Hide();
 
             Size = new Size(width, height);
             pictureBox1.Size = Size;
