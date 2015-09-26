@@ -760,9 +760,11 @@ namespace ITechnologyNET.FindUnusedFiles
                         var w     = item.Open();
                         w.Visible = true;
 
+                        // INFO: This crashes Visual Studio if "track active item in solution explorer" is already checked in options
+                        // So since we can check it in options anyways, disabled here for now until i find a way to detect if the option is selected or not
                         // Not using constant here because EXE does not have right reference to DTE
-                        Dte.Windows.Item("{3AE79031-E1BC-11D0-8F78-00A0C9110057}").Activate();
-                        Dte.ExecuteCommand("SolutionExplorer.SyncWithActiveDocument");
+                        // Dte.Windows.Item("{3AE79031-E1BC-11D0-8F78-00A0C9110057}").Activate();
+                        // Dte.ExecuteCommand("SolutionExplorer.SyncWithActiveDocument");
                     }
                 }
             }
