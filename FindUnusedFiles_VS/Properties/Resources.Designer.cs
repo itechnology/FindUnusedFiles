@@ -81,23 +81,6 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1.3.4 (in progress)
-        ///  * Started working on a treeview that shows in which files an item is used
-        ///	* Problem is treeviews do not allow for multi-select (delete, export, etc)
-        ///	* Will probably just add some basic context menus to the treeview and leave the original resultList in place
-        ///	* Once migrated to WPF it will be much easier to implement a kickass all in one list
-        ///	  * https://github.com/itechnology/FindUnusedFiles/issues/4
-        ///  * Once this is done: 1.3.3 &amp; 1.3.4 will be released merged as 1.4
-        ///
-        ///1.3.3  [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string changelog_txt {
-            get {
-                return ResourceManager.GetString("changelog_txt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap collapse {
@@ -197,30 +180,6 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
             get {
                 object obj = ResourceManager.GetObject("manual", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to --------------------------
-        ///Find Unused Files
-        ///--------------------------
-        ///Standalone Application (EXE) &amp; Visual Studio Plug-in (VSIX)
-        ///
-        ///
-        ///Helps find and eliminate unused files in projects.
-        ///Files can be of any type, but will most likely be images that you wish to remove from a website project.
-        ///
-        ///
-        ///------------------
-        ///How it works
-        ///------------------
-        ///1) Enter a valid Regexp in the (Search for files) textbox
-        ///2) Choose if you wish to display the used or unused report
-        ///3) Enter a valid Regexp in the (Insid [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string manual_txt {
-            get {
-                return ResourceManager.GetString("manual_txt", resourceCulture);
             }
         }
         

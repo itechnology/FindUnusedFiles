@@ -165,7 +165,6 @@
     <Content Include="screen-vs.png" />
     <None Include="assets\save.png" />
     <Content Include="assets\license.png" />
-    <Content Include="manual.txt" />
     <None Include="assets\about.png" />
     <None Include="assets\changelog.png" />
     <None Include="assets\delete.png" />
@@ -177,7 +176,6 @@
     <None Include="assets\select.png" />
     <None Include="assets\solution.png" />
     <None Include="assets\website.png" />
-    <Content Include="changelog.txt" />
     <Content Include="assets\find.ico" />
     <Content Include="license.txt" />
   </ItemGroup>

@@ -224,14 +224,20 @@
     <Resource Include="Resources\Images.png" />
     <Resource Include="assets\launch.png" />
     <None Include="Resources\launch.bmp" />
-    <Resource Include="assets\assets.txt" />
+    <Content Include="assets\assets.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Resource Include="assets\down.png" />
+    <Content Include="changelog.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="screen-main.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Resource Include="screen-search.png" />
-    <Resource Include="manual.txt" />
     <Resource Include="assets\about.png" />
     <Resource Include="assets\changelog.png" />
     <Resource Include="assets\delete.png" />
@@ -249,10 +255,6 @@
     <Resource Include="assets\website.png" />
     <Resource Include="assets\save.png" />
     <Resource Include="assets\license.png" />
-    <Content Include="changelog.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
     <Content Include="license.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>

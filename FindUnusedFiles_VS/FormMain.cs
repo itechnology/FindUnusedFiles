@@ -1155,7 +1155,7 @@ namespace ITechnologyNET.FindUnusedFiles
         #region Menu Items
         void WebsiteStripMenuItemClick(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.codeproject.com/Articles/555489/Find-Unused-Files-v");
+            System.Diagnostics.Process.Start("https://github.com/itechnology/FindUnusedFiles");
         }
 
         void AboutToolStripMenuItemClick(object sender, EventArgs e)
@@ -1165,14 +1165,18 @@ namespace ITechnologyNET.FindUnusedFiles
         }
         void ManualToolStripMenuItemClick(object sender, EventArgs e)
         {
-            var help = new Help("manual");
-            help.Show();
+            System.Diagnostics.Process.Start("https://github.com/itechnology/FindUnusedFiles/wiki/Manual");
+
+            //var help = new Help("manual");
+            //help.Show();
         }
 
         void ChangelogToolStripMenuItemClick(object sender, EventArgs e)
         {
-            var help = new Help("changelog");
-            help.Show();
+            System.Diagnostics.Process.Start("https://github.com/itechnology/FindUnusedFiles/blob/master/changelog.txt");
+
+            //var help = new Help("changelog");
+            //help.Show();
         }
 
         void LicenseToolStripMenuItemClick(object sender, EventArgs e)

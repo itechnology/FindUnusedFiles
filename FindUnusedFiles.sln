@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{948C8FB0-116E-4B2F-A4D5-76D44A53C098}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		changelog.txt = changelog.txt
 		LICENSE = LICENSE
 		README.md = README.md
 		version.txt = version.txt
