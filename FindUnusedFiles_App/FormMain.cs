@@ -106,6 +106,10 @@ namespace ITechnologyNET.FindUnusedFiles
             toolStripSeparatorUpdate.Visible     = false;
             checkUpdateToolStripMenuItem.Visible = false;
 
+            // dont show auto-update stuff
+            checkBoxAutoUpdateCheck.Visible = false;
+            comboBoxAutoUpdate.Visible      = false;
+
             InitializeFormElements();
             ProcessFiles();
         }
@@ -120,6 +124,15 @@ namespace ITechnologyNET.FindUnusedFiles
             registerShellToolStripMenuItem.Checked = Registry.ClassesRoot.OpenSubKey("Directory\\shell\\FindUnusedFiles") != null;
 
             InitializeFormElements();
+
+            // Auto-Update Check ?
+            if (Properties.Settings.Default.AutoUpdateCheck)
+            {
+                if (Properties.Settings.Default.UpdateLastCheck.Add(Properties.Settings.Default.AutoUpdateCheckFrequence) < DateTime.Now)
+                {
+                    CheckForUpdate(true);
+                }
+            }
 
             #region Command Line
             // Launch from command line for integration with external tools
@@ -300,6 +313,16 @@ namespace ITechnologyNET.FindUnusedFiles
 
             // Image Preview CheckBox
             checkBoxImages.Checked = Properties.Settings.Default.ImagePreviewChecked;
+
+            // Update Check
+            checkBoxAutoUpdateCheck.Checked = Properties.Settings.Default.AutoUpdateCheck;
+
+            comboBoxAutoUpdate.Items.Add(new AutoUpdateItem("1x /Day"  , 1));
+            comboBoxAutoUpdate.Items.Add(new AutoUpdateItem("1x /Week" , 7));
+            comboBoxAutoUpdate.Items.Add(new AutoUpdateItem("1x /Month", 30));
+
+            var days = Properties.Settings.Default.AutoUpdateCheckFrequence.Days;
+            comboBoxAutoUpdate.SelectedIndex = days == 1 ? 0 : days == 7 ? 1 : 2;
             #endregion
 
             // The context menu
@@ -640,7 +663,6 @@ namespace ITechnologyNET.FindUnusedFiles
 
             UnUsedFiles
                 .Where(c => !string.IsNullOrEmpty(c))
-                .OrderBy(c => c)
                 .ToList()
                 .ForEach(i => listResult.Items.Add(i.Replace(DirectoryPath, string.Empty)));
         }
@@ -665,7 +687,6 @@ namespace ITechnologyNET.FindUnusedFiles
             UsedFiles
                 .Select(c => c.Key)
                 .Where(c => !string.IsNullOrEmpty(c))
-                .OrderBy(c => c)
                 .ToList()
                 .ForEach(i => listResult.Items.Add(i.Replace(DirectoryPath, string.Empty)));
         }
@@ -1162,6 +1183,10 @@ namespace ITechnologyNET.FindUnusedFiles
 
         void checkUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CheckForUpdate();
+        }
+        void CheckForUpdate(bool silent = false)
+        {
             var req = (HttpWebRequest)WebRequest.Create("https://raw.githubusercontent.com/itechnology/FindUnusedFiles/master/version.txt");
 
             req.BeginGetResponse(ar =>
@@ -1183,11 +1208,10 @@ namespace ITechnologyNET.FindUnusedFiles
                                     var respMsg = MessageBox.Show(@"Would you like to go download it ?", @"Update Availiable", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                                     if (respMsg == DialogResult.Yes)
                                     {
-                                        System.Diagnostics.Process.Start(
-                                            "https://github.com/itechnology/FindUnusedFiles/tree/master/dist");
+                                        System.Diagnostics.Process.Start("https://github.com/itechnology/FindUnusedFiles/tree/master/dist");
                                     }
                                 }
-                                else
+                                else if (!silent)
                                 {
                                     MessageBox.Show(@"You have the latest version.", @"Up to date", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
@@ -1197,9 +1221,15 @@ namespace ITechnologyNET.FindUnusedFiles
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, @"Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (!silent)
+                    {
+                        MessageBox.Show(ex.Message, @"Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }, null);
+
+            Properties.Settings.Default.UpdateLastCheck = DateTime.Now;
+            Properties.Settings.Default.Save();
         }
         #endregion
 
@@ -1376,10 +1406,14 @@ namespace ITechnologyNET.FindUnusedFiles
         void buttonExcludeAdd_Click(object sender, EventArgs e)
         {
             var item = textBoxExclude.Text;
-            listBoxExclude.Items.Add(item);
+            if (!string.IsNullOrEmpty(item))
+            {
+                item = item.Replace("/", @"\");
+                listBoxExclude.Items.Add(item);
 
-            Properties.Settings.Default.Exclude.Add(item);
-            Properties.Settings.Default.Save();
+                Properties.Settings.Default.Exclude.Add(item);
+                Properties.Settings.Default.Save();
+            }
         }
 
         void checkBoxExclude_CheckedChanged(object sender, EventArgs e)
@@ -1400,6 +1434,50 @@ namespace ITechnologyNET.FindUnusedFiles
             {
                 PictureBox.Hide();
             }
+        }
+
+        #region Auto-Update
+        void checkBoxAutoUpdateCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.AutoUpdateCheck = checkBoxAutoUpdateCheck.Checked;
+            Properties.Settings.Default.Save();
+        }
+        #endregion
+
+        void comboBoxAutoUpdate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var updateItem = comboBoxAutoUpdate.SelectedItem as AutoUpdateItem;
+            if (updateItem != null)
+            {
+                Properties.Settings.Default.AutoUpdateCheckFrequence = updateItem.ToTimeSpan();
+                Properties.Settings.Default.Save();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Used to custom populate comboBoxAutoUpdate
+    /// </summary>
+    public class AutoUpdateItem
+    {
+        public AutoUpdateItem(string displayName, int days)
+        {
+            Display = displayName;
+            Days    = days;
+        }
+
+        public string Display { get; set; }
+
+        public int Days { get; set; }
+
+        public override string ToString()
+        {
+            return Display;
+        }
+
+        public TimeSpan ToTimeSpan()
+        {
+            return TimeSpan.FromDays(Days);
         }
     }
 }

@@ -72,10 +72,13 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>\\node_modules\\</string>\r\n  <string>\\scripts\\_reference.js</string>\r\n</Arra" +
-            "yOfString>")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>\node_modules\</string>
+  <string>\scripts\_reference.js</string>
+  <string>gruntfile.js</string>
+  <string>gulpfile.js</string>
+</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection Exclude {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["Exclude"]));
@@ -106,6 +109,42 @@ namespace ITechnologyNET.FindUnusedFiles.Properties {
             }
             set {
                 this["ImagePreviewChecked"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AutoUpdateCheck {
+            get {
+                return ((bool)(this["AutoUpdateCheck"]));
+            }
+            set {
+                this["AutoUpdateCheck"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7.00:00:00")]
+        public global::System.TimeSpan AutoUpdateCheckFrequence {
+            get {
+                return ((global::System.TimeSpan)(this["AutoUpdateCheckFrequence"]));
+            }
+            set {
+                this["AutoUpdateCheckFrequence"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2015-01-01")]
+        public global::System.DateTime UpdateLastCheck {
+            get {
+                return ((global::System.DateTime)(this["UpdateLastCheck"]));
+            }
+            set {
+                this["UpdateLastCheck"] = value;
             }
         }
     }

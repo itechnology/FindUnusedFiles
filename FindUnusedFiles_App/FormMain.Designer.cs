@@ -75,10 +75,13 @@
             this.tabPageNormal = new System.Windows.Forms.TabPage();
             this.tabPageTreeView = new System.Windows.Forms.TabPage();
             this.tabPageOptions = new System.Windows.Forms.TabPage();
-            this.checkBoxExclude = new System.Windows.Forms.CheckBox();
+            this.comboBoxAutoUpdate = new System.Windows.Forms.ComboBox();
+            this.checkBoxAutoUpdateCheck = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.buttonExcludeAdd = new System.Windows.Forms.Button();
             this.textBoxExclude = new System.Windows.Forms.TextBox();
             this.listBoxExclude = new System.Windows.Forms.ListBox();
+            this.checkBoxExclude = new System.Windows.Forms.CheckBox();
             this.buttonFindAutoComplete = new System.Windows.Forms.Button();
             this.buttonSearchAutoComplete = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
@@ -113,6 +116,7 @@
             this.listResult.Name = "listResult";
             this.listResult.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listResult.Size = new System.Drawing.Size(817, 332);
+            this.listResult.Sorted = true;
             this.listResult.TabIndex = 1;
             // 
             // patternSearch
@@ -555,6 +559,9 @@
             // 
             // tabPageOptions
             // 
+            this.tabPageOptions.Controls.Add(this.comboBoxAutoUpdate);
+            this.tabPageOptions.Controls.Add(this.checkBoxAutoUpdateCheck);
+            this.tabPageOptions.Controls.Add(this.label7);
             this.tabPageOptions.Controls.Add(this.buttonExcludeAdd);
             this.tabPageOptions.Controls.Add(this.textBoxExclude);
             this.tabPageOptions.Controls.Add(this.listBoxExclude);
@@ -567,17 +574,38 @@
             this.tabPageOptions.Text = "Options";
             this.tabPageOptions.UseVisualStyleBackColor = true;
             // 
-            // checkBoxExclude
+            // comboBoxAutoUpdate
             // 
-            this.checkBoxExclude.AutoSize = true;
-            this.checkBoxExclude.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxExclude.Location = new System.Drawing.Point(12, 20);
-            this.checkBoxExclude.Name = "checkBoxExclude";
-            this.checkBoxExclude.Size = new System.Drawing.Size(129, 19);
-            this.checkBoxExclude.TabIndex = 5;
-            this.checkBoxExclude.Text = "Exclusions Active ?";
-            this.checkBoxExclude.UseVisualStyleBackColor = true;
-            this.checkBoxExclude.CheckedChanged += new System.EventHandler(this.checkBoxExclude_CheckedChanged);
+            this.comboBoxAutoUpdate.FormattingEnabled = true;
+            this.comboBoxAutoUpdate.Location = new System.Drawing.Point(434, 39);
+            this.comboBoxAutoUpdate.Name = "comboBoxAutoUpdate";
+            this.comboBoxAutoUpdate.Size = new System.Drawing.Size(131, 23);
+            this.comboBoxAutoUpdate.TabIndex = 8;
+            this.comboBoxAutoUpdate.SelectedIndexChanged += new System.EventHandler(this.comboBoxAutoUpdate_SelectedIndexChanged);
+            // 
+            // checkBoxAutoUpdateCheck
+            // 
+            this.checkBoxAutoUpdateCheck.AutoSize = true;
+            this.checkBoxAutoUpdateCheck.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxAutoUpdateCheck.Checked = true;
+            this.checkBoxAutoUpdateCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxAutoUpdateCheck.Location = new System.Drawing.Point(431, 20);
+            this.checkBoxAutoUpdateCheck.Name = "checkBoxAutoUpdateCheck";
+            this.checkBoxAutoUpdateCheck.Size = new System.Drawing.Size(131, 19);
+            this.checkBoxAutoUpdateCheck.TabIndex = 7;
+            this.checkBoxAutoUpdateCheck.Text = "Auto-Update Check";
+            this.checkBoxAutoUpdateCheck.UseVisualStyleBackColor = true;
+            this.checkBoxAutoUpdateCheck.CheckedChanged += new System.EventHandler(this.checkBoxAutoUpdateCheck_CheckedChanged);
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label7.Location = new System.Drawing.Point(416, 3);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(2, 329);
+            this.label7.TabIndex = 6;
             // 
             // buttonExcludeAdd
             // 
@@ -609,7 +637,20 @@
             this.listBoxExclude.Location = new System.Drawing.Point(16, 39);
             this.listBoxExclude.Name = "listBoxExclude";
             this.listBoxExclude.Size = new System.Drawing.Size(381, 259);
+            this.listBoxExclude.Sorted = true;
             this.listBoxExclude.TabIndex = 1;
+            // 
+            // checkBoxExclude
+            // 
+            this.checkBoxExclude.AutoSize = true;
+            this.checkBoxExclude.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxExclude.Location = new System.Drawing.Point(12, 20);
+            this.checkBoxExclude.Name = "checkBoxExclude";
+            this.checkBoxExclude.Size = new System.Drawing.Size(129, 19);
+            this.checkBoxExclude.TabIndex = 5;
+            this.checkBoxExclude.Text = "Exclusions Active ?";
+            this.checkBoxExclude.UseVisualStyleBackColor = true;
+            this.checkBoxExclude.CheckedChanged += new System.EventHandler(this.checkBoxExclude_CheckedChanged);
             // 
             // buttonFindAutoComplete
             // 
@@ -745,6 +786,9 @@
         private System.Windows.Forms.TextBox textBoxExclude;
         private System.Windows.Forms.ListBox listBoxExclude;
         private System.Windows.Forms.CheckBox checkBoxExclude;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox comboBoxAutoUpdate;
+        private System.Windows.Forms.CheckBox checkBoxAutoUpdateCheck;
     }
 }
 

@@ -27,6 +27,8 @@
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;string&gt;\node_modules\&lt;/string&gt;
   &lt;string&gt;\scripts\_reference.js&lt;/string&gt;
+  &lt;string&gt;gruntfile.js&lt;/string&gt;
+  &lt;string&gt;gulpfile.js&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="ExcludeChecked" Type="System.Boolean" Scope="User">
@@ -34,6 +36,15 @@
     </Setting>
     <Setting Name="ImagePreviewChecked" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AutoUpdateCheck" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AutoUpdateCheckFrequence" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">7.00:00:00</Value>
+    </Setting>
+    <Setting Name="UpdateLastCheck" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2015-01-01</Value>
     </Setting>
   </Settings>
 </SettingsFile>
