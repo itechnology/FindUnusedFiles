@@ -2,6 +2,10 @@
 
 ###Latest Version: v1.3.2 :: [Download](https://github.com/itechnology/FindUnusedFiles/tree/master/dist)
 
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EXD977CVYHW76" title="Donate to this project using Paypal"><img src="https://itechnology.github.io/FindUnusedFiles/media/paypal-donate-yellow.svg" alt="PayPal donate button" /></a>
+*Donations go towards [code-signing certificates](https://www.instantssl.com/code-signing-certificate.html)*
+
+
 Helps you find and eliminate unused files (images, css, js, etc) in web projects/applications
 
 __FindUnusedFiles__ helps you parse a website solution or project to find and eliminate unused images or other orphaned file types that are not being referenced in your sourcecode anymore.

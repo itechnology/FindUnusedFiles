@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "media", "media", "{23D542C7
 		media\findunusedfiles-thumb.png = media\findunusedfiles-thumb.png
 		media\findunusedfiles-vs.png = media\findunusedfiles-vs.png
 		media\findunusedfiles.png = media\findunusedfiles.png
+		media\paypal-donate-yellow.svg = media\paypal-donate-yellow.svg
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dist", "dist", "{2E8EC581-688A-4934-9583-4BE47902A393}"
