@@ -4,7 +4,7 @@
 
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EXD977CVYHW76" title="Donate to this project using Paypal" target="_blank"><img src="https://itechnology.github.io/FindUnusedFiles/media/paypal-donate-yellow.svg" alt="PayPal donate button" /></a>
 
-*Donations go towards [code-signing certificates](https://www.instantssl.com/code-signing-certificate.html)*
+*Donations go towards a [code-signing certificate](https://www.instantssl.com/code-signing-certificate.html) (which costs $85/year)*
 
 ---
 
