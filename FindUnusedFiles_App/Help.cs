@@ -5,25 +5,15 @@ namespace ITechnologyNET.FindUnusedFiles
 {
     partial class Help : Form
     {
-        public Help(string which = "manual")
+        public Help(string which = "license")
         {
             InitializeComponent();
 
             switch (which)
             {
-                case "changelog":
-                    Text              = string.Format("Changelog: v{0}", AssemblyVersion);
-                    richTextBox1.Text = Properties.Resources.changelog_txt;
-                    break;
-
-                case "license":
-                    Text              = "License";
-                    richTextBox1.Text = Properties.Resources.license_txt;
-                    break;
-
                 default:
-                    Text              = "Manual";
-                    richTextBox1.Text = Properties.Resources.manual_txt;
+                    Text              = @"License";
+                    richTextBox1.Text = Properties.Resources.license_txt;
                     break;
             }
         }

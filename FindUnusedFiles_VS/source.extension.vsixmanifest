@@ -4,7 +4,7 @@
     <Identity Id="0cf7b733-7d9b-45b9-9aa8-328afd40580a" Version="1.4" Language="en-US" Publisher="Robert Hoffmann" />
     <DisplayName>FindUnusedFiles</DisplayName>
     <Description xml:space="preserve">Helps you find orphaned images or files in projects and directories.</Description>
-    <MoreInfo>http://www.codeproject.com/Articles/555489/Find-Unused-Files-v</MoreInfo>
+    <MoreInfo>https://github.com/itechnology/FindUnusedFiles</MoreInfo>
     <License>license.txt</License>
     <ReleaseNotes>changelog.txt</ReleaseNotes>
     <Icon>assets\find.ico</Icon>
