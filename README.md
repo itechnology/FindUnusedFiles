@@ -2,8 +2,8 @@
 
 ###Latest Version: v1.3.2 :: [Download](https://github.com/itechnology/FindUnusedFiles/tree/master/dist) | [Manual](https://github.com/itechnology/FindUnusedFiles/wiki/Manual)
 
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EXD977CVYHW76" title="Donate to this project using Paypal" target="_blank"><img src="https://itechnology.github.io/FindUnusedFiles/media/paypal-donate-yellow.svg" alt="Donate to this project using Paypal" /></a>
-<a href="https://blockchain.info/address/1L2bBkAMZwKAHFEpRtHhggEo8Gg3ZcRtYR" title="Donate to this project using Bitcoin" target="_blank"><img src="https://itechnology.github.io/FindUnusedFiles/media/bitcoin-donate-yellow.svg" alt="Donate to this project using Bitcoin" /></a>
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EXD977CVYHW76" title="Donate to this project using Paypal" target="_blank"><img src="https://itechnology.github.io/FindUnusedFiles/content/img/paypal-donate-yellow.svg" alt="Donate to this project using Paypal" /></a>
+<a href="https://blockchain.info/address/1L2bBkAMZwKAHFEpRtHhggEo8Gg3ZcRtYR" title="Donate to this project using Bitcoin" target="_blank"><img src="https://itechnology.github.io/FindUnusedFiles/content/img/bitcoin-donate-yellow.svg" alt="Donate to this project using Bitcoin" /></a>
 
 *Donations go towards a [code-signing certificate](https://www.instantssl.com/code-signing-certificate.html) (which costs $85/year)*
 
@@ -21,16 +21,16 @@ __Works as a Standalone Application, from the Windows Explorer context menu, fro
 Thank's to the command line it can easily be integrated with your favorite development IDE too.
 
 ### Main Dialog
-![Main Dialog](http://itechnology.github.io/FindUnusedFiles/media/findunusedfiles.png)
+![Main Dialog](http://itechnology.github.io/FindUnusedFiles/content/img/findunusedfiles.png)
 
 
 ### Thumbnail Preview
-![Thumbnail Preview](http://itechnology.github.io/FindUnusedFiles/media/findunusedfiles-thumb.png)
+![Thumbnail Preview](http://itechnology.github.io/FindUnusedFiles/content/img/findunusedfiles-thumb.png)
 
 ### Parsing Dialog
 
-![Parsing Dialog](http://itechnology.github.io/FindUnusedFiles/media/findunusedfiles-parse.png)
+![Parsing Dialog](http://itechnology.github.io/FindUnusedFiles/content/img/findunusedfiles-parse.png)
 
 ### Visual Studio (context menu)
 
-![Visual Studio (context menu)](http://itechnology.github.io/FindUnusedFiles/media/findunusedfiles-vs.png)
+![Visual Studio (context menu)](http://itechnology.github.io/FindUnusedFiles/content/img/findunusedfiles-vs.png)

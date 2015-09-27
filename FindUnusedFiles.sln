@@ -7,20 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{948C8FB0-1
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		changelog.txt = changelog.txt
+		index.html = index.html
 		LICENSE = LICENSE
 		README.md = README.md
 		version.txt = version.txt
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "media", "media", "{23D542C7-B8C6-48A4-AF95-8C545AD6EAB5}"
-	ProjectSection(SolutionItems) = preProject
-		media\bitcoin-donate-yellow.svg = media\bitcoin-donate-yellow.svg
-		media\findunusedfiles-parse.png = media\findunusedfiles-parse.png
-		media\findunusedfiles-thumb.png = media\findunusedfiles-thumb.png
-		media\findunusedfiles-vs.png = media\findunusedfiles-vs.png
-		media\findunusedfiles.png = media\findunusedfiles.png
-		media\flattr-donate-yellow.svg = media\flattr-donate-yellow.svg
-		media\paypal-donate-yellow.svg = media\paypal-donate-yellow.svg
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dist", "dist", "{2E8EC581-688A-4934-9583-4BE47902A393}"
@@ -40,6 +30,88 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "archive", "archive", "{E839
 		dist\archive\FindUnusedFiles-1.3.1.zip = dist\archive\FindUnusedFiles-1.3.1.zip
 		dist\archive\FindUnusedFiles-1.3.vsix = dist\archive\FindUnusedFiles-1.3.vsix
 		dist\archive\FindUnusedFiles-1.3.zip = dist\archive\FindUnusedFiles-1.3.zip
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{4E4617A2-0937-4F3A-93A1-DB62ED172E5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{4FB42202-26FA-45C6-B8A5-AFA3238C298A}"
+	ProjectSection(SolutionItems) = preProject
+		content\js\custom.js = content\js\custom.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{AF70485D-7370-46A7-B8BD-651F655F3BD8}"
+	ProjectSection(SolutionItems) = preProject
+		content\img\bitcoin-donate-yellow.svg = content\img\bitcoin-donate-yellow.svg
+		content\img\findunusedfiles-parse.png = content\img\findunusedfiles-parse.png
+		content\img\findunusedfiles-thumb.png = content\img\findunusedfiles-thumb.png
+		content\img\findunusedfiles-vs.png = content\img\findunusedfiles-vs.png
+		content\img\findunusedfiles.png = content\img\findunusedfiles.png
+		content\img\flattr-donate-yellow.svg = content\img\flattr-donate-yellow.svg
+		content\img\paypal-donate-yellow.svg = content\img\paypal-donate-yellow.svg
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{932EDD7A-0E6B-4B60-A544-4A05A6F9A2A5}"
+	ProjectSection(SolutionItems) = preProject
+		content\css\custom.css = content\css\custom.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fonts", "fonts", "{682BA3A1-74FC-4D18-A30A-A01B030B1B86}"
+	ProjectSection(SolutionItems) = preProject
+		content\fonts\placeholder.txt = content\fonts\placeholder.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{21851C68-B302-4DB6-B517-80FD018FFC76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bootstrap", "bootstrap", "{6F73CF08-67AF-46EC-8EC1-CC8ECE4301E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fontawesome", "fontawesome", "{A3CBF9B2-F8C1-463D-A977-83CCEB70BF3F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "jquery", "jquery", "{5437984D-B850-40E2-890B-D05D4CBEAA5B}"
+	ProjectSection(SolutionItems) = preProject
+		content\libs\jquery\jquery-2.1.4.js = content\libs\jquery\jquery-2.1.4.js
+		content\libs\jquery\jquery-2.1.4.min.js = content\libs\jquery\jquery-2.1.4.min.js
+		content\libs\jquery\jquery-2.1.4.min.map = content\libs\jquery\jquery-2.1.4.min.map
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fonts", "fonts", "{68CA4B54-BE38-4F56-9BFC-34390F064DEE}"
+	ProjectSection(SolutionItems) = preProject
+		content\libs\bootstrap\fonts\glyphicons-halflings-regular.eot = content\libs\bootstrap\fonts\glyphicons-halflings-regular.eot
+		content\libs\bootstrap\fonts\glyphicons-halflings-regular.svg = content\libs\bootstrap\fonts\glyphicons-halflings-regular.svg
+		content\libs\bootstrap\fonts\glyphicons-halflings-regular.ttf = content\libs\bootstrap\fonts\glyphicons-halflings-regular.ttf
+		content\libs\bootstrap\fonts\glyphicons-halflings-regular.woff = content\libs\bootstrap\fonts\glyphicons-halflings-regular.woff
+		content\libs\bootstrap\fonts\glyphicons-halflings-regular.woff2 = content\libs\bootstrap\fonts\glyphicons-halflings-regular.woff2
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{DF842980-E0CB-4D09-9F4D-D96EEC01A999}"
+	ProjectSection(SolutionItems) = preProject
+		content\libs\bootstrap\css\bootstrap-theme.css = content\libs\bootstrap\css\bootstrap-theme.css
+		content\libs\bootstrap\css\bootstrap-theme.css.map = content\libs\bootstrap\css\bootstrap-theme.css.map
+		content\libs\bootstrap\css\bootstrap-theme.min.css = content\libs\bootstrap\css\bootstrap-theme.min.css
+		content\libs\bootstrap\css\bootstrap.css = content\libs\bootstrap\css\bootstrap.css
+		content\libs\bootstrap\css\bootstrap.css.map = content\libs\bootstrap\css\bootstrap.css.map
+		content\libs\bootstrap\css\bootstrap.min.css = content\libs\bootstrap\css\bootstrap.min.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{541084F0-1364-44B4-A8BD-825DC3B9793B}"
+	ProjectSection(SolutionItems) = preProject
+		content\libs\bootstrap\js\bootstrap.js = content\libs\bootstrap\js\bootstrap.js
+		content\libs\bootstrap\js\bootstrap.min.js = content\libs\bootstrap\js\bootstrap.min.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{4F5AD4E6-9661-4A15-BD8A-5CB9309B131E}"
+	ProjectSection(SolutionItems) = preProject
+		content\libs\fontawesome\css\font-awesome.css = content\libs\fontawesome\css\font-awesome.css
+		content\libs\fontawesome\css\font-awesome.min.css = content\libs\fontawesome\css\font-awesome.min.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fonts", "fonts", "{C4D2D56E-3EA6-4D18-A74C-2B89F6E9B8C1}"
+	ProjectSection(SolutionItems) = preProject
+		content\libs\fontawesome\fonts\fontawesome-webfont.eot = content\libs\fontawesome\fonts\fontawesome-webfont.eot
+		content\libs\fontawesome\fonts\fontawesome-webfont.svg = content\libs\fontawesome\fonts\fontawesome-webfont.svg
+		content\libs\fontawesome\fonts\fontawesome-webfont.ttf = content\libs\fontawesome\fonts\fontawesome-webfont.ttf
+		content\libs\fontawesome\fonts\fontawesome-webfont.woff = content\libs\fontawesome\fonts\fontawesome-webfont.woff
+		content\libs\fontawesome\fonts\fontawesome-webfont.woff2 = content\libs\fontawesome\fonts\fontawesome-webfont.woff2
+		content\libs\fontawesome\fonts\FontAwesome.otf = content\libs\fontawesome\fonts\FontAwesome.otf
 	EndProjectSection
 EndProject
 Global
@@ -62,5 +134,18 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E839F61F-2EF1-460D-A9AB-D187EE271221} = {2E8EC581-688A-4934-9583-4BE47902A393}
+		{4FB42202-26FA-45C6-B8A5-AFA3238C298A} = {4E4617A2-0937-4F3A-93A1-DB62ED172E5C}
+		{AF70485D-7370-46A7-B8BD-651F655F3BD8} = {4E4617A2-0937-4F3A-93A1-DB62ED172E5C}
+		{932EDD7A-0E6B-4B60-A544-4A05A6F9A2A5} = {4E4617A2-0937-4F3A-93A1-DB62ED172E5C}
+		{682BA3A1-74FC-4D18-A30A-A01B030B1B86} = {4E4617A2-0937-4F3A-93A1-DB62ED172E5C}
+		{21851C68-B302-4DB6-B517-80FD018FFC76} = {4E4617A2-0937-4F3A-93A1-DB62ED172E5C}
+		{6F73CF08-67AF-46EC-8EC1-CC8ECE4301E8} = {21851C68-B302-4DB6-B517-80FD018FFC76}
+		{A3CBF9B2-F8C1-463D-A977-83CCEB70BF3F} = {21851C68-B302-4DB6-B517-80FD018FFC76}
+		{5437984D-B850-40E2-890B-D05D4CBEAA5B} = {21851C68-B302-4DB6-B517-80FD018FFC76}
+		{68CA4B54-BE38-4F56-9BFC-34390F064DEE} = {6F73CF08-67AF-46EC-8EC1-CC8ECE4301E8}
+		{DF842980-E0CB-4D09-9F4D-D96EEC01A999} = {6F73CF08-67AF-46EC-8EC1-CC8ECE4301E8}
+		{541084F0-1364-44B4-A8BD-825DC3B9793B} = {6F73CF08-67AF-46EC-8EC1-CC8ECE4301E8}
+		{4F5AD4E6-9661-4A15-BD8A-5CB9309B131E} = {A3CBF9B2-F8C1-463D-A977-83CCEB70BF3F}
+		{C4D2D56E-3EA6-4D18-A74C-2B89F6E9B8C1} = {A3CBF9B2-F8C1-463D-A977-83CCEB70BF3F}
 	EndGlobalSection
 EndGlobal
