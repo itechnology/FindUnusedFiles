@@ -219,7 +219,6 @@
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="screen-vs.png" />
     <Resource Include="Resources\Package.ico" />
     <Resource Include="Resources\Images.png" />
     <Resource Include="assets\launch.png" />
@@ -237,7 +236,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Resource Include="screen-search.png" />
     <Resource Include="assets\about.png" />
     <Resource Include="assets\changelog.png" />
     <Resource Include="assets\delete.png" />

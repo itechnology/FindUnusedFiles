@@ -160,9 +160,6 @@
     <Content Include="assets\expand.png" />
     <Content Include="assets\launch.png" />
     <Content Include="assets\refresh.png" />
-    <Content Include="screen-main.png" />
-    <Content Include="screen-search.png" />
-    <Content Include="screen-vs.png" />
     <None Include="assets\save.png" />
     <Content Include="assets\license.png" />
     <None Include="assets\about.png" />
