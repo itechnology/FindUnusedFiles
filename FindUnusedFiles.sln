@@ -14,10 +14,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{948C8FB0-1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "media", "media", "{23D542C7-B8C6-48A4-AF95-8C545AD6EAB5}"
 	ProjectSection(SolutionItems) = preProject
+		media\bitcoin-donate-yellow.svg = media\bitcoin-donate-yellow.svg
 		media\findunusedfiles-parse.png = media\findunusedfiles-parse.png
 		media\findunusedfiles-thumb.png = media\findunusedfiles-thumb.png
 		media\findunusedfiles-vs.png = media\findunusedfiles-vs.png
 		media\findunusedfiles.png = media\findunusedfiles.png
+		media\flattr-donate-yellow.svg = media\flattr-donate-yellow.svg
 		media\paypal-donate-yellow.svg = media\paypal-donate-yellow.svg
 	EndProjectSection
 EndProject
