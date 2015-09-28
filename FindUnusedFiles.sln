@@ -46,6 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{AF70485D-737
 		content\img\bitcoin-donate-yellow.svg = content\img\bitcoin-donate-yellow.svg
 		content\img\findunusedfiles-exclusions.png = content\img\findunusedfiles-exclusions.png
 		content\img\findunusedfiles-parse.png = content\img\findunusedfiles-parse.png
+		content\img\findunusedfiles-shell.png = content\img\findunusedfiles-shell.png
 		content\img\findunusedfiles-thumb.png = content\img\findunusedfiles-thumb.png
 		content\img\findunusedfiles-tree.png = content\img\findunusedfiles-tree.png
 		content\img\findunusedfiles-vs.png = content\img\findunusedfiles-vs.png

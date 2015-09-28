@@ -35,5 +35,8 @@ Thank's to the command line it can easily be integrated with your favorite devel
 ### Parsing Dialog
 ![Parsing Dialog](http://itechnology.github.io/FindUnusedFiles/content/img/findunusedfiles-parse.png?123)
 
+### Windows Explorer (context menu)
+![Visual Studio (context menu)](http://itechnology.github.io/FindUnusedFiles/content/img/findunusedfiles-shell.png?123)
+
 ### Visual Studio (context menu)
 ![Visual Studio (context menu)](http://itechnology.github.io/FindUnusedFiles/content/img/findunusedfiles-vs.png?123)
