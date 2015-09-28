@@ -309,7 +309,7 @@ namespace ITechnologyNET.FindUnusedFiles
 
             // Excusion Active CheckBox
             checkBoxExclude.Checked = Properties.Settings.Default.ExcludeChecked;
-            listBoxExclude.Enabled  = checkBoxExclude.Checked;
+            listBoxExclude.Enabled  = Properties.Settings.Default.ExcludeChecked;
 
             // Image Preview CheckBox
             checkBoxImages.Checked = Properties.Settings.Default.ImagePreviewChecked;

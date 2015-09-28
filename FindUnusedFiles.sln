@@ -42,8 +42,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{AF70485D-7370-46A7-B8BD-651F655F3BD8}"
 	ProjectSection(SolutionItems) = preProject
 		content\img\bitcoin-donate-yellow.svg = content\img\bitcoin-donate-yellow.svg
+		content\img\findunusedfiles-exclusions.png = content\img\findunusedfiles-exclusions.png
 		content\img\findunusedfiles-parse.png = content\img\findunusedfiles-parse.png
 		content\img\findunusedfiles-thumb.png = content\img\findunusedfiles-thumb.png
+		content\img\findunusedfiles-tree.png = content\img\findunusedfiles-tree.png
 		content\img\findunusedfiles-vs.png = content\img\findunusedfiles-vs.png
 		content\img\findunusedfiles.png = content\img\findunusedfiles.png
 		content\img\flattr-donate-yellow.svg = content\img\flattr-donate-yellow.svg

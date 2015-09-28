@@ -20,17 +20,20 @@ __Works as a Standalone Application, from the Windows Explorer context menu, fro
 
 Thank's to the command line it can easily be integrated with your favorite development IDE too.
 
-### Main Dialog
+### Flat View
 ![Main Dialog](http://itechnology.github.io/FindUnusedFiles/content/img/findunusedfiles.png)
-
 
 ### Thumbnail Preview
 ![Thumbnail Preview](http://itechnology.github.io/FindUnusedFiles/content/img/findunusedfiles-thumb.png)
 
-### Parsing Dialog
+### Tree View
+![Main Dialog](http://itechnology.github.io/FindUnusedFiles/content/img/findunusedfiles-tree.png)
 
+### File/Folder Exclusions
+![Main Dialog](http://itechnology.github.io/FindUnusedFiles/content/img/findunusedfiles-exclusions.png)
+
+### Parsing Dialog
 ![Parsing Dialog](http://itechnology.github.io/FindUnusedFiles/content/img/findunusedfiles-parse.png)
 
 ### Visual Studio (context menu)
-
 ![Visual Studio (context menu)](http://itechnology.github.io/FindUnusedFiles/content/img/findunusedfiles-vs.png)
