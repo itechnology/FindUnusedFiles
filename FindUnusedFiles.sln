@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{948C8FB0-116E-4B2F-A4D5-76D44A53C098}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,8 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{948C8FB0-1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dist", "dist", "{2E8EC581-688A-4934-9583-4BE47902A393}"
 	ProjectSection(SolutionItems) = preProject
-		dist\FindUnusedFiles-1.3.2.vsix = dist\FindUnusedFiles-1.3.2.vsix
-		dist\FindUnusedFiles-1.3.2.zip = dist\FindUnusedFiles-1.3.2.zip
+		dist\FindUnusedFiles.vsix = dist\FindUnusedFiles.vsix
+		dist\FindUnusedFiles.zip = dist\FindUnusedFiles.zip
 		dist\readme.md = dist\readme.md
 	EndProjectSection
 EndProject
@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "archive", "archive", "{E839
 	ProjectSection(SolutionItems) = preProject
 		dist\archive\FindUnusedFiles-1.3.1.vsix = dist\archive\FindUnusedFiles-1.3.1.vsix
 		dist\archive\FindUnusedFiles-1.3.1.zip = dist\archive\FindUnusedFiles-1.3.1.zip
+		dist\archive\FindUnusedFiles-1.3.2.vsix = dist\archive\FindUnusedFiles-1.3.2.vsix
+		dist\archive\FindUnusedFiles-1.3.2.zip = dist\archive\FindUnusedFiles-1.3.2.zip
 		dist\archive\FindUnusedFiles-1.3.vsix = dist\archive\FindUnusedFiles-1.3.vsix
 		dist\archive\FindUnusedFiles-1.3.zip = dist\archive\FindUnusedFiles-1.3.zip
 	EndProjectSection

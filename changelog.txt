@@ -1,4 +1,4 @@
-﻿v1.4 (just needs some testing to be finalized)
+﻿v1.4.0
 
   * Made picturebox a little bigger, and moved outside of bounds of main window for better ergonomics
   * Added image-preview checkbox to not have to alt-click on an image to trigger display
@@ -22,6 +22,7 @@
     * Has some context menus, but some things like multi-select do not work in treeviews, thus the Flat View pane that remains
   * Fixed Visual Studio from crashing when double-clicking a file
     * This was happeneing when "track active item in solution explorer" was already checked in VS options
+  * Switched .csproj back to VS2013 temporarily to fix some issues on 2013. Has no impact on 2015
 
 v1.3.2
 
