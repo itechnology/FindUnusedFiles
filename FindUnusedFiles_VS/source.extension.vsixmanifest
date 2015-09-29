@@ -8,7 +8,7 @@
     <License>license.txt</License>
     <ReleaseNotes>changelog.txt</ReleaseNotes>
     <Icon>assets\find.ico</Icon>
-    <PreviewImage>screen-main.png</PreviewImage>
+    <PreviewImage>findunusedfiles.png</PreviewImage>
     <Tags>cleanup, organize, tools, project</Tags>
   </Metadata>
   <Installation InstalledByMsi="false">
