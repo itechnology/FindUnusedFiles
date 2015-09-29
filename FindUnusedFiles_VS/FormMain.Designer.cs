@@ -581,6 +581,7 @@
             //
             // comboBoxAutoUpdate
             //
+            this.comboBoxAutoUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxAutoUpdate.FormattingEnabled = true;
             this.comboBoxAutoUpdate.Location = new System.Drawing.Point(434, 39);
             this.comboBoxAutoUpdate.Name = "comboBoxAutoUpdate";
@@ -590,6 +591,7 @@
             //
             // checkBoxAutoUpdateCheck
             //
+            this.checkBoxAutoUpdateCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxAutoUpdateCheck.AutoSize = true;
             this.checkBoxAutoUpdateCheck.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.checkBoxAutoUpdateCheck.Checked = true;

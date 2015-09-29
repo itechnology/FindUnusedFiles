@@ -1,4 +1,4 @@
-﻿v1.4 (just needs some testing to be finalized)
+﻿v1.4.0
 
   * Made picturebox a little bigger, and moved outside of bounds of main window for better ergonomics
   * Added image-preview checkbox to not have to alt-click on an image to trigger display

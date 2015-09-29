@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="4.0" DefaultTargets="Default" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <!--
+    MSBuild Doc:
+    http://msdn.microsoft.com/en-us/library/ms171451.aspx
+    -->
+  <Target Name="Default" Condition="$(Configuration) == 'Release'">
+    <Copy SourceFiles="..\bin\release\FindUnusedFiles.vsix" DestinationFolder="..\..\dist\" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="false" Retries="2" RetryDelayMilliseconds="200" ContinueOnError="false"></Copy>
+    <Message Text="POST BUILD: Copied files to release folder"/>
+  </Target>
+</Project>
