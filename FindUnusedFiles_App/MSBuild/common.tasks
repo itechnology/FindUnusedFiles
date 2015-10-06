@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    http://blog.3d-logic.com/2012/10/16/msbuild-zip-task-without-external-dependencies/ 
+    http://blog.3d-logic.com/2012/10/16/msbuild-zip-task-without-external-dependencies/
     -->
+  <UsingTask TaskName="CodeSign" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <Task>
+      <Reference Include="Microsoft.VisualBasic" />
+      <Using Namespace="Microsoft.VisualBasic" />
+      <Using Namespace="System.Diagnostics" />
+      <Code Type="Fragment" Language="cs">
+      <![CDATA[
+	    string password = Microsoft.VisualBasic.Interaction.InputBox("Enter the certificate password, or click cancel to continue without signing", "Code-Signing", "", -1, -1);
+	    if (!string.IsNullOrEmpty(password))
+	    {
+		    var cmd = string.Format(@"sign /f ""E:\Program Data\ImpSauve\certificates\code-signing.pfx"" /p {0} /t http://time.certum.pl ..\bin\Release\FindUnusedFiles.exe", password);
+
+		    var p = System.Diagnostics.Process.Start(@"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Bin\signtool.exe", cmd);
+		    p.WaitForExit();
+	    }
+      ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
   <UsingTask TaskName="Zip" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
     <ParameterGroup>
       <InputFileNames ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
@@ -13,7 +33,7 @@
       <Reference Include="System.IO.Compression" />
       <Using Namespace="System.IO.Compression" />
       <Code Type="Fragment" Language="cs">
-      <![CDATA[        
+      <![CDATA[
         var fileMode = OverwriteExistingFile ? FileMode.Create : FileMode.CreateNew;
         using (var archive = new ZipArchive(new FileStream(OutputFileName, fileMode), ZipArchiveMode.Create))
         {
@@ -46,7 +66,7 @@
       <Reference Include="System.IO.Compression.FileSystem" />
       <Using Namespace="System.IO.Compression" />
       <Code Type="Fragment" Language="cs">
-      <![CDATA[        
+      <![CDATA[
         if (File.Exists(OutputFileName))
         {
             if (!OverwriteExistingFile)
@@ -57,7 +77,7 @@
         }
         ZipFile.CreateFromDirectory
         (
-            InputBaseDirectory, OutputFileName, 
+            InputBaseDirectory, OutputFileName,
             CompressionLevel.Optimal, IncludeBaseDirectory
         );
       ]]>

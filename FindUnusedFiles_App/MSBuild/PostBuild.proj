@@ -9,7 +9,7 @@
   <PropertyGroup>
     <Configuration></Configuration>
   </PropertyGroup>
-  
+
   <Target Name="Default" Condition="$(Configuration) == 'Release'">
     <ItemGroup>
       <FilesToZip Include="..\..\changelog.txt" />
@@ -17,6 +17,7 @@
       <FilesToZip Include="..\bin\release\FindUnusedFiles.exe" />
       <FilesToZip Include="..\bin\release\FindUnusedFiles.exe.config" />
     </ItemGroup>
+    <CodeSign/>
     <Zip
       InputFileNames="@(FilesToZip)"
       OutputFileName="..\..\dist\FindUnusedFiles.zip"
