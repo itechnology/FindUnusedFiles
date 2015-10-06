@@ -5,7 +5,7 @@
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EXD977CVYHW76" title="Donate to this project using Paypal" target="_blank"><img src="https://itechnology.github.io/FindUnusedFiles/content/img/paypal-donate-yellow.svg" alt="Donate to this project using Paypal" /></a>
 <a href="https://blockchain.info/address/1L2bBkAMZwKAHFEpRtHhggEo8Gg3ZcRtYR" title="Donate to this project using Bitcoin" target="_blank"><img src="https://itechnology.github.io/FindUnusedFiles/content/img/bitcoin-donate-yellow.svg" alt="Donate to this project using Bitcoin" /></a>
 
-*Donations go towards a [code-signing certificate](https://www.instantssl.com/code-signing-certificate.html) (which costs $85/year)*
+*Donations go towards maintaining a [code-signing certificate](https://www.instantssl.com/code-signing-certificate.html)*
 
 ---
 
